@@ -1,0 +1,83 @@
+server:
+  port: 8080
+  address: 0.0.0.0
+  servlet:
+    context-path: /muldb_hb
+    path: /rest
+
+logging:
+  level:
+    root: INFO
+    com:
+      sb:
+        stu: DEBUG
+    org:
+      springframework:
+        web:
+          servlet:
+            DispatcherServlet: TRACE
+            mvc:
+              method:
+                annotation:
+                  ServletInvocableHandleMethod: TRACE
+      hibernate:
+        type:
+          descriptor:
+            sql:
+              BasicBinder: TRACE
+              BasicExtractor: TRACE
+        engine:
+          QueryParameters: TRACE
+          query:
+            HQLQueryPlan: TRACE
+  file: log/muldb_hb.log
+
+spring:
+  #=====================jpa config================================
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+
+#=====================multiple database config============================
+db:
+  #database1
+  first:
+    datasource:
+      driverClassName: com.mysql.jdbc.Driver
+      url: jdbc:mysql://127.0.0.1:3306/springdatajpastu1
+      username: root
+      password: root
+      #database1 connection pool config
+      initialSize: 5
+      minIdle: 5
+      maxIdle: 10
+      maxActive: 20
+      maxWait: 60000
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: SELECT 1 FROM DUAL
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+  #database2
+  second:
+    datasource:
+      driverClassName: com.mysql.jdbc.Driver
+      url: jdbc:mysql://127.0.0.1:3306/springdatajpastu2
+      username: root
+      password: root
+      #database2 connection pool config
+      initialSize: 5
+      minIdle: 5
+      maxIdle: 10
+      maxActive: 20
+      maxWait: 60000
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: SELECT 1 FROM DUAL
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false

@@ -1,0 +1,42 @@
+server:
+  port: 8080
+  address: 0.0.0.0
+  servlet:
+    context-path: /comredis
+    path: /rest
+
+logging:
+  level:
+    root: INFO
+    com:
+      sb:
+        stu: DEBUG
+    org:
+      springframework:
+        web:
+          servlet:
+            DispatcherServlet: TRACE
+            mvc:
+              method:
+                annotation:
+                  ServletInvocableHandleMethod: TRACE
+  file: log/comredis.log
+
+spring:
+  #################redis��������#################
+  redis:
+    host: 117.48.215.117
+    database: 0
+    password: 123456
+    port: 6379
+    timeout: 3600 # ���ӳ�ʱʱ�䣨���룩
+    #################redis�̳߳�����#################
+    jedis:
+      shutdown-timeout: 1000 #jedis��ʱ
+      pool:
+        max-idle: 8 # ���ӳ��е����������ӣ�Ĭ��ֵҲ��8��
+        min-idle: 0 #���ӳ��е���С�������ӣ�Ĭ��ֵҲ��0��
+        max-active: 8 # �����ֵΪ-1�����ʾ�����ƣ����pool�Ѿ�������maxActive��jedisʵ�������ʱpool��״̬Ϊexhausted(�ľ�)��
+        max-wait: 1000 # �ȴ��������ӵ����ʱ�䣬��λ���룬Ĭ��ֵΪ-1����ʾ������ʱ����������ȴ�ʱ�䣬��ֱ���׳�JedisConnectionException
+
+

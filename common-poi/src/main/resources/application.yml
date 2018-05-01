@@ -1,0 +1,23 @@
+server:
+  port: 8080
+  address: 0.0.0.0
+  servlet:
+    context-path: /poidemo
+    path: /rest
+
+logging:
+  level:
+    root: INFO
+    com:
+      sb:
+        stu: DEBUG
+    org:
+      springframework:
+        web:
+          servlet:
+            DispatcherServlet: TRACE
+            mvc:
+              method:
+                annotation:
+                  ServletInvocableHandleMethod: TRACE
+  file: log/poidemo.log

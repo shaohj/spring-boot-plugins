@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sb.stu.commonmuldbmb.mapper.db1.MoreDb1TableMapper">
+  <resultMap id="BaseResultMap" type="com.sb.stu.commonmuldbmb.model.db1.MoreDb1Table">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="number" jdbcType="VARCHAR" property="number" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+  </resultMap>
+  
+  <sql id="Base_Column_List">
+    id, number, name
+  </sql>
+  
+  <select id="selectByNumber" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+      <include refid="Base_Column_List" />
+    from more_db1_table
+    where number = #{number,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectByNumberAndName" resultMap="BaseResultMap">
+    select
+      <include refid="Base_Column_List" />
+    from more_db1_table
+    where number = #{number,jdbcType=VARCHAR} and name = #{name,jdbcType=VARCHAR}
+  </select>
+
+</mapper>
