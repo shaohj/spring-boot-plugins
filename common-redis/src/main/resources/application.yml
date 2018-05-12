@@ -23,20 +23,20 @@ logging:
   file: log/comredis.log
 
 spring:
-  #################redis��������#################
+  #################redis基础配置#################
   redis:
     host: 117.48.215.117
     database: 0
     password: 123456
     port: 6379
-    timeout: 3600 # ���ӳ�ʱʱ�䣨���룩
-    #################redis�̳߳�����#################
+    timeout: 3600 # 连接超时时间（毫秒）
+    #################redis线程池设置#################
     jedis:
-      shutdown-timeout: 1000 #jedis��ʱ
+      shutdown-timeout: 1000
       pool:
-        max-idle: 8 # ���ӳ��е����������ӣ�Ĭ��ֵҲ��8��
-        min-idle: 0 #���ӳ��е���С�������ӣ�Ĭ��ֵҲ��0��
-        max-active: 8 # �����ֵΪ-1�����ʾ�����ƣ����pool�Ѿ�������maxActive��jedisʵ�������ʱpool��״̬Ϊexhausted(�ľ�)��
-        max-wait: 1000 # �ȴ��������ӵ����ʱ�䣬��λ���룬Ĭ��ֵΪ-1����ʾ������ʱ����������ȴ�ʱ�䣬��ֱ���׳�JedisConnectionException
+        max-idle: 8 # 连接池中的最大空闲连接，默认值也是8。
+        min-idle: 0 # 连接池中的最小空闲连接，默认值也是0。
+        max-active: 8 # 如果赋值为-1，则表示不限制；如果pool已经分配了maxActive个jedis实例，则此时pool的状态为exhausted(耗尽)。
+        max-wait: 1000 # 等待可用连接的最大时间，单位毫秒，默认值为-1，表示永不超时。如果超过等待时间，则直接抛出JedisConnectionException
 
 
