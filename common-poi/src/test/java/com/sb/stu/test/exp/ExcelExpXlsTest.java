@@ -8,8 +8,8 @@ import java.util.Date;
 import java.util.List;
 
 import com.sb.stu.commonpoi.entity.Model;
-import net.sf.excelutils.ExcelException;
-import net.sf.excelutils.ExcelUtils;
+import net.ex.poi.ExcelException;
+import net.ex.poi.poiutils.ExcelUtils;
 import org.apache.poi.util.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

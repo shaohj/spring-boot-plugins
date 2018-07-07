@@ -1,4 +1,4 @@
-package com.sb.stu.commonpoi.utils;
+package net.ex.poi.utils;
 
 import java.io.Closeable;
 import java.io.IOException;
@@ -12,6 +12,17 @@ public class IOUtils {
 
 	private static Logger logger = LoggerFactory.getLogger(IOUtils.class);
 	
+	public static void close(Closeable c){
+		if(null == c){
+			return;
+		}
+		try {
+			c.close();
+		} catch (IOException e) {
+			logger.error("Unable to close resource: \n{}", e);
+		}
+	}
+
 	/**
 	 * IO流操作,边读边写,经测试(文件大小为8KB时,此性能比一次性读取速度还快)
 	 * @param in

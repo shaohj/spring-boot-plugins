@@ -2,15 +2,14 @@ package com.sb.stu.test.exp;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import com.sb.stu.commonpoi.entity.Model;
-import net.sf.excelutils.ExcelException;
-import net.sf.excelutils.ExcelUtils;
+import net.ex.poi.ExcelException;
+import net.ex.poi.poiutils.ExcelUtils;
 import org.apache.poi.util.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,7 +38,7 @@ public class ExcelExpEachTest {
 		ExcelUtils.addValue("model", model);
 
 		//万条数据导出测试
-		for(int i = 0; i< 2000; i++){
+		for(int i = 0; i< 10; i++){
 			details.add(new Model("user3", "world", 144.342));
 		}
 		ExcelUtils.addValue("list", details);

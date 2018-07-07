@@ -7,8 +7,8 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 
-import net.sf.excelutils.ExcelException;
-import net.sf.excelutils.WorkbookUtils;
+import net.ex.poi.ExcelException;
+import net.ex.poi.poiutils.WorkbookUtils;
 
 public class TestImpExcel1 {
 
@@ -16,7 +16,7 @@ public class TestImpExcel1 {
 
 	public static void main(String[] args) {
 		try {
-			Workbook wb = WorkbookUtils.openWorkbook(IMP_FILE_PATH);
+			Workbook wb = WorkbookUtils.openWorkbookByProPath(IMP_FILE_PATH);
 			
 			Sheet sheet = wb.getSheetAt(0);
 			

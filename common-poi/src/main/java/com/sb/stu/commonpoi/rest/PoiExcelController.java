@@ -16,8 +16,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import net.sf.excelutils.ExcelException;
-import net.sf.excelutils.ExcelUtils;
+import net.ex.poi.ExcelException;
+import net.ex.poi.poiutils.ExcelUtils;
 
 @RestController
 public class PoiExcelController {

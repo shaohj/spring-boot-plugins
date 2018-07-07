@@ -5,8 +5,12 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 
-import net.sf.excelutils.*;
-import net.sf.excelutils.webwork.GenerateSequenceUtil;
+import net.ex.poi.*;
+import net.ex.poi.poiutils.WorkbookUtils;
+import net.ex.poi.utils.FileUtils;
+import net.ex.poi.utils.GenerateSequenceUtil;
+import net.ex.poi.utils.IOUtils;
+import net.ex.poi.utils.POIUtils;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Row;
@@ -42,7 +46,7 @@ public class MergeExcelUtil {
 	 * @param dir 指定该目录下所有的excel文件合并
 	 * @param mergeFilePath 合并文件全路径
 	 * @param isXlsx 指定合并的格式,由于复制样式时xls与xlsx样式不一致,因此只能要么合并xls文件,要么合并xlsx文件.true:合并xlsx文件
-	 * @throws ExcelException 
+	 * @throws ExcelException
 	 */
 	public static void mergeExcelFiles(String dir, String mergeFilePath, boolean isXlsx) throws IllegalArgumentException, IOException, ExcelException{
 		if(StringUtils.isEmpty(dir) || StringUtils.isEmpty(mergeFilePath)){
@@ -68,7 +72,7 @@ public class MergeExcelUtil {
 					Workbook mergeWb = null;
 					try{
 						/* 从第1个文件开始合并文件,修改下sheet名称,防止sheet名称重复 */
-						mergeWb = WorkbookUtils.openWorkbook(dir + File.separator + excelFiles.get(0), true);
+						mergeWb = WorkbookUtils.openWorkbookByAbsolute(dir + File.separator + excelFiles.get(0));
 						for(int i=0; i< mergeWb.getNumberOfSheets(); i++){
 							mergeWb.setSheetName(i, mergeWb.getSheetName(i) + "_" + GenerateSequenceUtil.generateSequenceNo());
 						}
@@ -98,7 +102,7 @@ public class MergeExcelUtil {
 	public static void copyExcel(String fromFilePath, Workbook toWb) throws ExcelException, IOException{
 		Workbook formWb = null;
 		try{
-			formWb = WorkbookUtils.openWorkbook(fromFilePath, true);
+			formWb = WorkbookUtils.openWorkbookByAbsolute(fromFilePath);
 			
 			Iterator<Sheet> itor = formWb.iterator();
 			
