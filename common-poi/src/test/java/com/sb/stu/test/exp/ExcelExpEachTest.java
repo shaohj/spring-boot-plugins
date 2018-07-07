@@ -23,17 +23,25 @@ public class ExcelExpEachTest {
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static void main(String[] args) {
+		System.out.println(System.getProperty("java.io.tmpdir"));
+
 		Model model = new Model("aaa1", "bbb", 123.234);
 
 		model.setYear("1992");
 
 		List details = new ArrayList();
+
 		details.add(new Model("user1", "kong", 1234.342));
 		details.add(new Model("user2", "hello", 1224.342));
 		details.add(new Model("user3", "world", 144.342));
 
 		ExcelUtils.addValue("printDate", getCurrentDate("yyyy-MM-dd"));
 		ExcelUtils.addValue("model", model);
+
+		//万条数据导出测试
+		for(int i = 0; i< 2000; i++){
+			details.add(new Model("user3", "world", 144.342));
+		}
 		ExcelUtils.addValue("list", details);
 
 		String tempPath = "xlsx/";
@@ -41,8 +49,10 @@ public class ExcelExpEachTest {
 
 		FileOutputStream fos = null;
 		try {
+			long t1 = System.currentTimeMillis();
 			fos = new FileOutputStream(exportPath + "demo_each_exp.xlsx");
 			ExcelUtils.export(tempFilePath, fos);
+			logger.info("导出{}条数据,耗费时间为{}毫秒", details.size(), System.currentTimeMillis() - t1);
 		} catch (FileNotFoundException | ExcelException ex) {
 			logger.error("{}", ex);
 		} finally {

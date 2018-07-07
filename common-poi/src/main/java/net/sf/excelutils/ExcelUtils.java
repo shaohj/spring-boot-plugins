@@ -28,6 +28,8 @@ import org.apache.commons.beanutils.LazyDynaBean;
 
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.streaming.SXSSFWorkbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  * <p>
@@ -150,7 +152,16 @@ public class ExcelUtils {
 			initExcelProperties(wb);
 
 			parseWorkbook(context, wb);
-			wb.write(out);
+
+			if(wb instanceof XSSFWorkbook){
+				XSSFWorkbook xwb = (XSSFWorkbook) wb;
+				SXSSFWorkbook swb = new SXSSFWorkbook(xwb,10);
+				swb.write(out);
+				swb.dispose(); //清除临时文件
+			} else {
+				wb.write(out);
+			}
+
 		} catch (Exception e) {
 			throw new ExcelException(e.getMessage());
 		}
