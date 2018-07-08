@@ -22,7 +22,7 @@ import net.sf.excelutils.ExcelUtils;
 @RestController
 public class PoiExcelController {
 
-	private static Logger logger = LoggerFactory.getLogger(PoiExcelExportController.class);
+	private static Logger logger = LoggerFactory.getLogger(PoiExcelController.class);
 
 	public static final String exportPath = "C:/Users/dell/Desktop/temp/export";
 

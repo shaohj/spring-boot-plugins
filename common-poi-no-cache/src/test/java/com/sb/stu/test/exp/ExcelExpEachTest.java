@@ -34,6 +34,11 @@ public class ExcelExpEachTest {
 
 		ExcelUtils.addValue("printDate", getCurrentDate("yyyy-MM-dd"));
 		ExcelUtils.addValue("model", model);
+
+		//万条数据导出测试
+		for(int i = 0; i< 100; i++){
+			details.add(new Model("user3", "world", 144.342));
+		}
 		ExcelUtils.addValue("list", details);
 
 		String tempPath = "xlsx/";
@@ -41,8 +46,11 @@ public class ExcelExpEachTest {
 
 		FileOutputStream fos = null;
 		try {
+			long t1 = System.currentTimeMillis();
+
 			fos = new FileOutputStream(exportPath + "demo_each_exp.xlsx");
 			ExcelUtils.export(tempFilePath, fos);
+			logger.info("导出{}条数据,耗费时间为{}毫秒", details.size(), System.currentTimeMillis() - t1);
 		} catch (FileNotFoundException | ExcelException ex) {
 			logger.error("{}", ex);
 		} finally {
