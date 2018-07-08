@@ -6,7 +6,8 @@
 * spring boot 项目原型，处理一些基本配置和日志等配置
 * aop,如记录日志
 * email，如发送邮件，分析邮件
-* poi，如导出excel
+* poi，如导出excel，这里做了2种处理，分为缓存模板导出(SXSSFWorkbook，不支持xls等导出)、及支持xls的导出(不支持缓存导出)
+* common-poi-no-cache
 * freemarker模板导出word
 * resttemplate调用封装
 * redis，如5种数据类型处理
