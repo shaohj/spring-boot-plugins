@@ -38,7 +38,7 @@ public class ExcelExpEachTest {
 		ExcelUtils.addValue("model", model);
 
 		//万条数据导出测试
-		for(int i = 0; i< 10; i++){
+		for(int i = 0; i< 10000; i++){
 			details.add(new Model("user3", "world", 144.342));
 		}
 		ExcelUtils.addValue("list", details);
