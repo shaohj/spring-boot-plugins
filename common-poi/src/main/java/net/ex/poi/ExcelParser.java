@@ -454,6 +454,6 @@ public class ExcelParser {
 	 * @return shift number
 	 */
 	public static int getShiftNum(int old_tagend, int tagstart) {
-		return tagstart - old_tagend - 1;
+		return tagstart - old_tagend;
 	}
 }
