@@ -41,15 +41,6 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.util.CellRangeAddress;
 
-/**
- * <p>
- * <b>ExcelParser </b> is a class which can parse the Excel template <BR>
- * to genrate reports.
- * </p>
- * 
- * @author rainsoft
- * @version $Revision: 1.7 $ $Date: 2005/11/03 03:35:19 $
- */
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class ExcelParser {
 
@@ -212,6 +203,14 @@ public class ExcelParser {
 	 * @return the value of the expr
 	 */
 	public static Object parseExpr(Object context, String expr) {
+		/** poi导出时模板支持默认值设置,若值为null或""，则使用默认值 */
+		int defaultIdx = expr.lastIndexOf("?");
+		String defaultVal = null;
+		if(defaultIdx > 0 ) {
+			int endIdx = expr.lastIndexOf(VALUED_DELIM2);
+			defaultVal = expr.substring(defaultIdx + 1, endIdx);
+			expr = expr.replace("?" + defaultVal, "");
+		}
 
 		int indexValued = expr.indexOf(VALUED_DELIM);
 		int indexValued2 = expr.lastIndexOf(VALUED_DELIM2);
@@ -233,6 +232,10 @@ public class ExcelParser {
 			value = getValue(context, property);
 		} else if (indexValued > 0 && indexValued2 > 0) {
 			value = parseStr(context, expr);
+		}
+
+		if(null != defaultVal && org.springframework.util.StringUtils.isEmpty(value)) {
+			value = defaultVal;
 		}
 
 		return value;
