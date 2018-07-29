@@ -1,6 +1,4 @@
 # spring-boot-common
-## 用markdown写下你的第一个md文档  
-* https://www.jianshu.com/p/de9c98bba332
 ## 描述
 将功能原型集成到该github库中，如
 * spring boot 项目原型，处理一些基本配置和日志等配置
@@ -15,3 +13,5 @@
 * muldb-hb，jpa-hibernate多数据源功能
 * muldb-mb，mybatis多数据源功能
 * util，封装一些常用的工具类，如时间、文件、hibernate验证器等工具类
+## 参考
+[利用内存分析工具（Memory Analyzer Tool，MAT）分析java项目内存泄露](https://blog.csdn.net/wanghuiqi2008/article/details/50724676)
