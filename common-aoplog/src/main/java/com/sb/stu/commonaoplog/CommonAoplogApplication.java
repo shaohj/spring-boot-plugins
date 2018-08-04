@@ -9,14 +9,11 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
 /**
- *
- * 参考：
- *  (1)didispace-SpringBoot-Learning-master 4.2.4小节
- *  (2)Spring AOP 注解方式实现的一些"坑": http://www.jianshu.com/p/def4c497571c
- * 名  称：CommonAoplogApplication<br/>
- * 描  述：<br/>
- * 完成日期：2018年4月29日 下午5:21:23<br/>
- * 编码作者：ShaoHj<br/>
+ * 编  号：
+ * 名  称：CommonAoplogApplication
+ * 描  述：
+ * 完成日期：2018/8/4 13:14
+ * @author：felix.shao
  */
 @SpringBootApplication
 public class CommonAoplogApplication {

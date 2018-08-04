@@ -1,5 +1,15 @@
 package com.sb.stu.commonaoplog.model;
 
+import lombok.Data;
+
+/**
+ * 编  号：
+ * 名  称：Demand
+ * 描  述：
+ * 完成日期：2018/8/4 13:15
+ * @author：felix.shao
+ */
+@Data
 public class Demand {
 
 	private int did;
@@ -12,44 +22,4 @@ public class Demand {
 	
 	private String desc;
 
-	public int getDid() {
-		return did;
-	}
-
-	public void setDid(int did) {
-		this.did = did;
-	}
-
-	public String getDcode() {
-		return dcode;
-	}
-
-	public void setDcode(String dcode) {
-		this.dcode = dcode;
-	}
-
-	public String getDname() {
-		return dname;
-	}
-
-	public void setDname(String dname) {
-		this.dname = dname;
-	}
-
-	public String getDtypename() {
-		return dtypename;
-	}
-
-	public void setDtypename(String dtypename) {
-		this.dtypename = dtypename;
-	}
-
-	public String getDesc() {
-		return desc;
-	}
-
-	public void setDesc(String desc) {
-		this.desc = desc;
-	}
-	
 }

@@ -12,11 +12,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-
+/**
+ * 编  号：
+ * 名  称：LogController
+ * 描  述：
+ * 完成日期：2018/8/4 13:20
+ * @author：felix.shao
+ */
 @RestController
 public class LogController {
 
-	public static final String exportPath = "C:/Users/dell/Desktop/temp/export";
+	public static final String EXPORT_PATH = "C:/Users/dell/Desktop/temp/export";
 	
 	private @Autowired ILogService ls;
 	
@@ -26,7 +32,7 @@ public class LogController {
 	
 	@GetMapping(path="/test", produces="application/json; charset=utf-8")
 	public Object test(){
-		Map<String, Object> result = new HashMap<String, Object>();
+		Map<String, Object> result = new HashMap<String, Object>(4);
 		
 		result.put("error_no", "0");
 		result.put("error_msg", "ok!");
@@ -44,7 +50,7 @@ public class LogController {
 	@PostMapping(path="/logAop", produces="application/json; charset=utf-8")
 	@SystemControllerLog(description = "保存demand", name="logAop")
 	public Object logAop(@RequestBody Demand demand){
-		Map<String, Object> result = new HashMap<String, Object>();
+		Map<String, Object> result = new HashMap<String, Object>(6);
 		
 		result.put("error_no", "0");
 		result.put("error_msg", "ok!");

@@ -7,6 +7,13 @@ import org.springframework.stereotype.Service;
 
 import com.sb.stu.commonaoplog.model.*;
 
+/**
+ * 编  号：
+ * 名  称：LogServiceImpl
+ * 描  述：
+ * 完成日期：2018/8/4 13:15
+ * @author：felix.shao
+ */
 @Service
 public class LogServiceImpl implements ILogService {
 
@@ -36,7 +43,7 @@ public class LogServiceImpl implements ILogService {
 
 	@Override
 	public Demand save(Demand d) {
-		logger.info("***** save demand ***********");
+		logger.info("***** save demand ***********,did={}", d.getDid());
 		return d;
 	}
 	

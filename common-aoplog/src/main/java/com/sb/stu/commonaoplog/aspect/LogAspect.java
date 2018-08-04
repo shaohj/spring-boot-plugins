@@ -10,6 +10,13 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.ContextLoader;
 import org.springframework.web.context.WebApplicationContext;
 
+/**
+ * 编  号：
+ * 名  称：LogAspect
+ * 描  述：
+ * 完成日期：2018/8/4 13:20
+ * @author：felix.shao
+ */
 @Aspect
 @Component
 public class LogAspect {
@@ -31,8 +38,6 @@ public class LogAspect {
 
     	Object[] args = jp.getArgs();
     	WebApplicationContext context = ContextLoader.getCurrentWebApplicationContext();
-//    	jpaReposti  failResendDao = (LogServiceImpl)context.getBean("failResendDao");
-    	//getOne()
     	Object result = jp.proceed();
 		logger.info("**  around  end  ");
     }

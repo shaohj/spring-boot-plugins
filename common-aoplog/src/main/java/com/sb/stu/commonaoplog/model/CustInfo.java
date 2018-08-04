@@ -1,10 +1,15 @@
 package com.sb.stu.commonaoplog.model;
 
+import lombok.Data;
+
 /**
- * 
- * @author dell
- *
+ * 编  号：
+ * 名  称：CustInfo
+ * 描  述：
+ * 完成日期：2018/8/4 13:20
+ * @author：felix.shao
  */
+@Data
 public class CustInfo {
 
 	private String cname;
@@ -17,44 +22,4 @@ public class CustInfo {
 	
 	private String age;
 
-	public String getCname() {
-		return cname;
-	}
-
-	public void setCname(String cname) {
-		this.cname = cname;
-	}
-
-	public String getCcode() {
-		return ccode;
-	}
-
-	public void setCcode(String ccode) {
-		this.ccode = ccode;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getAge() {
-		return age;
-	}
-
-	public void setAge(String age) {
-		this.age = age;
-	}
-	
 }
