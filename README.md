@@ -14,6 +14,7 @@
 * common-util：封装一些常用的工具类，如时间、文件、hibernate验证器等工具类
 * java-stu：javase知识点，编程题学习代码
 ## 参考
+* [markdown文件的基本常用编写语法](https://www.cnblogs.com/liugang-vip/p/6337580.html) 
 * [利用内存分析工具（Memory Analyzer Tool，MAT）分析java项目内存泄露](https://blog.csdn.net/wanghuiqi2008/article/details/50724676)
 * [Java程序员必备的11大Intellij插件](https://www.toutiao.com/a6584934544699294216)
 * [Lombok 介绍和使用](https://blog.csdn.net/motui/article/details/79012846)

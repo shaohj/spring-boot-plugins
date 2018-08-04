@@ -6,7 +6,7 @@ import java.io.Serializable;
  * 编  号：
  * 名  称：User
  * 描  述：
- * 完成日期：2018/8/4 15:30
+ * 完成日期：2018/8/4 15:40
  * @author：felix.shao
  */
 public class User implements Serializable {

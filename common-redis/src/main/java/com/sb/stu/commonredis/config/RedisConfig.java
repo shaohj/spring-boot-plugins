@@ -12,7 +12,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
  * 编  号：
  * 名  称：RedisConfig
  * 描  述：
- * 完成日期：2018/8/4 15:30
+ * 完成日期：2018/8/4 15:40
  * @author：felix.shao
  */
 @Configuration
