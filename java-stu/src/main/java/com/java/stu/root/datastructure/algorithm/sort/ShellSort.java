@@ -12,7 +12,6 @@ public class ShellSort {
 	/**
 	 * 希尔排序递归实现
 	 * @param arr 数组
-	 * @param n 增量
 	 */
 	public static void shellSort(int[] arr){
 		/* 设置初始增量 */

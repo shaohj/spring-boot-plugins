@@ -1,5 +1,7 @@
 package com.java.stu.root.datastructure.algorithm.sort;
 
+import org.junit.jupiter.api.Test;
+
 /**
  * 编  号：
  * 名  称：BubbleSort
@@ -33,7 +35,24 @@ public class BubbleSort {
 			System.out.println();
 		}
 	}
-	
+
+	/**
+	 * 编  号：
+	 * 名  称：BubbleSort
+	 * 描  述：异或(不进位加法)交换值
+	 * 完成日期：2018/8/4 20:17
+	 * @author：felix.shao
+	 */
+	@Test
+	public void testSwap(){
+		int a = 10;
+		int b = 20;
+		a = a ^ b;
+		b = a ^ b;
+		a = a ^ b;
+		System.out.println("a="+a+",b="+b);
+	}
+
 	public static void main(String[] args) {
 		int[] arr = new int[10];
 		for(int i=0;i<arr.length;i++){

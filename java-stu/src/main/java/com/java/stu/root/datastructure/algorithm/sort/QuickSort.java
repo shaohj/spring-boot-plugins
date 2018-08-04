@@ -44,7 +44,7 @@ public class QuickSort {
 		}
 		arr[idx] = key;
 		
-		System.out.printf("%-40s",("begin  key: "+arr[idx]+"-low: "+low+"-high: "+high+"\n    end  :"));
+		System.out.printf("%-40s",("begin  key: "+arr[idx]+"，low: "+low+"，high: "+high+"\n    end  :"));
 		for(int num:arr){
 			System.out.print(num+" ");
 		}
