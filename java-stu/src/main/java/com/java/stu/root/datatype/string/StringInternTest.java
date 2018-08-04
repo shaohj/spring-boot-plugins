@@ -1,4 +1,4 @@
-package com.sb.stu.java;
+package com.java.stu.root.datatype.string;
 
 import java.util.Random;
 

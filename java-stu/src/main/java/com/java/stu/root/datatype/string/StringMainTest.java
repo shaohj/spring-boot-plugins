@@ -1,4 +1,4 @@
-package com.sb.stu.java;
+package com.java.stu.root.datatype.string;
 
 /**
  * 参考：
