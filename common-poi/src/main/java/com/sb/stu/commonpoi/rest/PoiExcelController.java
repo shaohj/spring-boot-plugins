@@ -16,8 +16,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import net.ex.poi.ExcelException;
-import net.ex.poi.poiutils.ExcelUtils;
+import com.poi.template.excel.exception.ExcelException;
+import com.poi.template.excel.parse.cache.poiutils.CacheExcelUtils;
 
 @RestController
 public class PoiExcelController {
@@ -45,15 +45,15 @@ public class PoiExcelController {
 		details.add(new Model("user2", "hello", 1224.342));
 		details.add(new Model("user3", "world", 144.342));
 
-		ExcelUtils.addValue("printDate", getCurrentDate("yyyy-MM-dd"));
-		ExcelUtils.addValue("model", model);
-		ExcelUtils.addValue("list", details);
+		CacheExcelUtils.addValue("printDate", getCurrentDate("yyyy-MM-dd"));
+		CacheExcelUtils.addValue("model", model);
+		CacheExcelUtils.addValue("list", details);
 		String config = "demo.xlsx";
 
 		FileOutputStream fos = null;
 		try {
 			fos = new FileOutputStream(exportPath + "/" + "demo2.xlsx");
-			ExcelUtils.export(config, fos);
+			CacheExcelUtils.export(config, fos);
 		} catch (FileNotFoundException | ExcelException ex) {
 			logger.error("{}", ex);
 		} finally {

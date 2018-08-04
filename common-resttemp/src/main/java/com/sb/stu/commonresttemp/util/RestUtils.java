@@ -96,7 +96,6 @@ public class RestUtils {
 	/**
 	 * 发送基本的get json请求头格式
 	 * @param url
-	 * @param httpMethod
 	 * @param cls
 	 * @return
 	 * @throws IllegalArgumentException
