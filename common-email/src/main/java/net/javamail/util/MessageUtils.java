@@ -13,6 +13,13 @@ import javax.mail.internet.MimeUtility;
 
 import com.alibaba.fastjson.util.IOUtils;
 
+/**
+ * 编  号：
+ * 名  称：MessageUtils
+ * 描  述：解析邮件工具类
+ * 完成日期：2018/8/4 15:13
+ * @author：felix.shao
+ */
 public class MessageUtils {
 
 	/**
@@ -25,11 +32,13 @@ public class MessageUtils {
 	public static void reMultipart(Multipart multipart, String storePath, List<String> pathList) throws MessagingException, IOException {
 	    // 依次处理各个部分
 	    for (int j = 0, n = multipart.getCount(); j < n; j++) {
-	        Part part = multipart.getBodyPart(j); //解包, 取出 MultiPart的各个部分, 每部分可能是邮件内容,
+			//解包, 取出 MultiPart的各个部分, 每部分可能是邮件内容,
+	        Part part = multipart.getBodyPart(j);
 	        // 也可能是另一个小包裹(MultipPart)
 	        // 判断此包裹内容是不是一个小包裹, 一般这一部分是 正文 Content-Type: multipart/alternative
 	        if (part.getContent() instanceof Multipart) {
-	            Multipart p = (Multipart) part.getContent();// 转成小包裹
+				// 转成小包裹
+	            Multipart p = (Multipart) part.getContent();
 	            //递归迭代
 	            reMultipart(p, storePath, pathList);
 	        } else {
@@ -48,8 +57,10 @@ public class MessageUtils {
 	 */
 	public static void rePart(Part part, String storePath, List<String> pathList) throws MessagingException, IOException {
 		if (part.getDisposition() != null) {
-			String strFileNmae = MimeUtility.decodeText(part.getFileName()); //MimeUtility.decodeText解决附件名乱码问题
-		    InputStream in = part.getInputStream();// 打开附件的输入流
+			//MimeUtility.decodeText解决附件名乱码问题
+			String strFileNmae = MimeUtility.decodeText(part.getFileName());
+			// 打开附件的输入流
+		    InputStream in = part.getInputStream();
 		    
 		    String path = storePath + "/" + strFileNmae;
 		    pathList.add(path);

@@ -4,12 +4,11 @@ import java.util.concurrent.CountDownLatch;
 import java.util.stream.Stream;
 
 /**
- * 设计4个线程，其中两个线程每次对j增加1，另外两个线程对j每次减少1。写出程序
  * 编  号：
  * 名  称：Thread01
- * 描  述：
- * 完成日期：2018/8/4 0:28
- * 编码作者：SHJ
+ * 描  述：设计4个线程，其中两个线程每次对j增加1，另外两个线程对j每次减少1。写出程序
+ * 完成日期：2018/8/4 15:36
+ * @author：felix.shao
  */
 public class Thread01 {
 

@@ -8,12 +8,11 @@ import java.util.Properties;
 import javax.mail.internet.InternetAddress;
 
 /**
- * 发送邮件参数
- * 编  号：<br/>
- * 名  称：SendMailParam<br/>
- * 描  述：<br/>
- * 完成日期：2018年3月23日 下午2:46:20<br/>
- * 编码作者：shj<br/>
+ * 编  号：
+ * 名  称：SendMailParam
+ * 描  述：发送邮件参数
+ * 完成日期：2018/8/4 15:11
+ * @author：felix.shao
  */
 public class SendMailParam {
 
@@ -333,12 +332,11 @@ public class SendMailParam {
 	}
 	
 	/**
-	 * 
-	 * 编  号：<br/>
-	 * 名  称：Builder<br/>
-	 * 描  述：<br/>
-	 * 完成日期：2016年11月14日 下午6:08:18<br/>
-	 * 编码作者：ShaoHanJie<br/>
+	 * 编  号：
+	 * 名  称：SendMailParam
+	 * 描  述：
+	 * 完成日期：2018/8/4 15:14
+	 * @author：felix.shao
 	 */
 	public static class Builder {
 		

@@ -7,12 +7,11 @@ import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.SerializationException;
 
 /**
- * 
- * 编  号：<br/>
- * 名  称：RedisObjectSerializer<br/>
- * 描  述：<br/>
- * 完成日期：2018年3月14日 下午2:43:12<br/>
- * 编码作者：shj<br/>
+ * 编  号：
+ * 名  称：RedisObjectSerializer
+ * 描  述：
+ * 完成日期：2018/8/4 15:30
+ * @author：felix.shao
  */
 public class RedisObjectSerializer implements RedisSerializer<Object> {
 
@@ -21,6 +20,7 @@ public class RedisObjectSerializer implements RedisSerializer<Object> {
 
   static final byte[] EMPTY_ARRAY = new byte[0];
 
+  @Override
   public Object deserialize(byte[] bytes) {
     if (isEmpty(bytes)) {
       return null;
@@ -33,6 +33,7 @@ public class RedisObjectSerializer implements RedisSerializer<Object> {
     }
   }
 
+  @Override
   public byte[] serialize(Object object) {
     if (object == null) {
       return EMPTY_ARRAY;

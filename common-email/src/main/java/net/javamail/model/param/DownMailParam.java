@@ -7,12 +7,11 @@ import java.util.Properties;
 import javax.mail.internet.InternetAddress;
 
 /**
- * 下载邮件参数
- * 编  号：<br/>
- * 名  称：DownMailParam<br/>
- * 描  述：<br/>
- * 完成日期：2018年3月23日 下午2:16:13<br/>
- * 编码作者：shj<br/>
+ * 编  号：
+ * 名  称：DownMailParam
+ * 描  述：下载邮件参数
+ * 完成日期：2018/8/4 15:11
+ * @author：felix.shao
  */
 public class DownMailParam {
 
@@ -84,10 +83,12 @@ public class DownMailParam {
 	 * @Title: initDefaultProps
 	 */
 	public void initDefaultProps(){
-		isAuth = (null == isAuth || "".endsWith(isAuth))? "true" : isAuth; //默认需要权限认证
+		//默认需要权限认证
+		isAuth = (null == isAuth || "".endsWith(isAuth))? "true" : isAuth;
 		this.putProp("mail.smtp.auth", isAuth);
-		
-		isEnabledDebugMod = (null == isEnabledDebugMod || "".endsWith(isEnabledDebugMod))? "fasle" : isAuth; //默认不开启调试模式
+
+		//默认不开启调试模式
+		isEnabledDebugMod = (null == isEnabledDebugMod || "".endsWith(isEnabledDebugMod))? "fasle" : isAuth;
 		this.putProp("mail.debug", isEnabledDebugMod);
 	}
 	
@@ -315,14 +316,12 @@ public class DownMailParam {
 		return this;
 	}
 	
-	
 	/**
-	 * 
-	 * 编  号：<br/>
-	 * 名  称：Builder<br/>
-	 * 描  述：<br/>
-	 * 完成日期：2016年11月14日 下午6:08:18<br/>
-	 * 编码作者：ShaoHanJie<br/>
+	 * 编  号：
+	 * 名  称：DownMailParam
+	 * 描  述：
+	 * 完成日期：2018/8/4 15:11
+	 * @author：felix.shao
 	 */
 	public static class Builder {
 		

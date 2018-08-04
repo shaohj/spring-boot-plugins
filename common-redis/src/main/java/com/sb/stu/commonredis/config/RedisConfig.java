@@ -9,12 +9,11 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 /**
- * 
- * 编  号：<br/>
- * 名  称：RedisConfig<br/>
- * 描  述：<br/>
- * 完成日期：2018年3月14日 上午10:57:45<br/>
- * 编码作者：shj<br/>
+ * 编  号：
+ * 名  称：RedisConfig
+ * 描  述：
+ * 完成日期：2018/8/4 15:30
+ * @author：felix.shao
  */
 @Configuration
 public class RedisConfig {

@@ -3,12 +3,11 @@ package com.sb.stu.commonredis.entity;
 import java.io.Serializable;
 
 /**
- * 
- * 编  号：<br/>
- * 名  称：User<br/>
- * 描  述：<br/>
- * 完成日期：2018年3月14日 下午2:43:18<br/>
- * 编码作者：shj<br/>
+ * 编  号：
+ * 名  称：User
+ * 描  述：
+ * 完成日期：2018/8/4 15:30
+ * @author：felix.shao
  */
 public class User implements Serializable {
 

@@ -1,12 +1,11 @@
 package net.javamail.model.param;
 
 /**
- * 压缩附件参数
- * 编  号：<br/>
- * 名  称：ZipParam<br/>
- * 描  述：<br/>
- * 完成日期：2018年3月23日 下午2:30:14<br/>
- * 编码作者：shj<br/>
+ * 编  号：
+ * 名  称：ZipParam
+ * 描  述：压缩附件参数
+ * 完成日期：2018/8/4 15:12
+ * @author：felix.shao
  */
 public class ZipParam {
 
@@ -30,14 +29,12 @@ public class ZipParam {
 		return this;
 	}
 	
-	
 	/**
-	 * 
-	 * 编  号：<br/>
-	 * 名  称：Builder<br/>
-	 * 描  述：<br/>
-	 * 完成日期：2018年3月23日 下午2:30:40<br/>
-	 * 编码作者：shj<br/>
+	 * 编  号：
+	 * 名  称：ZipParam
+	 * 描  述：
+	 * 完成日期：2018/8/4 15:12
+	 * @author：felix.shao
 	 */
 	public static class Builder {
 		

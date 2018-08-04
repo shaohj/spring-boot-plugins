@@ -1,9 +1,11 @@
 package com.sb.stu.commonfreemarker.util;
 
 /**
- * 平台
- * @author ShaoHanJie
- *
+ * 编  号：
+ * 名  称：EPlatform
+ * 描  述：平台
+ * 完成日期：2018/8/4 15:26
+ * @author：felix.shao
  */
 public enum EPlatform {
 	
@@ -30,7 +32,8 @@ public enum EPlatform {
 	private EPlatform(String desc){
 		this.description = desc;
 	}
-	
+
+	@Override
 	public String toString(){
 		return description;
 	}

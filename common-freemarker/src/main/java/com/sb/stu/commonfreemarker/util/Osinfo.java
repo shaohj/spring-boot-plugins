@@ -6,15 +6,15 @@ package com.sb.stu.commonfreemarker.util;
  * @author ShaoHanJie
  *
  */
-public class OSinfo {
+public class Osinfo {
 	
 	private static String OS = System.getProperty("os.name").toLowerCase();
 	
-	private static OSinfo _instance = new OSinfo();
+	private static Osinfo instance = new Osinfo();
 	
 	private EPlatform platform;
 	
-	private OSinfo(){}
+	private Osinfo(){}
 	
 	public static boolean isLinux(){
 		return OS.indexOf("linux")>=0;
@@ -90,49 +90,49 @@ public class OSinfo {
 	 */
 	public static EPlatform getOSname(){
 		if(isAix()){
-			_instance.platform = EPlatform.AIX;
+			instance.platform = EPlatform.AIX;
 		}else if (isDigitalUnix()) {
-			_instance.platform = EPlatform.Digital_Unix;
+			instance.platform = EPlatform.Digital_Unix;
 		}else if (isFreeBSD()) {
-			_instance.platform = EPlatform.FreeBSD;
+			instance.platform = EPlatform.FreeBSD;
 		}else if (isHPUX()) {
-			_instance.platform = EPlatform.HP_UX;
+			instance.platform = EPlatform.HP_UX;
 		}else if (isIrix()) {
-			_instance.platform = EPlatform.Irix;
+			instance.platform = EPlatform.Irix;
 		}else if (isLinux()) {
-			_instance.platform = EPlatform.Linux;
+			instance.platform = EPlatform.Linux;
 		}else if (isMacOS()) {
-			_instance.platform = EPlatform.Mac_OS;
+			instance.platform = EPlatform.Mac_OS;
 		}else if (isMacOSX()) {
-			_instance.platform = EPlatform.Mac_OS_X;
+			instance.platform = EPlatform.Mac_OS_X;
 		}else if (isMPEiX()) {
-			_instance.platform = EPlatform.MPEiX;
+			instance.platform = EPlatform.MPEiX;
 		}else if (isNetWare()) {
-			_instance.platform = EPlatform.NetWare_411;
+			instance.platform = EPlatform.NetWare_411;
 		}else if (isOpenVMS()) {
-			_instance.platform = EPlatform.OpenVMS;
+			instance.platform = EPlatform.OpenVMS;
 		}else if (isOS2()) {
-			_instance.platform = EPlatform.OS2;
+			instance.platform = EPlatform.OS2;
 		}else if (isOS390()) {
-			_instance.platform = EPlatform.OS390;
+			instance.platform = EPlatform.OS390;
 		}else if (isOSF1()) {
-			_instance.platform = EPlatform.OSF1;
+			instance.platform = EPlatform.OSF1;
 		}else if (isSolaris()) {
-			_instance.platform = EPlatform.Solaris;
+			instance.platform = EPlatform.Solaris;
 		}else if (isSunOS()) {
-			_instance.platform = EPlatform.SunOS;
+			instance.platform = EPlatform.SunOS;
 		}else if (isWindows()) {
-			_instance.platform = EPlatform.Windows;
+			instance.platform = EPlatform.Windows;
 		}else{
-			_instance.platform = EPlatform.Others;
+			instance.platform = EPlatform.Others;
 		}
-		return _instance.platform;
+		return instance.platform;
 	}
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		System.out.println(OSinfo.getOSname());
+		System.out.println(Osinfo.getOSname());
 	}
 
 }

@@ -27,16 +27,12 @@ import net.javamail.model.param.AttachFileParam;
 import net.javamail.model.param.EmbedImageParam;
 import net.javamail.model.param.SendMailParam;
 
-
 /**
- * 发送邮件工具类
- * 参考：JavaMail学习笔记（三）、使用SMTP协议发送电子邮件（全）
- *   http://www.2cto.com/kf/201206/136649.html
- * 编  号：<br/>
- * 名  称：SendMailSynUtils<br/>
- * 描  述：<br/>
- * 完成日期：2017年9月27日 下午4:36:26<br/>
- * 编码作者：ShaoHj<br/>
+ * 编  号：
+ * 名  称：SendMailSynUtils
+ * 描  述：同步发送邮件工具类
+ * 完成日期：2018/8/4 15:15
+ * @author：felix.shao
  */
 public class SendMailSynUtils {
 	
@@ -63,11 +59,9 @@ public class SendMailSynUtils {
 	private static ServiceResponse<String> sendMultipleEmail(SendMailParam param){
 		int errorNO = ServiceResponse.SUCCESS;
 		String errorMsg = "";
-		
-		// 创建Session实例对象 
+		// 创建Session实例对象
         Session session = Session.getInstance(param.getProps()); 
-         
-        // 创建MimeMessage实例对象 
+        // 创建MimeMessage实例对象
         MimeMessage message = new MimeMessage(session); 
         Transport transport = null;
         try {
@@ -131,29 +125,13 @@ public class SendMailSynUtils {
 			transport.connect(param.getAccount(), param.getPassword()); 
 			// 将message对象传递给transport对象，将邮件发送出去 
 			transport.sendMessage(message, message.getAllRecipients()); 
-		} catch (AddressException|IOException e) {
+		} catch (Exception e) {
 			logger.error("{}", e);
-			
-			errorNO = ServiceResponse.DEFAULT_FAIL;
-			errorMsg = e.getMessage();
-		} catch (NoSuchProviderException e) {
-			logger.error("{}", e);
-			
-			errorNO = ServiceResponse.DEFAULT_FAIL;
-			errorMsg = e.getMessage();
-		} catch (MessagingException e) {
-			logger.error("{}", e);
-			
 			errorNO = ServiceResponse.DEFAULT_FAIL;
 			errorMsg = e.getMessage();
 		} finally{
-			try {
-				if(null != transport){
-					transport.close();
-				}
-			} catch (MessagingException e) {}
+			try {if(null != transport){transport.close();}} catch (MessagingException e) {}
 		}
-        
         return new ServiceResponse<String>(errorNO, errorMsg);
 	};
 	

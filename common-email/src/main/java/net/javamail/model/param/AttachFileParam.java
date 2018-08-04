@@ -1,12 +1,11 @@
 package net.javamail.model.param;
 
 /**
- * 发送邮件附件参数
- * 编  号：<br/>
- * 名  称：ImageAttachParam<br/>
- * 描  述：<br/>
- * 完成日期：2016年11月16日 上午10:03:13<br/>
- * 编码作者：ShaoHanJie<br/>
+ * 编  号：
+ * 名  称：AttachFileParam
+ * 描  述：发送邮件附件参数
+ * 完成日期：2018/8/4 15:10
+ * @author：felix.shao
  */
 public class AttachFileParam {
 
@@ -17,7 +16,6 @@ public class AttachFileParam {
 	protected String name;
 	
 	public AttachFileParam(){
-		
 	}
 	
 	public AttachFileParam path(String path){
@@ -29,18 +27,15 @@ public class AttachFileParam {
 		this.name = name;
 		return this;
 	}
-	
-	
+
 	/**
-	 * 
-	 * 编  号：<br/>
-	 * 名  称：Builder<br/>
-	 * 描  述：<br/>
-	 * 完成日期：2016年11月14日 下午6:08:18<br/>
-	 * 编码作者：ShaoHanJie<br/>
+	 * 编  号：
+	 * 名  称：AttachFileParam
+	 * 描  述：
+	 * 完成日期：2018/8/4 15:10
+	 * @author：felix.shao
 	 */
 	public static class Builder {
-		
 		public static AttachFileParam path(String path){
 			AttachFileParam params = new AttachFileParam();
 			return params.path(path);
@@ -50,7 +45,6 @@ public class AttachFileParam {
 			AttachFileParam params = new AttachFileParam();
 			return params.name(name);
 		}
-		
 	}
 
 	public String getPath() {

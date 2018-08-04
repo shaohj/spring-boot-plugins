@@ -11,12 +11,11 @@ import net.javamail.model.param.AttachFileParam;
 import net.javamail.model.param.ZipParam;
 
 /**
- * 压缩工具类
- * 编  号：<br/>
- * 名  称：ZipUtils<br/>
- * 描  述：<br/>
- * 完成日期：2017年9月27日 下午4:16:26<br/>
- * 编码作者：ShaoHj<br/>
+ * 编  号：
+ * 名  称：ZipUtils
+ * 描  述：压缩工具类
+ * 完成日期：2018/8/4 15:15
+ * @author：felix.shao
  */
 public class ZipUtils {
 

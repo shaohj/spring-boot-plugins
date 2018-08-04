@@ -22,12 +22,11 @@ import net.javamail.ServiceResponse;
 import net.javamail.model.param.DownMailParam;
 
 /**
- * 下载收件人指定的邮件
- * 编  号：<br/>
- * 名  称：DownMailUtils<br/>
- * 描  述：<br/>
- * 完成日期：2017年9月28日 上午10:55:05<br/>
- * 编码作者：shj<br/>
+ * 编  号：
+ * 名  称：DownMailUtils
+ * 描  述：下载收件人指定的邮件
+ * 完成日期：2018/8/4 15:12
+ * @author：felix.shao
  */
 public class DownMailUtils {
 	
@@ -61,8 +60,9 @@ public class DownMailUtils {
 		try {
 			store = session.getStore(urlname);
 			store.connect();
-			
-			Folder folder = store.getDefaultFolder();// 默认父目录
+
+			// 默认父目录
+			Folder folder = store.getDefaultFolder();
 	        if (folder == null) {
 	        	errorNO = ServiceResponse.DEFAULT_FAIL;
 				errorMsg = "服务器不可用";
@@ -71,8 +71,9 @@ public class DownMailUtils {
 	        }
 	        
 	        /** 3.获取收件箱,及收件箱可读邮件 */
-	        Folder popFolder = folder.getFolder("INBOX");// 获取收件箱
-            popFolder.open(Folder.READ_WRITE);// 可读邮件,可以删邮件的模式打开目录
+	        Folder popFolder = folder.getFolder("INBOX");
+			// 可读邮件,可以删邮件的模式打开目录
+            popFolder.open(Folder.READ_WRITE);
             
             /** 4.获取所有收件箱下的所有邮件,对其满足条件的邮件进行下载操作 */
             Message[] messages = popFolder.getMessages();
@@ -115,7 +116,7 @@ public class DownMailUtils {
 	};
 	
 	/**
-	 * 查看该收件信息是否匹配<br />
+	 * 查看该收件信息是否匹配
 	 * 比较发件人邮箱地址、主题等信息
 	 * @Title: isMatcher 
 	 * @param msg

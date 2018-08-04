@@ -15,27 +15,31 @@ import javax.validation.ValidatorFactory;
 import org.springframework.beans.factory.annotation.Value;
 
 /**
- * hibernate验证器工具类
+ * 编  号：
+ * 名  称：HbValidatorUtil
+ * 描  述：hibernate验证器工具类
+ * 完成日期：2018/8/4 15:33
+ * @author：felix.shao
  */
 public class HbValidatorUtil {
 
 	/** 验证器工厂 */
-	public static final ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
+	public static final ValidatorFactory VALIDATOR_FACTORY = Validation.buildDefaultValidatorFactory();
 
 	public static <T> String validateAndGetErrorInfo(T object, Class<?>... groups) {
-		Validator validator = validatorFactory.getValidator();
+		Validator validator = VALIDATOR_FACTORY.getValidator();
 		Set<ConstraintViolation<T>> set = validator.validate(object, groups);
 		return set == null || set.isEmpty() ? null : makeErrorInfo(set);
 	}
 
 	public static <T> String validatePropertyAndGetErrorInfo(T object, String propertyName, Class<?>... groups) {
-		Validator validator = validatorFactory.getValidator();
+		Validator validator = VALIDATOR_FACTORY.getValidator();
 		Set<ConstraintViolation<T>> set = validator.validateProperty(object, propertyName, groups);
 		return set == null || set.isEmpty() ? null : makeErrorInfo(set);
 	}
 
 	public static <T> String validateValueAndGetErrorInfo(Class<T> beanType, String propertyName, Object value, Class<?>... groups) {
-		Validator validator = validatorFactory.getValidator();
+		Validator validator = VALIDATOR_FACTORY.getValidator();
 		Set<ConstraintViolation<T>> set = validator.validateValue(beanType, propertyName, value, groups);
 		return set == null || set.isEmpty() ? null : makeErrorInfo(set);
 	}
@@ -67,7 +71,7 @@ public class HbValidatorUtil {
 	public static <K, V extends Collection> Map<K, V> mapAppender(Map<K, V>... paramMap)
 			throws InstantiationException, IllegalAccessException {
 		// 返回结果
-		Map<K, V> resMap = new HashMap<>();
+		Map<K, V> resMap = new HashMap<>(16);
 
 		if (paramMap == null || paramMap.length == 0) {
 			return resMap;

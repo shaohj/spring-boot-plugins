@@ -29,12 +29,11 @@ import freemarker.template.Configuration;
 import freemarker.template.Template;
 
 /**
- * 
- * 编  号：<br/>
- * 名  称：FreeMarkerUtil<br/>
- * 描  述：<br/>
- * 完成日期：2017年8月21日 上午10:33:22<br/>
- * 编码作者：ShaoHj<br/>
+ * 编  号：
+ * 名  称：FreeMarkerUtil
+ * 描  述：
+ * 完成日期：2018/8/4 15:29
+ * @author：felix.shao
  */
 public class FreeMarkerUtil {
 

@@ -5,12 +5,11 @@ import java.io.File;
 import org.springframework.util.StringUtils;
 
 /**
- * 
- * 编  号：<br/>
- * 名  称：FileUtils<br/>
- * 描  述：<br/>
- * 完成日期：2017年8月21日 上午10:35:22<br/>
- * 编码作者：ShaoHj<br/>
+ * 编  号：
+ * 名  称：FileUtils
+ * 描  述：
+ * 完成日期：2018/8/4 15:27
+ * @author：felix.shao
  */
 public class FileUtils {
 

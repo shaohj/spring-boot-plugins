@@ -1,12 +1,11 @@
 package net.javamail.model.param;
 
 /**
- * 发送邮件内嵌图片参数
- * 编  号：<br/>
- * 名  称：ImageAttachParam<br/>
- * 描  述：<br/>
- * 完成日期：2016年11月16日 上午10:03:13<br/>
- * 编码作者：ShaoHanJie<br/>
+ * 编  号：
+ * 名  称：EmbedImageParam
+ * 描  述：发送邮件内嵌图片参数
+ * 完成日期：2018/8/4 15:11
+ * @author：felix.shao
  */
 public class EmbedImageParam {
 
@@ -30,14 +29,12 @@ public class EmbedImageParam {
 		return this;
 	}
 	
-	
 	/**
-	 * 
-	 * 编  号：<br/>
-	 * 名  称：Builder<br/>
-	 * 描  述：<br/>
-	 * 完成日期：2016年11月14日 下午6:08:18<br/>
-	 * 编码作者：ShaoHanJie<br/>
+	 * 编  号：
+	 * 名  称：EmbedImageParam
+	 * 描  述：
+	 * 完成日期：2018/8/4 15:11
+	 * @author：felix.shao
 	 */
 	public static class Builder {
 		

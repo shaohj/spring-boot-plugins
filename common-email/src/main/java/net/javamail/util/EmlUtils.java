@@ -14,12 +14,11 @@ import com.alibaba.fastjson.util.IOUtils;
 import net.javamail.ServiceResponse;
 
 /**
- * eml文件辅助类
- * 编  号：<br/>
- * 名  称：ParseEmlUtils<br/>
- * 描  述：<br/>
- * 完成日期：2017年9月28日 下午3:32:26<br/>
- * 编码作者：shj<br/>
+ * 编  号：
+ * 名  称：EmlUtils
+ * 描  述：eml文件辅助类
+ * 完成日期：2018/8/4 15:13
+ * @author：felix.shao
  */
 public class EmlUtils {
 	
