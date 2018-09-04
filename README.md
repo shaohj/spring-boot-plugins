@@ -12,6 +12,7 @@
 * common-muldb-hb：jpa-hibernate多数据源功能
 * common-muldb-mb：mybatis多数据源功能
 * common-util：封装一些常用的工具类，如时间、文件、hibernate验证器等工具类
+* common-net：网络编程学习，如bio、nio(netty)、aio
 * java-stu：javase知识点，编程题学习代码
 ## 参考
 * [markdown文件的基本常用编写语法](https://www.cnblogs.com/liugang-vip/p/6337580.html) 
