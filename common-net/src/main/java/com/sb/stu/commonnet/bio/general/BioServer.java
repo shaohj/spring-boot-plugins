@@ -30,7 +30,9 @@ public class BioServer {
     private static final ConcurrentHashMap<String, BioServerHandler> clients = new ConcurrentHashMap(4);
 
     /** 服务端是否启动标志位 */
-    private boolean startFlag = false;
+    @Getter
+    @Setter
+    private volatile boolean startFlag = false;
 
     /** 单例的ServerSocket */
     @Getter
@@ -44,12 +46,18 @@ public class BioServer {
 
     }
 
-    public static BioServer singleServer() throws IOException {
+    public static BioServer singleServer() throws  IOException{
         if(null == singleServer){
             synchronized (BioServer.class){
                 if(null == singleServer){
                     singleServer = new BioServer();
-                    singleServer.setServSocket(new ServerSocket(BioConstant.DEFAULT_SERVER_PORT));
+                    try {
+                        singleServer.setServSocket(new ServerSocket(BioConstant.DEFAULT_SERVER_PORT));
+                    } catch (IOException e) {
+                        logger.error("启动服务器失败", e);
+                        singleServer = null;
+                        throw e;
+                    }
                 }
             }
         }
@@ -63,6 +71,11 @@ public class BioServer {
 
     public static void start() throws IOException{
         BioServer singleServer = singleServer();
+        if(null != singleServer && singleServer.isStartFlag()){
+            return ;
+        } else{
+            singleServer.setStartFlag(true);
+        }
         logger.info("启动BioServer，监听端口为{}", BioConstant.DEFAULT_SERVER_PORT);
         while(true){
             logger.info("BioServer等待接收客户端请求...");
@@ -101,10 +114,14 @@ public class BioServer {
     }
 
     public static void main(String[] args) {
+        BioServer singleServer = null;
         try {
             BioServer.start();
+            singleServer = BioServer.singleServer();
         } catch (IOException e) {
-            logger.error("启动服务器失败,", e);
+            if(null != singleServer){
+                singleServer.setStartFlag(false);
+            }
         }
     }
 

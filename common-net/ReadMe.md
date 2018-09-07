@@ -2,6 +2,7 @@
 ## 描述
 java 网络编程学习
 * bio
+    * 伪异步io,在传统的bio上添加了线程池
 * nio
     * netty
 * aio
@@ -12,6 +13,8 @@ java 网络编程学习
 ## 参考
 [Java 网络IO编程总结](https://blog.csdn.net/anxpp/article/details/51512200)
 [Java IO编程模型概览](http://blog.decaywood.me/2016/02/24/Java-IO-programming-model/)
+### nio参考
+[NIO 入门](https://www.ibm.com/developerworks/cn/education/java/j-nio/j-nio.html)
 
 
 
