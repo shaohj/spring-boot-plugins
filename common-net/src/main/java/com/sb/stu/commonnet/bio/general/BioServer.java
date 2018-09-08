@@ -27,7 +27,7 @@ public class BioServer {
     private static final Logger logger = LoggerFactory.getLogger(BioServer.class);
 
     /** 存放了当前所有客户的连接信息。key为客户手机号 */
-    private static final ConcurrentHashMap<String, BioServerHandler> clients = new ConcurrentHashMap(4);
+    public static final ConcurrentHashMap<String, BioServerHandler> clients = new ConcurrentHashMap(4);
 
     /** 服务端是否启动标志位 */
     @Getter
@@ -62,11 +62,6 @@ public class BioServer {
             }
         }
         return singleServer;
-    }
-
-    public static BioServerHandler getBioClient(String phone){
-        Assert.isTrue(StringUtils.isEmpty(phone), "phone不能为空");
-        return clients.get(phone);
     }
 
     public static void start() throws IOException{

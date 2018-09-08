@@ -58,11 +58,12 @@ public class NioClientHandler implements Runnable {
             doConnect();
         }catch(IOException e){
             logger.error("", e);
+            System.exit(1);
         }
+
         while(started){
             try{
                 int num = selector.select(1000);
-                //logger.info("NioClientHandler handle event num={}", num);
                 if(num > 0){
                     Set<SelectionKey> keys = selector.selectedKeys();
                     Iterator<SelectionKey> it = keys.iterator();
@@ -98,6 +99,7 @@ public class NioClientHandler implements Runnable {
                         byte[] bytes = new byte[buffer.remaining()];
                         buffer.get(bytes);
                         String result = new String(bytes,"UTF-8");
+                        logger.info("接收服务器数据：{}", result);
                     }
                     else if(readBytes<0){
                         key.cancel();
@@ -114,8 +116,16 @@ public class NioClientHandler implements Runnable {
     }
 
     private void doConnect() throws IOException{
-        if(!socketChannel.connect(new InetSocketAddress(host, port))){
+        logger.info("请求连接服务器，ip={},port={}", host, port);
+        /**
+         * true if a connection was established,
+         * false if this channel is in non-blocking mode
+         * 连接失败，抛出异常
+         */
+        boolean isConn = socketChannel.connect(new InetSocketAddress(host, port));
+        if(!isConn){
             socketChannel.register(selector, SelectionKey.OP_CONNECT);
+            logger.info("非阻塞式连接服务器成功，ip={},port={}", host, port);
         }
     }
 

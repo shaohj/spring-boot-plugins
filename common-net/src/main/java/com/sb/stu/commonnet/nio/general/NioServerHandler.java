@@ -51,20 +51,13 @@ public class NioServerHandler implements Runnable {
         }
     }
 
-    public void stop(){
-        started = false;
-        logger.info("stop NioServerHandler success");
-    }
-
     @Override
     public void run() {
         while(started){
             try{
                 int num = selector.select(1000);
-                //logger.info("NioServerHandler handle event num={}", num);
                 if(num > 0){
-                    Set<SelectionKey> keys = selector.selectedKeys();
-                    Iterator<SelectionKey> itor = keys.iterator();
+                    Iterator<SelectionKey> itor = selector.selectedKeys().iterator();
                     SelectionKey key = null;
                     while(itor.hasNext()) {
                         key = itor.next();
@@ -83,12 +76,14 @@ public class NioServerHandler implements Runnable {
     }
     private void handleInput(SelectionKey key){
         if(key.isValid()){
+            logger.info("handleInput,key={}", key.toString());
             try{
                 if(key.isAcceptable()){
-                    ServerSocketChannel ssc = (ServerSocketChannel) key.channel();
-                    SocketChannel sc = ssc.accept();
-                    sc.configureBlocking(false);
-                    sc.register(selector, SelectionKey.OP_READ);
+                    logger.info("有客户端新连接产生了");
+                    ServerSocketChannel srvSockChan = (ServerSocketChannel) key.channel();
+                    SocketChannel socketChannel = srvSockChan.accept();
+                    socketChannel.configureBlocking(false);
+                    socketChannel.register(selector, SelectionKey.OP_READ);
                 } else if(key.isReadable()){
                     SocketChannel sc = (SocketChannel) key.channel();
                     ByteBuffer buffer = ByteBuffer.allocate(1024);
@@ -98,6 +93,8 @@ public class NioServerHandler implements Runnable {
                         byte[] bytes = new byte[buffer.remaining()];
                         buffer.get(bytes);
                         String userData = new String(bytes,"UTF-8");
+
+
                         String result = "服务器处理数据：" + userData;
                         logger.info(result);
                         NioUtils.doWrite(sc, result);

@@ -14,8 +14,8 @@ import java.nio.channels.SocketChannel;
  */
 public class NioUtils {
 
-    public static void doWrite(SocketChannel channel, String request) throws IOException {
-        byte[] bytes = request.getBytes();
+    public static void doWrite(SocketChannel channel, String requestMsg) throws IOException {
+        byte[] bytes = requestMsg.getBytes();
         ByteBuffer writeBuffer = ByteBuffer.allocate(bytes.length);
         writeBuffer.put(bytes);
         writeBuffer.flip();
