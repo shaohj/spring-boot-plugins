@@ -74,6 +74,8 @@ public class NioServerHandler implements Runnable {
             IOUtils.close(selector);
         }
     }
+
+
     private void handleInput(SelectionKey key){
         if(key.isValid()){
             logger.info("handleInput,key={}", key.toString());

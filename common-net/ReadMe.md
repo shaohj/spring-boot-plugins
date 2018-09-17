@@ -12,13 +12,17 @@ java 网络编程学习
 * System.in、System.out、System.err的包装流不能被关闭，否则会影响其他程序
 * socket的流建立连接后不能马上被关闭
 ## 参考
-[Java 网络IO编程总结](https://blog.csdn.net/anxpp/article/details/51512200)
-[Java IO编程模型概览](http://blog.decaywood.me/2016/02/24/Java-IO-programming-model/)
+* [Java 网络IO编程总结](https://blog.csdn.net/anxpp/article/details/51512200)  
+* [Java IO编程模型概览](http://blog.decaywood.me/2016/02/24/Java-IO-programming-model/)  
+* [Java BIO、NIO、AIO 比较](https://my.oschina.net/yangpeng/blog/612127)  
+* [NIo、Bio、aio、 的原理及区别与应用场景](https://blog.csdn.net/u013851082/article/details/53942947)  
 ### nio参考
-[NIO 入门](https://www.ibm.com/developerworks/cn/education/java/j-nio/j-nio.html)
-[实现多人聊天室](https://www.jianshu.com/p/16104564f640)
+* [NIO 入门](https://www.ibm.com/developerworks/cn/education/java/j-nio/j-nio.html)
+* [实现多人聊天室](https://www.jianshu.com/p/16104564f640)
 ### aio参考
-[使用异步 I/O 大大提高应用程序的性能](https://www.ibm.com/developerworks/cn/linux/l-async/index.html)
-
-
+* [使用异步 I/O 大大提高应用程序的性能](https://www.ibm.com/developerworks/cn/linux/l-async/index.html)  
+* [java aio 编程](https://colobu.com/2014/11/13/java-aio-introduction/)
+### netty参考
+* [Netty 4.x 用户指南](https://waylau.com/netty-4-user-guide)  
+* [Netty 4.x 用户指南源码](https://github.com/waylau/netty-4-user-guide-demos)
 
