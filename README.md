@@ -15,6 +15,9 @@
 * common-net：网络编程学习，如bio、nio(netty)、aio
 * java-stu：javase知识点，编程题学习代码
 * netty4-chatroom：netty4实现的聊天室代码
+### 参考项目思路
+* Spring Boot自定义Starter(代码较为简单就不具体实现了，代码可参考([教你自己写starter](https://github.com/yidao620c/SpringBootBucket/tree/master/springboot-starter)))
+    * [Spring Boot自定义Starter【从零开始学Spring Boot】](http://412887952-qq-com.iteye.com/blog/2395419)
 ## 参考
 * [markdown文件的基本常用编写语法](https://www.cnblogs.com/liugang-vip/p/6337580.html) 
 * [利用内存分析工具（Memory Analyzer Tool，MAT）分析java项目内存泄露](https://blog.csdn.net/wanghuiqi2008/article/details/50724676)
