@@ -15,7 +15,7 @@ import org.springframework.context.annotation.PropertySource;
  */
 @Data
 @Configuration
-@PropertySource(value= "classpath:/nettyserver.properties")
+@PropertySource(value = "classpath:/nettyserver.properties")
 public class NettyServerConfigs {
 
     @Value("${tcp.port}")

@@ -4,9 +4,14 @@ import com.sb.stu.netty4chatroom.config.NettyServerConfigs;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
+import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import io.netty.handler.codec.http.HttpObjectAggregator;
+import io.netty.handler.codec.http.HttpServerCodec;
+import io.netty.handler.codec.http.websocketx.WebSocketServerProtocolHandler;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
+import io.netty.handler.stream.ChunkedWriteHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,7 +36,7 @@ public class WebSocketServer {
     private NettyServerConfigs config;
 
     @Autowired
-    private NettyWebSocketChannelInitializer nettyWebSocketChannelInitializer;
+    private TextWebSocketFrameHandler textWebSocketFrameHandler;
 
     public void run() throws Exception {
         EventLoopGroup bossGroup = new NioEventLoopGroup(config.getBossCount());
@@ -41,7 +46,18 @@ public class WebSocketServer {
         b.group(bossGroup, workerGroup)
                 .channel(NioServerSocketChannel.class)
                 .handler(new LoggingHandler(LogLevel.DEBUG))
-                .childHandler(nettyWebSocketChannelInitializer);
+                .childHandler(new ChannelInitializer<SocketChannel>() {
+                    @Override
+                    public void initChannel(SocketChannel ch) throws Exception {
+                        ChannelPipeline pipeline = ch.pipeline();
+
+                        pipeline.addLast(new HttpServerCodec());
+                        pipeline.addLast(new HttpObjectAggregator(64 * 1024));
+                        pipeline.addLast(new ChunkedWriteHandler());
+                        pipeline.addLast(new WebSocketServerProtocolHandler("/ws"));
+                        pipeline.addLast(textWebSocketFrameHandler);
+                    }
+                });
         Map<ChannelOption<?>, Object> tcpChannelOptions = new HashMap<ChannelOption<?>, Object>();
         tcpChannelOptions.put(ChannelOption.SO_KEEPALIVE, config.isKeepAlive());
         tcpChannelOptions.put(ChannelOption.SO_BACKLOG, config.getBacklog());
@@ -53,7 +69,7 @@ public class WebSocketServer {
 
         /** 启动服务器 */
         InetSocketAddress srvAddress = new InetSocketAddress(config.getTcpPort());
-        serverChannel =  b.bind(srvAddress).sync().channel().closeFuture().sync().channel();
+        serverChannel = b.bind(srvAddress).sync().channel().closeFuture().sync().channel();
     }
 
     @PreDestroy

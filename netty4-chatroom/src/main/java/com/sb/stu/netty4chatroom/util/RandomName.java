@@ -6,7 +6,7 @@ import java.util.Random;
  * 编  号：
  * 名  称：RandomName
  * 描  述：
- * 完成日期：2018/9/17 20:15
+ * 完成日期：2018/9/17 20:54
  * @author：felix.shao
  */
 public class RandomName {
@@ -42,8 +42,7 @@ public class RandomName {
                 "小头爸爸","卡卡洛特","你把我灌醉","明明就","比克","德玛西亚","金钟国","美国队长","曾小贤","宫水三叶","吴邪",
                 "杰尼龟","超梦","柯震东","赵本山","吴镇宇","权志龙","陈伟霆","钟汉良","郭敬明","陈奕迅","陈学冬","赵又廷",
                 "杰森·斯坦森","小沈阳","你的名字","释小龙","林书豪","吴彦祖","井柏然"};
-        String name = nameList[new Random().nextInt(nameList.length)];
-        return name;
+        return nameList[new Random().nextInt(nameList.length)];
     }
 
 }

@@ -11,6 +11,13 @@ import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 import io.netty.util.concurrent.GlobalEventExecutor;
 import org.springframework.stereotype.Component;
 
+/**
+ * 编  号：
+ * 名  称：TextWebSocketFrameHandler
+ * 描  述：
+ * 完成日期：2018/9/17 20:53
+ * @author：felix.shao
+ */
 @Component
 @ChannelHandler.Sharable
 public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextWebSocketFrame> {
@@ -20,12 +27,12 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, TextWebSocketFrame msg) throws Exception {
         Channel incoming = ctx.channel();
-        String uName = CacheDao.getString(incoming.id()+"");
+        String uName = CacheDao.getString(incoming.id() + "");
         for (Channel channel : channels) {
-            if (channel != incoming){
+            if (channel != incoming) {
                 channel.writeAndFlush(new TextWebSocketFrame("[" + uName + "]" + msg.text()));
             } else {
-                channel.writeAndFlush(new TextWebSocketFrame("[you]" + msg.text() ));
+                channel.writeAndFlush(new TextWebSocketFrame("[you]" + msg.text()));
             }
         }
     }
@@ -39,7 +46,7 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
         for (Channel channel : channels) {
             channel.writeAndFlush(new TextWebSocketFrame("[新用户] - " + uName + " 加入"));
         }
-        CacheDao.saveString(incoming.id()+"",uName);
+        CacheDao.saveString(incoming.id() + "", uName);
         channels.add(ctx.channel());
     }
 
@@ -57,20 +64,20 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         Channel incoming = ctx.channel();
-        System.out.println("用户:"+CacheDao.getString(incoming.id()+"")+"在线");
+        System.out.println("用户:" + CacheDao.getString(incoming.id() + "") + "在线");
     }
 
 
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
         Channel incoming = ctx.channel();
-        System.out.println("用户:"+CacheDao.getString(incoming.id()+"")+"掉线");
+        System.out.println("用户:" + CacheDao.getString(incoming.id() + "") + "掉线");
     }
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
         Channel incoming = ctx.channel();
-        System.out.println("用户:"+CacheDao.getString(incoming.id()+"")+"异常");
+        System.out.println("用户:" + CacheDao.getString(incoming.id() + "") + "异常");
         cause.printStackTrace();
         ctx.close();
     }

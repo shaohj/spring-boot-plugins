@@ -16,12 +16,13 @@ public class IndexController {
 
     /**
      * 返回至WebSocket首页视图
+     *
      * @return
      * @author felix.shao
      * @since 2018/9/17 20:10
      */
     @RequestMapping("/")
-    public String WebsocketChatClient(){
+    public String WebsocketChatClient() {
         return "/WebsocketChatClient";
     }
 
