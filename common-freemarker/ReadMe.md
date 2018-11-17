@@ -17,7 +17,7 @@ doc为单文件格式，我们将其转为可编辑的xml格式后，替换掉�
 * 用文本编辑器打开xml文件，找到${name}，改为张三，文件另存为doc文件
 * 打开doc文件，内容显示为“hello，张三”  
 程序实现无难点，请看具体代码  
-![模板导出doc.gif](https://github.com/shaohj/shj_tools/tree/master/imgs/blog/模板导出doc.gif)  
+![模板导出doc.gif](https://github.com/shaohj/shj_tools/blob/master/imgs/blog/%E6%A8%A1%E6%9D%BF%E5%AF%BC%E5%87%BAdoc.gif?raw=true)  
 #### freemarker导出docx
 docx是压缩文件格式，我们需要找到对应的文本模板文件，替换掉表达式的值后，将新的文本模板文件替换掉原docx的模板文件即可。
 手动模拟步骤：
@@ -25,6 +25,6 @@ docx是压缩文件格式，我们需要找到对应的文本模板文件，替�
 * 用7z(使用winrar压缩软件也是一样的)打开docx文件，编辑word/document.xml，修改为“hello，张三”,系统为提示是否将已更改的内容更新到压缩包，点击确认即可。
 * 打开docx文件，内容显示为“hello，张三”
 程序实现时，涉及到了压缩包文件的操作，因此使用了apache的压缩包工具类，具体请看代码  
-![模板导出docx.gif](https://github.com/shaohj/shj_tools/tree/master/imgs/blog/模板导出docx.gif)  
+![模板导出docx.gif](https://github.com/shaohj/shj_tools/blob/master/imgs/blog/%E6%A8%A1%E6%9D%BF%E5%AF%BC%E5%87%BAdocx.gif?raw=true)  
 ## 缺陷
 暂无记录，若发现了其他问题，可以提到issue里面。
