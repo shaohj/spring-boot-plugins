@@ -1,10 +1,12 @@
-package com.sb.stu.commonfreemarker.util;
+package com.sb.stu.commonfreemarker.constants;
 
 /**
- * 操作系统类： 
- * 获取System.getProperty("os.name")对应的操作系统 
- * @author ShaoHanJie
- *
+ * 获取System.getProperty("os.name")对应的操作系统
+ * 编  号：
+ * 名  称：Osinfo
+ * 描  述：
+ * 完成日期：2018/11/18 11:36
+ * @author：felix.shao
  */
 public class Osinfo {
 	
@@ -128,9 +130,7 @@ public class Osinfo {
 		}
 		return instance.platform;
 	}
-	/**
-	 * @param args
-	 */
+
 	public static void main(String[] args) {
 		System.out.println(Osinfo.getOSname());
 	}

@@ -1,10 +1,10 @@
-package com.sb.stu.commonfreemarker.util;
+package com.sb.stu.commonfreemarker.constants;
 
 /**
  * 编  号：
  * 名  称：EPlatform
- * 描  述：平台
- * 完成日期：2018/8/4 15:26
+ * 描  述：
+ * 完成日期：2018/11/18 22:10
  * @author：felix.shao
  */
 public enum EPlatform {

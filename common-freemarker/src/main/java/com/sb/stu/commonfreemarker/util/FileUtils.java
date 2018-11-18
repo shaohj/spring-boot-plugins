@@ -1,7 +1,9 @@
 package com.sb.stu.commonfreemarker.util;
 
 import java.io.File;
+import java.io.IOException;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.StringUtils;
 
 /**
@@ -11,6 +13,7 @@ import org.springframework.util.StringUtils;
  * 完成日期：2018/8/4 15:40
  * @author：felix.shao
  */
+@Slf4j
 public class FileUtils {
 
 	/**
@@ -36,5 +39,30 @@ public class FileUtils {
     	
     	return true;
 	}
-	
+
+	public static boolean createFile(String filePath){
+		createParentFolder(filePath);
+		File file = new File(filePath);
+		if(!file.exists()){
+			try{
+				return file.createNewFile();
+			}catch (IOException e){
+				log.error("", e);
+			}
+		}
+		return false;
+	}
+
+	public static boolean deleteFile(String filePath){
+		File file = new File(filePath);
+		return deleteFile(file);
+	}
+
+	public static boolean deleteFile(File file){
+		if(file.exists()){
+			return file.delete();
+		}
+		return false;
+	}
+
 }
