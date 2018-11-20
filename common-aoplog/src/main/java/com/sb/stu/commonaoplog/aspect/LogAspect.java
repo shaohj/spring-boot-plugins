@@ -33,13 +33,15 @@ public class LogAspect {
     
     @SuppressWarnings("unused")
 	@Around("webLog()")
-    public void around(ProceedingJoinPoint jp) throws Throwable {
+    public Object around(ProceedingJoinPoint jp) throws Throwable {
 		logger.info("**  around  begin  ");
 
     	Object[] args = jp.getArgs();
     	WebApplicationContext context = ContextLoader.getCurrentWebApplicationContext();
     	Object result = jp.proceed();
+
 		logger.info("**  around  end  ");
+		return result;
     }
     
 }
