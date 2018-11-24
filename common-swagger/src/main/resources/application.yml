@@ -1,0 +1,45 @@
+server:
+  port: 8080
+  address: 0.0.0.0
+  servlet:
+    context-path: /comswagger
+    path: /rest
+
+logging:
+  level:
+    root: INFO
+    com:
+      sb:
+        stu: DEBUG
+    org:
+      springframework:
+        web:
+          servlet:
+            DispatcherServlet: TRACE
+            mvc:
+              method:
+                annotation:
+                  ServletInvocableHandleMethod: TRACE
+      hibernate:
+        type:
+          descriptor:
+            sql:
+              BasicBinder: TRACE
+              BasicExtractor: TRACE
+        engine:
+          QueryParameters: TRACE
+          query:
+            HQLQueryPlan: TRACE
+  file: log/comswagger.log
+
+#swagger api配置
+swagger:
+  title: Demo Swagger API
+  description: demo swagger api
+  version: 1.0.0
+  license: felix.shao
+  licenseUrl: http://www.shjfun.com
+  contact:
+    name: felix.shao
+    email: 728060301@qq.com
+    url: http://www.shjfun.com
