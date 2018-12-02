@@ -22,6 +22,7 @@ doc为单文件格式，我们将其转为可编辑的xml格式后，替换掉�
 * 打开doc文件，内容显示为“hello，张三”  
 步骤演示图如下  
 <img src="https://github.com/shaohj/shj_tools/blob/master/imgs/blog/%E6%A8%A1%E6%9D%BF%E5%AF%BC%E5%87%BAdoc.gif?raw=true" style="zoom:50%" border="1px"/>  
+
 代码步骤，对应如上步骤  
 * 使用jacob将doc转为了xml,jacob使用注意事项见以下小节  
 * freemarker读取模板字符串后，使用javabean值替换模板表达式值，再将xml另存为doc，删除xml临时文件，完成，具体请看代码  
@@ -48,6 +49,7 @@ docx是压缩文件格式，我们需要找到对应的文本模板文件，替�
 * 打开docx文件，内容显示为“hello，张三”
 程序实现时，涉及到了压缩包文件的操作，因此使用了apache的压缩包工具类，具体请看代码，步骤演示图如下  
 <img src="https://github.com/shaohj/shj_tools/blob/master/imgs/blog/%E6%A8%A1%E6%9D%BF%E5%AF%BC%E5%87%BAdocx.gif?raw=true" style="zoom:50%" border="1px"/>  
+
 代码步骤，对应如上步骤  
 * 使用apache zip包打开压缩文件
 * 编辑压缩文件，找到word/document.xml
