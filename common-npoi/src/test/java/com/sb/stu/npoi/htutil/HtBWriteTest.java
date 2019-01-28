@@ -48,7 +48,7 @@ public class HtBWriteTest {
         /**
          * -ea -Xmx8m -Xms8m -Xmn8m -Xss16m  40W数据量<临界值<100W数据量,一次性写出时内存会溢出
          */
-        int num = 10000;
+        int num = 1;
 
         List<Map<String, Object>> rows = new ArrayList<>(num);
 
@@ -66,6 +66,7 @@ public class HtBWriteTest {
         BigExcelWriter writer= ExcelUtil.getBigWriter("E:\\temp\\export\\htbMapByOneTest.xlsx");
 
         // 一次性写出内容，使用默认样式
+        writer.passCurrentRow();
         writer.write(rows);
         // 关闭writer，释放内存
         writer.close();
