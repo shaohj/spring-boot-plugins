@@ -3,6 +3,7 @@ package com.sb.stu.npoi.common.bean;
 import lombok.Data;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 编  号：
@@ -19,6 +20,9 @@ public class SheetData {
 
     private String sheetName;
 
-    private List<RowData> rowDatas;
+    /** 列宽度 */
+    private int[] cellWidths;
+
+    private Map<String, RowData> rowDatas;
 
 }

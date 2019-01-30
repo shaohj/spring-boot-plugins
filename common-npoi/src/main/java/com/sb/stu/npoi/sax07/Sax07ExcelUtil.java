@@ -1,18 +1,25 @@
 package com.sb.stu.npoi.sax07;
 
+import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.ArrayUtil;
 import com.alibaba.fastjson.JSON;
 import com.sb.stu.npoi.common.bean.CellData;
 import com.sb.stu.npoi.common.bean.RowData;
 import com.sb.stu.npoi.common.bean.SheetData;
+import com.sb.stu.npoi.common.util.CalculationUtil;
+import com.sb.stu.npoi.common.util.ExcelCommonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.xssf.streaming.SXSSFSheet;
+import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import java.io.IOException;
 import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * 编  号：
@@ -33,107 +40,89 @@ public class Sax07ExcelUtil {
      * @author SHJ
      * @since 2018/7/8 13:41
      */
-    public static void export(String tempFileName, OutputStream out) {
+    public static void export(String tempFileName, Map<String, Object> params, OutputStream out) {
         // 打开工作簿 并进行初始化
         XSSFWorkbook readWb = Sax07ExcelWorkbookUtil.openWorkbookByProPath(tempFileName);
 
         // 读取模板工作簿内容
-        List<SheetData> readSheetDatas = readSheetData(readWb);
+        List<SheetData> readSheetDatas = Sax07ExcelReadUtil.readSheetData(readWb);
+
+        // 写入模板内容
+        //创建缓存的输出文件工作簿
+        SXSSFWorkbook writeWb = new SXSSFWorkbook(100);
+
+        writeSheetData(writeWb, params, readSheetDatas);
+
+        try {
+            //输出文件并清理导出的临时缓存文件
+            writeWb.write(out);
+            writeWb.dispose();
+        } catch (IOException e) {
+            log.info("导出excel时错误", e);
+        }
 
         log.info("\n读取的模板内容为-->\n{}", JSON.toJSONString(readSheetDatas));
     }
 
-    /**
-     * 读取XSSFWorkbook的Sheet，生成SheetData数据
-     * @param readWb
-     * @return
-     */
-    public static List<SheetData> readSheetData(XSSFWorkbook readWb){
-        int readWbSheetCount = readWb.getNumberOfSheets(); //模板中所有sheet数量
-        List<SheetData> sheetDatas = new ArrayList<>(readWbSheetCount);
-
-        for (int i = 0; i < readWbSheetCount; i++) {
-            Sheet readSheet = readWb.getSheetAt(i);
-
-            SheetData sheetData = new SheetData();
-            sheetData.setSheetNum(i);
-            sheetData.setSheetName(readSheet.getSheetName());
-
-            List<RowData> readSheetRowDatas = readRowData(readSheet, readSheet.getFirstRowNum(), readSheet.getLastRowNum());
-            sheetData.setRowDatas(readSheetRowDatas);
-
-            sheetDatas.add(sheetData);
+    public static void writeSheetData(final SXSSFWorkbook writeWb, final Map<String, Object> params, final List<SheetData> readSheetDatas){
+        if(CollUtil.isEmpty(readSheetDatas)){
+            return;
         }
 
-        return sheetDatas;
-    }
+        readSheetDatas.stream().forEach(readSheetData -> {
+            //创建sheet
+            SXSSFSheet writeSheet =  writeWb.createSheet(readSheetData.getSheetName());
 
-    public static List<RowData> readRowData(Sheet readSheet, int firstRowNum, int lastRowNum){
-        List<RowData> rowDatas = new ArrayList<>(lastRowNum - firstRowNum + 1);
-        int curRowNum = firstRowNum;
-
-        while (curRowNum <= lastRowNum) {
-            Row readRow = readSheet.getRow(curRowNum);
-
-            RowData rowData = new RowData();
-            rowData.setRowNum(curRowNum);
-
-            List<CellData> readRowCellDatas = null;
-            if(null == readRow){
-                readRowCellDatas = new ArrayList<>(0);
-            } else {
-                readRowCellDatas = readCellData(readRow, readRow.getFirstCellNum(), readRow.getLastCellNum());
+            if(!ArrayUtil.isEmpty(readSheetData.getCellWidths())){
+                for (int i = 0; i < readSheetData.getCellWidths().length; i++) {
+                    writeSheet.setColumnWidth(i, readSheetData.getCellWidths()[i]);
+                }
             }
 
-            rowData.setCellDatas(readRowCellDatas);
-
-            rowDatas.add(rowData);
-
-            curRowNum++;
-        }
-
-        return rowDatas;
-    }
-
-    public static List<CellData> readCellData(Row readRow, int firstCellNum, int lastCellNum){
-        List<CellData> cellDatas = new ArrayList<>(lastCellNum - firstCellNum + 1);
-
-        int curCellNum = firstCellNum;
-
-        while (curCellNum <= lastCellNum) {
-            Cell readCell = readRow.getCell(curCellNum);
-
-            CellData cellData = new CellData();
-            cellData.setColNum(curCellNum);
-
-            if (null == readCell){
-                cellData.setValue("");
-            } else {
-                cellData.setValue(getCellValue(readCell));
+            if(CollUtil.isEmpty(readSheetData.getRowDatas())){
+                return;
             }
-
-            cellDatas.add(cellData);
-
-            curCellNum++;
-        }
-
-        return cellDatas;
+            // 样式需要做缓存特殊处理，以sheet为单位作缓存处理，定义在此保证线程安全
+            final Map<String, CellStyle> writeCellStyleCache = new HashMap<>();
+            readSheetData.getRowDatas().forEach((readRowNum, rowData) -> writeRowData(writeWb, writeSheet, rowData, params, writeCellStyleCache));
+        });
     }
 
-    public static Object getCellValue(Cell cell){
-        Object result = null;
-        switch (cell.getCellTypeEnum()) {
-            case BOOLEAN:
-                result = cell.getBooleanCellValue(); break;
-            case FORMULA:
-                result = cell.getCellFormula(); break;
-            case NUMERIC:
-                result = cell.getNumericCellValue(); break;
-            case STRING:
-                result = cell.getStringCellValue(); break;
-            default:
+    public static void writeRowData(final SXSSFWorkbook writeWb, final SXSSFSheet writeSheet, final RowData rowData,
+                                    final Map<String, Object> params, final Map<String, CellStyle> writeCellStyleCache){
+        final Row writeRow = writeSheet.createRow(rowData.getRowNum());
+        writeRow.setHeight(rowData.getHeight());
+        writeRow.setHeightInPoints(rowData.getHeightInPoints());
+        if(CollUtil.isEmpty(rowData.getCellDatas())){
+            return;
         }
-        return result;
+
+
+        rowData.getCellDatas().forEach((readCellNum, cellData) -> writeCellData(writeWb, writeRow, rowData.getRowNum(), cellData, params, writeCellStyleCache));
+    }
+
+    public static void writeCellData(final SXSSFWorkbook writeWb, final Row writeRow, final int rowNum, final CellData cellData,
+                                     final Map<String, Object> params, final Map<String, CellStyle> writeCellStyleCache){
+        Cell writeCell = writeRow.createCell(cellData.getColNum());
+
+        String cellStyleKey = rowNum + "_" + cellData.getColNum();
+        CellStyle cellStyle = null;
+        if(null != writeCellStyleCache.get(cellStyleKey)){
+            cellStyle = writeCellStyleCache.get(cellStyleKey);
+            writeCell.setCellStyle(cellStyle);
+            writeCell.setCellType(cellData.getCellType());
+        } else {
+            if(null != cellData.getCellStyle()){
+                cellStyle = writeWb.createCellStyle();
+                cellStyle.cloneStyleFrom(cellData.getCellStyle());
+                writeCellStyleCache.put(cellStyleKey, cellStyle);
+                writeCell.setCellStyle(cellStyle);
+                writeCell.setCellType(cellData.getCellType());
+            }
+        }
+
+        Object parseValue = ExcelCommonUtil.parseTempStr(params, cellData.getValue());
+        ExcelCommonUtil.setCellValue(writeCell, parseValue);
     }
 
 }
