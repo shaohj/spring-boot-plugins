@@ -99,7 +99,7 @@ public class ExcelCommonUtil {
         if(null == value || !"java.lang.String".equals(value.getClass().getName())){
             return value;
         }
-        String result = StringHelper.renderString(value.toString(), params);
+        Object result = ExprUtil.getExprStrValue(params, value.toString());
         return result;
     }
 
