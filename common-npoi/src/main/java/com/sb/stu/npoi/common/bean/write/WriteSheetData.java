@@ -1,20 +1,19 @@
-package com.sb.stu.npoi.common.bean;
+package com.sb.stu.npoi.common.bean.write;
 
 import lombok.Data;
 
-import java.util.List;
 import java.util.Map;
 
 /**
  * 编  号：
- * 名  称：SheetData
+ * 名  称：WriteSheetData
  * 描  述：
- * 完成日期：2019/01/28 23:46
+ * 完成日期：2019/02/02 01:00
  *
  * @author：felix.shao
  */
 @Data
-public class SheetData {
+public class WriteSheetData {
 
     private int sheetNum;
 
@@ -23,6 +22,6 @@ public class SheetData {
     /** 列宽度 */
     private int[] cellWidths;
 
-    private Map<String, RowData> rowDatas;
+    private Map<String, WriteBlock> writeBlocks;
 
 }
