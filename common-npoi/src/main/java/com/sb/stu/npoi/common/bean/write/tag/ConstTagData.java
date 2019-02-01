@@ -10,4 +10,9 @@ package com.sb.stu.npoi.common.bean.write.tag;
  */
 public class ConstTagData extends TagData{
 
+    @Override
+    public String getRealExpr() {
+        return String.valueOf(value);
+    }
+
 }

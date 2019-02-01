@@ -1,6 +1,7 @@
 package com.sb.stu.npoi.common.consts;
 
 import cn.hutool.core.util.StrUtil;
+import lombok.Data;
 
 /**
  * 编  号：
@@ -48,9 +49,26 @@ public enum TagEnum {
         return CONST_TAG;
     }
 
+    public static boolean isEndTagNum(String expr){
+        if(StrUtil.isEmpty(expr)){
+            return false;
+        }
+        return expr.trim().equalsIgnoreCase(SaxExcelConst.TAG_KEY + "end");
+    }
+
     public static void main(String[] args) {
         System.out.println(getTagEnum(null));
         System.out.println(getTagEnum("#if aa"));
     }
 
-}
+    public int getType() {
+        return type;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public String getName() {
+        return name;
+    }}

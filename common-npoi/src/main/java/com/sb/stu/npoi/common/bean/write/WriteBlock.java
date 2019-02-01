@@ -4,6 +4,7 @@ import com.sb.stu.npoi.common.bean.write.tag.TagData;
 import lombok.Data;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 编  号：
@@ -18,6 +19,6 @@ public class WriteBlock {
 
     private TagData tagData;
 
-    private List<WriteBlock> writeBlocks;
+    private Map<String, WriteBlock> writeBlocks;
 
 }

@@ -17,7 +17,7 @@ import java.util.List;
 @Data
 public abstract class TagData {
 
-    protected Object object;
+    protected Object value;
 
     protected List<RowData> readRowData;
 
@@ -27,5 +27,7 @@ public abstract class TagData {
         }
         readRowData.add(rowData);
     }
+
+    public abstract String getRealExpr();
 
 }

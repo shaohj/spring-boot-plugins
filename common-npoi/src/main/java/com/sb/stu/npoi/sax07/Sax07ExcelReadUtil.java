@@ -2,7 +2,7 @@ package com.sb.stu.npoi.sax07;
 
 import com.sb.stu.npoi.common.bean.CellData;
 import com.sb.stu.npoi.common.bean.RowData;
-import com.sb.stu.npoi.common.bean.SheetData;
+import com.sb.stu.npoi.common.bean.ReadSheetData;
 import com.sb.stu.npoi.common.util.CalculationUtil;
 import com.sb.stu.npoi.common.util.ExcelCommonUtil;
 import org.apache.poi.ss.usermodel.Cell;
@@ -30,29 +30,29 @@ public class Sax07ExcelReadUtil {
      * @param readWb
      * @return
      */
-    public static List<SheetData> readSheetData(XSSFWorkbook readWb){
+    public static List<ReadSheetData> readSheetData(XSSFWorkbook readWb){
         //模板中所有sheet数量
         int readWbSheetCount = readWb.getNumberOfSheets();
-        List<SheetData> sheetDatas = new ArrayList<>(readWbSheetCount);
+        List<ReadSheetData> readSheetDatas = new ArrayList<>(readWbSheetCount);
 
         for (int i = 0; i < readWbSheetCount; i++) {
             Sheet readSheet = readWb.getSheetAt(i);
 
-            SheetData sheetData = new SheetData();
-            sheetData.setSheetNum(i);
-            sheetData.setSheetName(readSheet.getSheetName());
+            ReadSheetData readSheetData = new ReadSheetData();
+            readSheetData.setSheetNum(i);
+            readSheetData.setSheetName(readSheet.getSheetName());
 
             int maxCellNum = ExcelCommonUtil.getMaxCellNum(readSheet);
             int[] cellWidths = ExcelCommonUtil.getCellWidths(readSheet, maxCellNum);
-            sheetData.setCellWidths(cellWidths);
+            readSheetData.setCellWidths(cellWidths);
 
             Map<String, RowData> readSheetRowDatas = readRowData(readSheet, readSheet.getFirstRowNum(), readSheet.getLastRowNum());
-            sheetData.setRowDatas(readSheetRowDatas);
+            readSheetData.setRowDatas(readSheetRowDatas);
 
-            sheetDatas.add(sheetData);
+            readSheetDatas.add(readSheetData);
         }
 
-        return sheetDatas;
+        return readSheetDatas;
     }
 
     public static Map<String, RowData> readRowData(Sheet readSheet, int firstRowNum, int lastRowNum){
