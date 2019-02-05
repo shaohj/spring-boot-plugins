@@ -6,10 +6,7 @@ import com.sb.stu.npoi.common.bean.read.ReadSheetData;
 import com.sb.stu.npoi.common.bean.read.RowData;
 import com.sb.stu.npoi.common.bean.write.WriteBlock;
 import com.sb.stu.npoi.common.bean.write.WriteSheetData;
-import com.sb.stu.npoi.common.bean.write.tag.BigForeachTagData;
-import com.sb.stu.npoi.common.bean.write.tag.ConstTagData;
-import com.sb.stu.npoi.common.bean.write.tag.ForeachTagData;
-import com.sb.stu.npoi.common.bean.write.tag.TagData;
+import com.sb.stu.npoi.common.bean.write.tag.*;
 import com.sb.stu.npoi.common.consts.TagEnum;
 import com.sb.stu.npoi.common.util.CalculationUtil;
 import com.sb.stu.npoi.common.util.ExcelCommonUtil;
@@ -19,10 +16,7 @@ import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Workbook;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 编  号：
@@ -72,7 +66,7 @@ public class SaxWriteUtil {
         if(CollUtil.isEmpty(rowDatas)){
             return new HashMap<>(0);
         }
-        final Map<String, WriteBlock> writeBlockMap = new HashMap<>(CalculationUtil.calMapCapacity(rowDatas.size()));
+        final Map<String, WriteBlock> writeBlockMap = new LinkedHashMap<>(CalculationUtil.calMapCapacity(rowDatas.size()));
 
         geneTreeWriteBlock(0,rowDatas.size() - 1, rowDatas,writeBlockMap);
 
@@ -104,6 +98,17 @@ public class SaxWriteUtil {
 
             int curRowEndNum = -1;
             switch (tagEnum){
+                case IF_TAG:
+                    tagData = new IfTagData();
+                    tagData.setValue(getFirstCellValueStr(rowData));
+
+                    curRowEndNum = TagUtil.getTagEndNum(curRowNum + 1, rowNumEnd, rowDatas);
+                    for (int i = curRowNum + 1; i< curRowEndNum; i++){
+                        rowData = rowDatas.get(String.valueOf(i));
+                        tagData.addRowData(rowData);
+                    }
+                    curRowNum = curRowEndNum;
+                    break;
                 case FOREACH_TAG:
                     tagData = new ForeachTagData();
                     tagData.setValue(getFirstCellValueStr(rowData));

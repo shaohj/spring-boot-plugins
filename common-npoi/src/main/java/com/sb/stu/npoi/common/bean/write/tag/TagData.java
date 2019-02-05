@@ -38,4 +38,8 @@ public abstract class TagData {
     public abstract void writeTagData(Workbook writeWb, SXSSFSheet writeSheet, WriteSheetData writeSheetData,
                                       Map<String, Object> params, Map<String, CellStyle> writeCellStyleCache);
 
+    public boolean isExprTrue(Map<String, Object> params){
+        return true;
+    };
+
 }

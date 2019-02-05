@@ -60,9 +60,9 @@ public class Sax07ExcelUtilTest {
     @Test
     public void pageExportTest(){
         long t1 = System.currentTimeMillis();
-        int num = 100;
+        int num = 105;
         int pageSize = 10;
-        int totalPageNum = num/pageSize;
+        int totalPageNum = num % pageSize == 0 ? num/pageSize : num/pageSize + 1;
 
         log.info("缓存导出的xlsx临时文件目录为:{}", System.getProperty("java.io.tmpdir"));
         String tempPath = "xlsx/";
@@ -84,7 +84,7 @@ public class Sax07ExcelUtilTest {
                     for (int i = 0; i <totalPageNum; i++) {
                         Map<String, Object> pageParams = new HashMap<>();
                         List details = new ArrayList(pageSize);
-                        for (int j = 0; j <pageSize ; j++) {
+                        for (int j = 0; j <pageSize && pageSize * (i+1) + j < num; j++) {
                             details.add(new ModelTest("user" + j, "world", 144.342));
                         }
                         pageParams.put("list", details);
@@ -92,8 +92,10 @@ public class Sax07ExcelUtilTest {
                     }
                 }
             };
+            //设置sax07ExcelPageWriteService对应的表达式
+            sax07ExcelPageWriteService.setExprVal("#bigforeach detail in ${list}");
 
-            fos = new FileOutputStream(exportPath + "demo_each_exp2.xlsx");
+            fos = new FileOutputStream(exportPath + "demo_each_bigexp.xlsx");
             Sax07ExcelUtil.export(tempFilePath, map, fos, sax07ExcelPageWriteService);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
