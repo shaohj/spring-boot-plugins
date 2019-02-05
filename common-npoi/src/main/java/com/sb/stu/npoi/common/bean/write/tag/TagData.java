@@ -1,10 +1,15 @@
 package com.sb.stu.npoi.common.bean.write.tag;
 
-import com.sb.stu.npoi.common.bean.RowData;
+import com.sb.stu.npoi.common.bean.read.RowData;
+import com.sb.stu.npoi.common.bean.write.WriteSheetData;
 import lombok.Data;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.streaming.SXSSFSheet;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 编  号：
@@ -29,5 +34,8 @@ public abstract class TagData {
     }
 
     public abstract String getRealExpr();
+
+    public abstract void writeTagData(Workbook writeWb, SXSSFSheet writeSheet, WriteSheetData writeSheetData,
+                                      Map<String, Object> params, Map<String, CellStyle> writeCellStyleCache);
 
 }

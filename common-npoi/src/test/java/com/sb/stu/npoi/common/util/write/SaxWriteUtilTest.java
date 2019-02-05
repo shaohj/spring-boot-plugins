@@ -2,8 +2,8 @@ package com.sb.stu.npoi.common.util.write;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
-import com.sb.stu.npoi.common.bean.ReadSheetData;
-import com.sb.stu.npoi.common.bean.RowData;
+import com.sb.stu.npoi.common.bean.read.ReadSheetData;
+import com.sb.stu.npoi.common.bean.read.RowData;
 import com.sb.stu.npoi.common.bean.write.WriteBlock;
 import com.sb.stu.npoi.common.bean.write.WriteSheetData;
 import lombok.extern.slf4j.Slf4j;

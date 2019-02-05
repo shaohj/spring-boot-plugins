@@ -1,17 +1,22 @@
 package com.sb.stu.npoi.common.util.write;
 
 import cn.hutool.core.collection.CollUtil;
-import com.sb.stu.npoi.common.bean.CellData;
-import com.sb.stu.npoi.common.bean.ReadSheetData;
-import com.sb.stu.npoi.common.bean.RowData;
+import com.sb.stu.npoi.common.bean.read.CellData;
+import com.sb.stu.npoi.common.bean.read.ReadSheetData;
+import com.sb.stu.npoi.common.bean.read.RowData;
 import com.sb.stu.npoi.common.bean.write.WriteBlock;
 import com.sb.stu.npoi.common.bean.write.WriteSheetData;
 import com.sb.stu.npoi.common.bean.write.tag.ConstTagData;
 import com.sb.stu.npoi.common.bean.write.tag.ForeachTagData;
 import com.sb.stu.npoi.common.bean.write.tag.TagData;
-import com.sb.stu.npoi.common.consts.SaxExcelConst;
 import com.sb.stu.npoi.common.consts.TagEnum;
 import com.sb.stu.npoi.common.util.CalculationUtil;
+import com.sb.stu.npoi.common.util.ExcelCommonUtil;
+import com.sb.stu.npoi.common.util.ExprUtil;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Workbook;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -94,13 +99,13 @@ public class SaxWriteUtil {
 
             RowData rowData = rowDatas.get(String.valueOf(curRowNum));
             TagData tagData = null;
-            TagEnum tagEnum = getTagEnum(rowData);
+            TagEnum tagEnum = TagUtil.getTagEnum(rowData);
 
             switch (tagEnum){
                 case FOREACH_TAG:
                     tagData = new ForeachTagData();
                     tagData.setValue(getFirstCellValueStr(rowData));
-                    int curRowEndNum = getTagEndNum(curRowNum + 1, rowNumEnd, rowDatas);
+                    int curRowEndNum = TagUtil.getTagEndNum(curRowNum + 1, rowNumEnd, rowDatas);
 
                     for (int i = curRowNum + 1; i< curRowEndNum; i++){
                         rowData = rowDatas.get(String.valueOf(i));
@@ -128,27 +133,38 @@ public class SaxWriteUtil {
         return expr;
     };
 
-    public static TagEnum getTagEnum(RowData rowData){
-        String expr = getFirstCellValueStr(rowData);
-        return TagEnum.getTagEnum(expr);
-    };
+    /**
+     * 写入Excel Cell数据和样式
+     *   foreach和bigforeach标签在写入样式时，使用了缓存的样式，避免创建很多相同的样式导致excel文件过大
+     * @param writeWb
+     * @param writeRow
+     * @param readRowNum
+     * @param cellData
+     * @param params java动态参数
+     * @param writeCellStyleCache 样式缓存
+     */
+    public static void writeCellData(Workbook writeWb, Row writeRow, int readRowNum, CellData cellData,
+                                     Map<String, Object> params, Map<String, CellStyle> writeCellStyleCache){
+        Cell writeCell = writeRow.createCell(cellData.getColNum());
 
-    public static int getTagEndNum(int rowNumStart, int rowNumEnd, Map<String, RowData> rowDatas){
-        if(rowNumStart < 0 || rowNumStart > rowNumEnd || rowNumEnd >= rowDatas.size()){
-            return -1;
-        }
-
-        int curRowNum = rowNumStart;
-        while(curRowNum <= rowNumEnd && rowNumEnd < rowDatas.size()){
-            RowData rowData = rowDatas.get(String.valueOf(curRowNum));
-            String expr = getFirstCellValueStr(rowData);
-            boolean isEnd = TagEnum.isEndTagNum(expr);
-            if (isEnd) {
-                return curRowNum;
+        String cellStyleKey = readRowNum + "_" + cellData.getColNum();
+        CellStyle cellStyle = null;
+        if(null != writeCellStyleCache.get(cellStyleKey)){
+            cellStyle = writeCellStyleCache.get(cellStyleKey);
+            writeCell.setCellStyle(cellStyle);
+            writeCell.setCellType(cellData.getCellType());
+        } else {
+            if(null != cellData.getCellStyle()){
+                cellStyle = writeWb.createCellStyle();
+                cellStyle.cloneStyleFrom(cellData.getCellStyle());
+                writeCellStyleCache.put(cellStyleKey, cellStyle);
+                writeCell.setCellStyle(cellStyle);
+                writeCell.setCellType(cellData.getCellType());
             }
-            curRowNum ++;
         }
-        return -1;
+
+        Object parseValue = ExprUtil.parseTempStr(params, cellData.getValue());
+        ExcelCommonUtil.setCellValue(writeCell, parseValue);
     }
 
 }

@@ -1,8 +1,7 @@
-package com.sb.stu.npoi.common.bean;
+package com.sb.stu.npoi.common.bean.read;
 
 import lombok.Data;
 
-import java.util.List;
 import java.util.Map;
 
 /**

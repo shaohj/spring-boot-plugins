@@ -1,12 +1,13 @@
 package com.sb.stu.npoi.common.util;
 
-import static com.sb.stu.npoi.common.consts.SaxExcelConst.*;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.beanutils.PropertyUtils;
 
-import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.Map;
+import java.lang.reflect.Array;
+import java.util.*;
+
+import static com.sb.stu.npoi.common.consts.SaxExcelConst.EXPR_END;
+import static com.sb.stu.npoi.common.consts.SaxExcelConst.EXPR_START;
 
 /**
  * 编  号：
@@ -18,6 +19,23 @@ import java.util.Map;
  */
 @Slf4j
 public class ExprUtil {
+
+    public static void main(String[] args) {
+        String content = "hello ${name}, 1 2 3 4 5 ${six} 7, again ${name}. ";
+        Map<String, Object> map = new HashMap<>();
+        map.put("name", "java");
+        map.put("six", "6");
+
+        System.out.println(parseTempStr(map, content));
+    }
+
+    public static Object parseTempStr(final Map<String, Object> params, Object value){
+        if(null == value || !"java.lang.String".equals(value.getClass().getName())){
+            return value;
+        }
+        Object result = ExprUtil.getExprStrValue(params, value.toString());
+        return result;
+    }
 
     /**
      * 根据java对象动态替换表达式里面的值
@@ -132,6 +150,32 @@ public class ExprUtil {
             log.warn("getProperty exception.{}", e.getMessage());
         }
         return value;
+    }
+
+    public static Iterator getIterator(Object collection) {
+        Iterator iterator = null;
+        if (collection.getClass().isArray()) {
+            try {
+                // If we're lucky, it is an array of objects
+                // that we can iterate over with no copying
+                iterator = Arrays.asList((Object[]) collection).iterator();
+            } catch (ClassCastException e) {
+                // Rats -- it is an array of primitives
+                int length = Array.getLength(collection);
+                ArrayList c = new ArrayList(length);
+                for (int i = 0; i < length; i++) {
+                    c.add(Array.get(collection, i));
+                }
+                iterator = c.iterator();
+            }
+        } else if (collection instanceof Collection) {
+            iterator = ((Collection) collection).iterator();
+        } else if (collection instanceof Iterator) {
+            iterator = (Iterator) collection;
+        } else if (collection instanceof Map) {
+            iterator = ((Map) collection).entrySet().iterator();
+        }
+        return iterator;
     }
 
 }

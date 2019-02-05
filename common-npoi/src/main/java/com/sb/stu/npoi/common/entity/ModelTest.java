@@ -7,8 +7,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 编  号：
+ * 名  称：ModelTest
+ * 描  述：模拟模板导出的javabean实体类
+ * 完成日期：2019/2/5 12:45
+ * @author：felix.shao
+ */
 @Data
-public class Model {
+public class ModelTest {
 
 	private int count;
 	private String user;
@@ -21,10 +28,10 @@ public class Model {
 	private String field1;
 	private Map maps = new HashMap();
 
-	public Model() {
+	public ModelTest() {
 	}
 
-	public Model(String name, String user, double qty) {
+	public ModelTest(String name, String user, double qty) {
 		this.name = name;
 		this.user = user;
 		this.qty = qty;

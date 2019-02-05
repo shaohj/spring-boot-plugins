@@ -19,9 +19,19 @@ public class WriteSheetData {
 
     private String sheetName;
 
+    /** 当前写入行号 */
+    private int curWriteRowNum;
+
+    /** 当前写入列号 */
+    private int curWriteColNum;
+
     /** 列宽度 */
     private int[] cellWidths;
 
     private Map<String, WriteBlock> writeBlocks;
+
+    public int getCurWriteRowNumAndIncrement(){
+        return curWriteRowNum++;
+    }
 
 }

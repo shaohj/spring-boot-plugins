@@ -1,17 +1,10 @@
 package com.sb.stu.npoi.common.util;
 
-import cn.hutool.core.lang.Dict;
-import cn.hutool.extra.template.Template;
-import cn.hutool.extra.template.TemplateConfig;
-import cn.hutool.extra.template.TemplateEngine;
-import cn.hutool.extra.template.TemplateUtil;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * 编  号：
@@ -93,23 +86,6 @@ public class ExcelCommonUtil {
                 writeCell.setCellValue(value.toString());
             }
         }
-    }
-
-    public static Object parseTempStr(final Map<String, Object> params, Object value){
-        if(null == value || !"java.lang.String".equals(value.getClass().getName())){
-            return value;
-        }
-        Object result = ExprUtil.getExprStrValue(params, value.toString());
-        return result;
-    }
-
-    public static void main(String[] args) {
-        String content = "hello ${name}, 1 2 3 4 5 ${six} 7, again ${name}. ";
-        Map<String, Object> map = new HashMap<>();
-        map.put("name", "java");
-        map.put("six", "6");
-
-        System.out.println(parseTempStr(map, content));
     }
 
 }

@@ -1,4 +1,4 @@
-package com.sb.stu.npoi.common.bean;
+package com.sb.stu.npoi.common.bean.read;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Data;

@@ -1,19 +1,16 @@
 package com.sb.stu.npoi.sax07;
 
-import com.sb.stu.npoi.common.bean.CellData;
-import com.sb.stu.npoi.common.bean.RowData;
-import com.sb.stu.npoi.common.bean.ReadSheetData;
+import com.sb.stu.npoi.common.bean.read.CellData;
+import com.sb.stu.npoi.common.bean.read.ReadSheetData;
+import com.sb.stu.npoi.common.bean.read.RowData;
 import com.sb.stu.npoi.common.util.CalculationUtil;
 import com.sb.stu.npoi.common.util.ExcelCommonUtil;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.ss.usermodel.Workbook;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 编  号：
@@ -30,7 +27,7 @@ public class Sax07ExcelReadUtil {
      * @param readWb
      * @return
      */
-    public static List<ReadSheetData> readSheetData(XSSFWorkbook readWb){
+    public static List<ReadSheetData> readSheetData(Workbook readWb){
         //模板中所有sheet数量
         int readWbSheetCount = readWb.getNumberOfSheets();
         List<ReadSheetData> readSheetDatas = new ArrayList<>(readWbSheetCount);
