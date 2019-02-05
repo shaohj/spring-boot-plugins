@@ -24,7 +24,7 @@ public class Sax07ExcelUtilTest {
     @Test
     public void exportTest(){
         long t1 = System.currentTimeMillis();
-        int num = 10000;
+        int num = 4;
 
         log.info("缓存导出的xlsx临时文件目录为:{}", System.getProperty("java.io.tmpdir"));
         String tempPath = "xlsx/";
@@ -57,5 +57,50 @@ public class Sax07ExcelUtilTest {
         log.info("导出{}条数据,耗费时间为{}毫秒", num, System.currentTimeMillis() - t1);
     }
 
+    @Test
+    public void pageExportTest(){
+        long t1 = System.currentTimeMillis();
+        int num = 100;
+        int pageSize = 10;
+        int totalPageNum = num/pageSize;
+
+        log.info("缓存导出的xlsx临时文件目录为:{}", System.getProperty("java.io.tmpdir"));
+        String tempPath = "xlsx/";
+        String tempFilePath = tempPath + "demo_bigeach.xlsx";
+
+        FileOutputStream fos = null;
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("printDate", "2019-01-31");
+
+        ModelTest model = new ModelTest("aaa1", "bbb", 123.234);
+        model.setYear("1992");
+        map.put("model", model);
+
+        try {
+            Sax07ExcelPageWriteService sax07ExcelPageWriteService = new Sax07ExcelPageWriteService(){
+                @Override
+                public void pageWriteData() {
+                    for (int i = 0; i <totalPageNum; i++) {
+                        Map<String, Object> pageParams = new HashMap<>();
+                        List details = new ArrayList(pageSize);
+                        for (int j = 0; j <pageSize ; j++) {
+                            details.add(new ModelTest("user" + j, "world", 144.342));
+                        }
+                        pageParams.put("list", details);
+                        tagData.writeTagData(writeWb, writeSheet, writeSheetData, pageParams, writeCellStyleCache);
+                    }
+                }
+            };
+
+            fos = new FileOutputStream(exportPath + "demo_each_exp2.xlsx");
+            Sax07ExcelUtil.export(tempFilePath, map, fos, sax07ExcelPageWriteService);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            IoUtil.close(fos);
+        }
+        log.info("导出{}条数据,耗费时间为{}毫秒", num, System.currentTimeMillis() - t1);
+    }
 
 }

@@ -58,4 +58,31 @@ public class Sax07ExcelUtil {
         log.info("\n写入的模板内容为-->\n{}", JSON.toJSONString(writeSheetDatas));
     }
 
+    public static void export(String tempFileName, Map<String, Object> params, OutputStream out, Sax07ExcelPageWriteService sax07ExcelPageWriteService) {
+        // 打开工作簿 并进行初始化
+        XSSFWorkbook readWb = Sax07ExcelWorkbookUtil.openWorkbookByProPath(tempFileName);
+
+        // 读取模板工作簿内容
+        List<ReadSheetData> readReadSheetData = Sax07ExcelReadUtil.readSheetData(readWb);
+
+        // 写入模板内容
+        List<WriteSheetData> writeSheetDatas = SaxWriteUtil.parseSheetData(readReadSheetData);
+
+        //创建缓存的输出文件工作簿
+        SXSSFWorkbook writeWb = new SXSSFWorkbook(100);
+
+        Sax07ExcelWriteUtil.writeSheetData(writeWb, params, writeSheetDatas, sax07ExcelPageWriteService);
+
+        try {
+            //输出文件并清理导出的临时缓存文件
+            writeWb.write(out);
+            writeWb.dispose();
+        } catch (IOException e) {
+            log.info("导出excel时错误", e);
+        }
+
+        log.info("\n读取的模板内容为-->\n{}", JSON.toJSONString(readReadSheetData));
+        log.info("\n写入的模板内容为-->\n{}", JSON.toJSONString(writeSheetDatas));
+    }
+
 }

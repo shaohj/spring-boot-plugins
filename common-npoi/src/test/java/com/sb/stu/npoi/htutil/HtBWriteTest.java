@@ -90,7 +90,7 @@ public class HtBWriteTest {
         row1.put("是否合格", true);
         row1.put("考试日期", DateUtil.date());
 
-        BigExcelWriter writer= ExcelUtil.getBigWriter("E:\\temp\\export\\htbMapByPageTest.xlsx");
+        BigExcelWriter writer = ExcelUtil.getBigWriter("E:\\temp\\export\\htbMapByPageTest.xlsx");
 
         // 分页写出内容，使用默认样式
         log.info("分页写出内容，总页数={},每页数={},总数据量={}", totalPageNum, pageSize, num);

@@ -3,12 +3,15 @@ package com.sb.stu.npoi.sax07;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ArrayUtil;
 import com.sb.stu.npoi.common.bean.write.WriteSheetData;
+import com.sb.stu.npoi.common.bean.write.tag.BigForeachTagData;
 import com.sb.stu.npoi.common.bean.write.tag.TagData;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.xssf.streaming.SXSSFSheet;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 编  号：
@@ -44,6 +47,44 @@ public class Sax07ExcelWriteUtil {
             writeSheetData.getWriteBlocks().forEach((readRowNum, writeBlock) -> {
                 TagData tagData = writeBlock.getTagData();
                 tagData.writeTagData(writeWb, writeSheet, writeSheetData, params, writeCellStyleCache);
+            });
+        });
+    }
+
+    public static void writeSheetData(SXSSFWorkbook writeWb, Map<String, Object> params, List<WriteSheetData> writeSheetDatas, Sax07ExcelPageWriteService sax07ExcelPageWriteService){
+        if(CollUtil.isEmpty(writeSheetDatas)){
+            return;
+        }
+
+        writeSheetDatas.stream().forEach(writeSheetData -> {
+            //创建sheet
+            SXSSFSheet writeSheet =  writeWb.createSheet(writeSheetData.getSheetName());
+
+            /** 设置列宽为模板文件的列宽 */
+            if(!ArrayUtil.isEmpty(writeSheetData.getCellWidths())){
+                for (int i = 0; i < writeSheetData.getCellWidths().length; i++) {
+                    writeSheet.setColumnWidth(i, writeSheetData.getCellWidths()[i]);
+                }
+            }
+
+            if(CollUtil.isEmpty(writeSheetData.getWriteBlocks())){
+                return;
+            }
+            // 样式需要做缓存特殊处理，以sheet为单位作缓存处理，定义在此保证线程安全
+            final Map<String, CellStyle> writeCellStyleCache = new HashMap<>();
+            writeSheetData.getWriteBlocks().forEach((readRowNum, writeBlock) -> {
+                TagData tagData = writeBlock.getTagData();
+                if(tagData instanceof BigForeachTagData){
+                    sax07ExcelPageWriteService.setTagData(tagData);
+                    sax07ExcelPageWriteService.setWriteWb(writeWb);
+                    sax07ExcelPageWriteService.setWriteSheet(writeSheet);
+                    sax07ExcelPageWriteService.setWriteSheetData(writeSheetData);
+                    sax07ExcelPageWriteService.setWriteCellStyleCache(writeCellStyleCache);
+
+                    sax07ExcelPageWriteService.pageWriteData();
+                } else {
+                    tagData.writeTagData(writeWb, writeSheet, writeSheetData, params, writeCellStyleCache);
+                }
             });
         });
     }

@@ -6,6 +6,7 @@ import com.sb.stu.npoi.common.bean.read.ReadSheetData;
 import com.sb.stu.npoi.common.bean.read.RowData;
 import com.sb.stu.npoi.common.bean.write.WriteBlock;
 import com.sb.stu.npoi.common.bean.write.WriteSheetData;
+import com.sb.stu.npoi.common.bean.write.tag.BigForeachTagData;
 import com.sb.stu.npoi.common.bean.write.tag.ConstTagData;
 import com.sb.stu.npoi.common.bean.write.tag.ForeachTagData;
 import com.sb.stu.npoi.common.bean.write.tag.TagData;
@@ -101,18 +102,30 @@ public class SaxWriteUtil {
             TagData tagData = null;
             TagEnum tagEnum = TagUtil.getTagEnum(rowData);
 
+            int curRowEndNum = -1;
             switch (tagEnum){
                 case FOREACH_TAG:
                     tagData = new ForeachTagData();
                     tagData.setValue(getFirstCellValueStr(rowData));
-                    int curRowEndNum = TagUtil.getTagEndNum(curRowNum + 1, rowNumEnd, rowDatas);
+                    curRowEndNum = TagUtil.getTagEndNum(curRowNum + 1, rowNumEnd, rowDatas);
 
                     for (int i = curRowNum + 1; i< curRowEndNum; i++){
                         rowData = rowDatas.get(String.valueOf(i));
                         tagData.addRowData(rowData);
                     }
                     curRowNum = curRowEndNum;
-                     break;
+                    break;
+                case BIGFOREACH_TAG:
+                    tagData = new BigForeachTagData();
+                    tagData.setValue(getFirstCellValueStr(rowData));
+                    curRowEndNum = TagUtil.getTagEndNum(curRowNum + 1, rowNumEnd, rowDatas);
+
+                    for (int i = curRowNum + 1; i< curRowEndNum; i++){
+                        rowData = rowDatas.get(String.valueOf(i));
+                        tagData.addRowData(rowData);
+                    }
+                    curRowNum = curRowEndNum;
+                    break;
                 case CONST_TAG:
                 default:
                     tagData = new ConstTagData();
