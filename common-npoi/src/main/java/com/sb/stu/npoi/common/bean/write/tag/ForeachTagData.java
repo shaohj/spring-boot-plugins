@@ -6,6 +6,7 @@ import com.sb.stu.npoi.common.consts.SaxExcelConst;
 import com.sb.stu.npoi.common.consts.TagEnum;
 import com.sb.stu.npoi.common.util.ExprUtil;
 import com.sb.stu.npoi.common.util.write.TagUtil;
+import lombok.Data;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.streaming.SXSSFSheet;
@@ -22,7 +23,12 @@ import java.util.StringTokenizer;
  *
  * @author：felix.shao
  */
+@Data
 public class ForeachTagData extends TagData {
+
+    private String iteratorObjKey;
+
+    private String iteratorListKey;
 
     @Override
     public String getRealExpr() {
@@ -33,24 +39,7 @@ public class ForeachTagData extends TagData {
 
     @Override
     public void writeTagData(Workbook writeWb, SXSSFSheet writeSheet, WriteSheetData writeSheetData, Map<String, Object> params, Map<String, CellStyle> writeCellStyleCache) {
-        String realExpr = getRealExpr();
-        if(StrUtil.isEmpty(realExpr)){
-            return;
-        }
-        StringTokenizer st = new StringTokenizer(realExpr, " ");
-        int pos = 0;
-        String iteratorObjKey = null;
-        String iteratorListKey = null;
-        while (st.hasMoreTokens()) {
-            String str = st.nextToken();
-            if (pos == 0) {
-                iteratorObjKey = str;
-            }
-            if (pos == 2) {
-                iteratorListKey = str;
-            }
-            pos++;
-        }
+        initExpr();
         Object iteratorList = ExprUtil.getExprStrValue(params, iteratorListKey);
         if(null == iteratorListKey){
             return;
@@ -63,5 +52,23 @@ public class ForeachTagData extends TagData {
             TagUtil.writeTagData(writeWb, writeSheet, writeSheetData, readRowData, params, writeCellStyleCache);
         }
     }
+
+    private void initExpr(){
+        String realExpr = getRealExpr();
+        if(StrUtil.isEmpty(realExpr)){
+            return;
+        }
+        StringTokenizer st = new StringTokenizer(realExpr, " ");
+        int pos = 0;
+        while (st.hasMoreTokens()) {
+            String str = st.nextToken();
+            if (pos == 0) {
+                iteratorObjKey = str;
+            } else if (pos == 2) {
+                iteratorListKey = str;
+            }
+            pos++;
+        }
+    };
 
 }

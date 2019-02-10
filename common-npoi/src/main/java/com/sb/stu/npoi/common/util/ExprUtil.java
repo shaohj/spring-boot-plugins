@@ -4,6 +4,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.beanutils.PropertyUtils;
 
 import java.lang.reflect.Array;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.*;
 
 import static com.sb.stu.npoi.common.consts.SaxExcelConst.EXPR_END;
@@ -176,6 +178,27 @@ public class ExprUtil {
             iterator = ((Map) collection).entrySet().iterator();
         }
         return iterator;
+    }
+
+    public static Field[] getBeanProperties(Class clazz) {
+        Field[] fields = clazz.getDeclaredFields();
+        Method[] methods = clazz.getMethods();
+        String m = "";
+
+        for (int i = 0; i < methods.length; i++) {
+            m += methods[i].getName() + ",";
+        }
+
+        List flist = new ArrayList();
+        for (int i = 0; i < fields.length; i++) {
+            if (m.indexOf("get" + fields[i].getName().substring(0, 1).toUpperCase()
+                    + fields[i].getName().substring(1, fields[i].getName().length())) >= 0) {
+                flist.add(fields[i]);
+            }
+        }
+        Field[] result = new Field[flist.size()];
+        flist.toArray(result);
+        return result;
     }
 
 }

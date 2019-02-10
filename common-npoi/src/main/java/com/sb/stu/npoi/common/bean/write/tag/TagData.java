@@ -7,9 +7,7 @@ import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.streaming.SXSSFSheet;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 编  号：
@@ -28,7 +26,8 @@ public abstract class TagData {
 
     public void addRowData(RowData rowData){
         if(null == readRowData){
-            readRowData = new ArrayList<>(2);
+            //一般标签内的excel行数不会太多，设置为4吧
+            readRowData = new ArrayList<>(4);
         }
         readRowData.add(rowData);
     }
@@ -37,9 +36,5 @@ public abstract class TagData {
 
     public abstract void writeTagData(Workbook writeWb, SXSSFSheet writeSheet, WriteSheetData writeSheetData,
                                       Map<String, Object> params, Map<String, CellStyle> writeCellStyleCache);
-
-    public boolean isExprTrue(Map<String, Object> params){
-        return true;
-    };
 
 }

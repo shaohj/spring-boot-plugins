@@ -3,7 +3,7 @@ package com.sb.stu.npoi.sax07;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ArrayUtil;
 import com.sb.stu.npoi.common.bean.write.WriteSheetData;
-import com.sb.stu.npoi.common.bean.write.tag.BigForeachTagData;
+import com.sb.stu.npoi.common.bean.write.tag.PageForeachTagData;
 import com.sb.stu.npoi.common.bean.write.tag.TagData;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.xssf.streaming.SXSSFSheet;
@@ -74,7 +74,7 @@ public class Sax07ExcelWriteUtil {
             final Map<String, CellStyle> writeCellStyleCache = new HashMap<>();
             writeSheetData.getWriteBlocks().forEach((readRowNum, writeBlock) -> {
                 TagData tagData = writeBlock.getTagData();
-                if(tagData instanceof BigForeachTagData){
+                if(tagData instanceof PageForeachTagData){
                     // 大数据导出service
                     if(null != tagData.getValue() && !CollUtil.isEmpty(sax07ExcelPageWriteServices)){
                         sax07ExcelPageWriteServices.stream()
@@ -85,9 +85,7 @@ public class Sax07ExcelWriteUtil {
                         });
                     }
                 } else {
-                    if(tagData.isExprTrue(params)){
-                        tagData.writeTagData(writeWb, writeSheet, writeSheetData, params, writeCellStyleCache);
-                    }
+                    tagData.writeTagData(writeWb, writeSheet, writeSheetData, params, writeCellStyleCache);
                 }
             });
         });

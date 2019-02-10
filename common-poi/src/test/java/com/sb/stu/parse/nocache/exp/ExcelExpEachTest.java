@@ -1,18 +1,18 @@
 package com.sb.stu.parse.nocache.exp;
 
+import com.poi.template.excel.exception.ExcelException;
+import com.poi.template.excel.parse.nocache.ExcelUtils;
+import com.sb.stu.commonpoi.entity.Model;
+import org.apache.poi.util.IOUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import com.poi.template.excel.exception.ExcelException;
-import com.sb.stu.commonpoi.entity.Model;
-import com.poi.template.excel.parse.nocache.ExcelUtils;
-import org.apache.poi.util.IOUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class ExcelExpEachTest {
 
@@ -35,19 +35,19 @@ public class ExcelExpEachTest {
 		ExcelUtils.addValue("model", model);
 
 		//万条数据导出测试
-		for(int i = 0; i< 1; i++){
+		for(int i = 0; i< 2; i++){
 			details.add(new Model("user3", "world", 144.342));
 		}
 		ExcelUtils.addValue("list", details);
 
-		String tempPath = "xlsx/";
-		String tempFilePath = tempPath + "demo_each.xlsx";
+		String tempPath = "xls/";
+		String tempFilePath = tempPath + "demo_each.xls";
 
 		FileOutputStream fos = null;
 		try {
 			long t1 = System.currentTimeMillis();
 
-			fos = new FileOutputStream(exportPath + "demo_each_exp.xlsx");
+			fos = new FileOutputStream(exportPath + "demo_each_exp.xls");
 			ExcelUtils.export(tempFilePath, fos);
 			logger.info("导出{}条数据,耗费时间为{}毫秒", details.size(), System.currentTimeMillis() - t1);
 		} catch (FileNotFoundException | ExcelException ex) {

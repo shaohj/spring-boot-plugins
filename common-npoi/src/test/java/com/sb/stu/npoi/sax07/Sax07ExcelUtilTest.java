@@ -22,13 +22,71 @@ public class Sax07ExcelUtilTest {
     public static final String exportPath = "E:\\temp\\export\\";
 
     @Test
-    public void exportTest(){
+    public void exportEachTest(){
+        long t1 = System.currentTimeMillis();
+
+        String tempPath = "xlsx/";
+        String tempFilePath = tempPath + "each_temp.xlsx";
+
+        FileOutputStream fos = null;
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("printDate", "2019-01-31");
+
+        ModelTest model = new ModelTest("aaa1", "bbb", 123.234);
+        model.setYear("1992");
+        map.put("model", model);
+
+        try {
+            fos = new FileOutputStream(exportPath + "each_data.xlsx");
+            Sax07ExcelUtil.export(tempFilePath, map, fos);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            IoUtil.close(fos);
+        }
+        log.info("导出1条数据,耗费时间为{}毫秒", System.currentTimeMillis() - t1);
+    }
+
+    @Test
+    public void exportEachMapTest(){
+        long t1 = System.currentTimeMillis();
+
+        String tempPath = "xlsx/";
+        String tempFilePath = tempPath + "each_temp.xlsx";
+
+        FileOutputStream fos = null;
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("printDate", "2019-01-31");
+
+        Map model = new LinkedHashMap();
+        model.put("uname", "zhangsan");
+        model.put("realname", "张三");
+        model.put("age", 19);
+
+        map.put("model", model);
+
+        try {
+            fos = new FileOutputStream(exportPath + "each_data.xlsx");
+            Sax07ExcelUtil.export(tempFilePath, map, fos);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            IoUtil.close(fos);
+        }
+        log.info("导出1条数据,耗费时间为{}毫秒", System.currentTimeMillis() - t1);
+    }
+
+    @Test
+    public void exportForeachTest(){
+        log.info("缓存导出的xlsx临时文件目录为:{}", System.getProperty("java.io.tmpdir"));
+
         long t1 = System.currentTimeMillis();
         int num = 4;
 
-        log.info("缓存导出的xlsx临时文件目录为:{}", System.getProperty("java.io.tmpdir"));
         String tempPath = "xlsx/";
-        String tempFilePath = tempPath + "demo_each.xlsx";
+        String tempFilePath = tempPath + "foreach_temp.xlsx";
 
         FileOutputStream fos = null;
 
@@ -47,7 +105,7 @@ public class Sax07ExcelUtilTest {
         map.put("list", details);
 
         try {
-            fos = new FileOutputStream(exportPath + "demo_each_exp2.xlsx");
+            fos = new FileOutputStream(exportPath + "foreach_data.xlsx");
             Sax07ExcelUtil.export(tempFilePath, map, fos);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -58,15 +116,16 @@ public class Sax07ExcelUtilTest {
     }
 
     @Test
-    public void pageExportTest(){
+    public void exportPageForeachTest(){
+        log.info("缓存导出的xlsx临时文件目录为:{}", System.getProperty("java.io.tmpdir"));
+
         long t1 = System.currentTimeMillis();
         int num = 105;
         int pageSize = 10;
         int totalPageNum = num % pageSize == 0 ? num/pageSize : num/pageSize + 1;
 
-        log.info("缓存导出的xlsx临时文件目录为:{}", System.getProperty("java.io.tmpdir"));
         String tempPath = "xlsx/";
-        String tempFilePath = tempPath + "demo_bigeach.xlsx";
+        String tempFilePath = tempPath + "pageforeach_temp.xlsx";
 
         FileOutputStream fos = null;
 
@@ -93,9 +152,9 @@ public class Sax07ExcelUtilTest {
                 }
             };
             //设置sax07ExcelPageWriteService对应的表达式
-            sax07ExcelPageWriteService.setExprVal("#bigforeach detail in ${list}");
+            sax07ExcelPageWriteService.setExprVal("#pageforeach detail in ${list}");
 
-            fos = new FileOutputStream(exportPath + "demo_each_bigexp.xlsx");
+            fos = new FileOutputStream(exportPath + "pageforeach_data.xlsx");
             Sax07ExcelUtil.export(tempFilePath, map, fos, sax07ExcelPageWriteService);
         } catch (FileNotFoundException e) {
             e.printStackTrace();

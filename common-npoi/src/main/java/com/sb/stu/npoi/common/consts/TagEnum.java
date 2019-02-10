@@ -1,7 +1,6 @@
 package com.sb.stu.npoi.common.consts;
 
 import cn.hutool.core.util.StrUtil;
-import lombok.Data;
 
 /**
  * 编  号：
@@ -17,7 +16,7 @@ public enum TagEnum {
     IF_TAG(1, "if", "if标签"),
     EACH_TAG(1, "each", "each标签"),
     FOREACH_TAG(0, "foreach", "普通foreach标签"),
-    BIGFOREACH_TAG(0, "bigforeach", "大数据foreach标签"),
+    BIGFOREACH_TAG(0, "pageforeach", "分页foreach标签"),
     ;
 
     private int type;

@@ -1,7 +1,9 @@
 package com.sb.stu.npoi.common.bean.read;
 
 import com.alibaba.fastjson.annotation.JSONField;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.CellType;
 
@@ -14,6 +16,8 @@ import org.apache.poi.ss.usermodel.CellType;
  * @author：felix.shao
  */
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class CellData {
 
     /** 列号 */

@@ -16,12 +16,12 @@ import java.util.StringTokenizer;
 
 /**
  * 编  号：
- * 名  称：BigForeachTagData
+ * 名  称：PageForeachTagData
  * 描  述：
  * 完成日期：2019/2/5 13:08
  * @author：felix.shao
  */
-public class BigForeachTagData extends TagData {
+public class PageForeachTagData extends TagData {
 
     @Override
     public String getRealExpr() {

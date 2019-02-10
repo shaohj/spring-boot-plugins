@@ -31,11 +31,12 @@ public class IfTagData extends TagData{
     @Override
     public void writeTagData(Workbook writeWb, SXSSFSheet writeSheet, WriteSheetData writeSheetData,
                              Map<String, Object> params, Map<String, CellStyle> writeCellStyleCache) {
-        TagUtil.writeTagData(writeWb, writeSheet, writeSheetData, readRowData, params, writeCellStyleCache);
+        if(isExprTrue(params)){
+            TagUtil.writeTagData(writeWb, writeSheet, writeSheetData, readRowData, params, writeCellStyleCache);
+        }
     }
 
-    @Override
-    public boolean isExprTrue(Map<String, Object> params){
+    private boolean isExprTrue(Map<String, Object> params){
         String exprStr = getRealExpr();
         Object exprValue = ExprUtil.getExprStrValue(params, exprStr);
         boolean isFlag = null == exprValue || StrUtil.isEmpty(exprValue.toString()) ? false : true;

@@ -121,7 +121,7 @@ public class SaxWriteUtil {
                     curRowNum = curRowEndNum;
                     break;
                 case BIGFOREACH_TAG:
-                    tagData = new BigForeachTagData();
+                    tagData = new PageForeachTagData();
                     tagData.setValue(getFirstCellValueStr(rowData));
                     curRowEndNum = TagUtil.getTagEndNum(curRowNum + 1, rowNumEnd, rowDatas);
 
@@ -131,6 +131,10 @@ public class SaxWriteUtil {
                     }
                     curRowNum = curRowEndNum;
                     break;
+                case EACH_TAG:
+                    tagData = new EachTagData();
+                    tagData.addRowData(rowData);
+                    tagData.setValue(getFirstCellValueStr(rowData)); break;
                 case CONST_TAG:
                 default:
                     tagData = new ConstTagData();
