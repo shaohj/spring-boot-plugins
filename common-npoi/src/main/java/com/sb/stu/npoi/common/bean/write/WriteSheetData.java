@@ -1,5 +1,6 @@
 package com.sb.stu.npoi.common.bean.write;
 
+import com.sb.stu.npoi.common.bean.write.tag.TagData;
 import lombok.Data;
 
 import java.util.Map;
@@ -28,7 +29,7 @@ public class WriteSheetData {
     /** 列宽度 */
     private int[] cellWidths;
 
-    private Map<String, WriteBlock> writeBlocks;
+    private Map<String, TagData> writeBlocks;
 
     public int getCurWriteRowNumAndIncrement(){
         return curWriteRowNum++;

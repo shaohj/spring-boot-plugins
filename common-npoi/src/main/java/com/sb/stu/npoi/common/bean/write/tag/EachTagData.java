@@ -4,12 +4,14 @@ import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSON;
 import com.sb.stu.npoi.common.bean.read.CellData;
+import com.sb.stu.npoi.common.bean.read.RowData;
 import com.sb.stu.npoi.common.bean.write.WriteSheetData;
 import com.sb.stu.npoi.common.consts.SaxExcelConst;
 import com.sb.stu.npoi.common.consts.TagEnum;
 import com.sb.stu.npoi.common.util.ExprUtil;
 import com.sb.stu.npoi.common.util.write.TagUtil;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.beanutils.DynaProperty;
 import org.apache.poi.ss.usermodel.CellStyle;
@@ -28,6 +30,7 @@ import java.util.*;
  * @author：felix.shao
  */
 @Data
+@NoArgsConstructor
 @Slf4j
 public class EachTagData extends TagData{
 
@@ -37,6 +40,12 @@ public class EachTagData extends TagData{
 
     /** 只遍历指定的属性 */
     private String onkeys;
+
+    protected RowData readRowData;
+
+    public EachTagData(RowData readRowData) {
+        this.readRowData = readRowData;
+    }
 
     @Override
     public String getRealExpr() {
@@ -51,7 +60,7 @@ public class EachTagData extends TagData{
         initExpr();
         initReadRowData(params);
         log.info("EachTagData.readRowData parse\n-->\n{}", JSON.toJSONString(readRowData));
-        TagUtil.writeTagData(writeWb, writeSheet, writeSheetData, readRowData, params, writeCellStyleCache);
+        TagUtil.writeTagData(writeWb, writeSheet, writeSheetData, Arrays.asList(readRowData), params, writeCellStyleCache);
     }
 
     /**
@@ -60,7 +69,7 @@ public class EachTagData extends TagData{
      * @param params
      */
     private void initReadRowData(Map<String, Object> params){
-        Map<String, CellData> cellDataMap = readRowData.stream().findFirst().get().getCellDatas();
+        Map<String, CellData> cellDataMap = readRowData.getCellDatas();
         if (!CollUtil.isEmpty(cellDataMap)){
             CellData eachCellData = cellDataMap.get("0");
 

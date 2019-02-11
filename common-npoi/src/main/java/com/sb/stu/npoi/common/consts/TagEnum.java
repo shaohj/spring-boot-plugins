@@ -12,11 +12,11 @@ import cn.hutool.core.util.StrUtil;
  */
 public enum TagEnum {
 
-    CONST_TAG(0, null, "非标签，常量与表达式混合的字符串"),
-    IF_TAG(1, "if", "if标签"),
-    EACH_TAG(1, "each", "each标签"),
-    FOREACH_TAG(0, "foreach", "普通foreach标签"),
-    BIGFOREACH_TAG(0, "pageforeach", "分页foreach标签"),
+    CONST_TAG(0, null, "非标签，常量与表达式混合的字符串", false),
+    IF_TAG(1, "if", "if标签", true),
+    EACH_TAG(1, "each", "each标签", false),
+    FOREACH_TAG(0, "foreach", "普通foreach标签", true),
+    BIGFOREACH_TAG(0, "pageforeach", "分页foreach标签", true),
     ;
 
     private int type;
@@ -25,10 +25,13 @@ public enum TagEnum {
 
     private String name;
 
-    TagEnum(int type, String key, String name) {
+    private boolean hasEndTag;
+
+    TagEnum(int type, String key, String name, boolean hasEndTag) {
         this.type = type;
         this.key = key;
         this.name = name;
+        this.hasEndTag = hasEndTag;
     }
 
     /**
@@ -70,4 +73,10 @@ public enum TagEnum {
 
     public String getName() {
         return name;
-    }}
+    }
+
+    public boolean isHasEndTag() {
+        return hasEndTag;
+    }
+
+}

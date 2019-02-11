@@ -33,12 +33,24 @@ public class TagUtil {
         }
 
         int curRowNum = rowNumStart;
+
+        // tag存在嵌套
+        int tagNum = 0;
         while(curRowNum <= rowNumEnd && rowNumEnd < rowDatas.size()){
             RowData rowData = rowDatas.get(String.valueOf(curRowNum));
-            String expr = SaxWriteUtil.getFirstCellValueStr(rowData);
-            boolean isEnd = TagEnum.isEndTagNum(expr);
-            if (isEnd) {
-                return curRowNum;
+            TagEnum tagEnum = getTagEnum(rowData);
+            if(tagEnum.isHasEndTag()){
+                // 嵌套标签且有结束标签
+                tagNum ++;
+            } else {
+                boolean isEnd = isEndTag(rowData);
+                if (isEnd) {
+                    if(0 == tagNum){
+                        return curRowNum;
+                    } else {
+                        tagNum --;
+                    }
+                }
             }
             curRowNum ++;
         }
@@ -56,6 +68,11 @@ public class TagUtil {
             }
             rowData.getCellDatas().forEach((readCellNum, cellData) -> SaxWriteUtil.writeCellData(writeWb, writeRow, rowData.getRowNum(), cellData, params, writeCellStyleCache));
         });
+    }
+
+    public static boolean isEndTag(RowData rowData){
+        String expr = SaxWriteUtil.getFirstCellValueStr(rowData);
+        return TagEnum.isEndTagNum(expr);
     }
 
 }

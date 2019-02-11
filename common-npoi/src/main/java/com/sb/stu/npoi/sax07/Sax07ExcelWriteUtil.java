@@ -4,12 +4,14 @@ import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ArrayUtil;
 import com.sb.stu.npoi.common.bean.write.WriteSheetData;
 import com.sb.stu.npoi.common.bean.write.tag.PageForeachTagData;
-import com.sb.stu.npoi.common.bean.write.tag.TagData;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.xssf.streaming.SXSSFSheet;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 编  号：
@@ -72,8 +74,7 @@ public class Sax07ExcelWriteUtil {
             }
             // 样式需要做缓存特殊处理，以sheet为单位作缓存处理，定义在此保证线程安全
             final Map<String, CellStyle> writeCellStyleCache = new HashMap<>();
-            writeSheetData.getWriteBlocks().forEach((readRowNum, writeBlock) -> {
-                TagData tagData = writeBlock.getTagData();
+            writeSheetData.getWriteBlocks().forEach((readRowNum, tagData) -> {
                 if(tagData instanceof PageForeachTagData){
                     // 大数据导出service
                     if(null != tagData.getValue() && !CollUtil.isEmpty(sax07ExcelPageWriteServices)){

@@ -4,7 +4,6 @@ import cn.hutool.core.collection.CollUtil;
 import com.sb.stu.npoi.common.bean.read.CellData;
 import com.sb.stu.npoi.common.bean.read.ReadSheetData;
 import com.sb.stu.npoi.common.bean.read.RowData;
-import com.sb.stu.npoi.common.bean.write.WriteBlock;
 import com.sb.stu.npoi.common.bean.write.WriteSheetData;
 import com.sb.stu.npoi.common.bean.write.tag.*;
 import com.sb.stu.npoi.common.consts.TagEnum;
@@ -62,13 +61,14 @@ public class SaxWriteUtil {
      * @param rowDatas
      * @return
      */
-    public static Map<String, WriteBlock> parseRowData(Map<String, RowData> rowDatas){
+    public static Map<String, TagData> parseRowData(Map<String, RowData> rowDatas){
         if(CollUtil.isEmpty(rowDatas)){
             return new HashMap<>(0);
         }
-        final Map<String, WriteBlock> writeBlockMap = new LinkedHashMap<>(CalculationUtil.calMapCapacity(rowDatas.size()));
 
-        geneTreeWriteBlock(0,rowDatas.size() - 1, rowDatas,writeBlockMap);
+        final Map<String, TagData> writeBlockMap = new LinkedHashMap<>(CalculationUtil.calMapCapacity(rowDatas.size()));
+
+        geneTreeWriteBlock(0,rowDatas.size() - 1, rowDatas, null, writeBlockMap);
 
         return writeBlockMap;
     }
@@ -79,19 +79,18 @@ public class SaxWriteUtil {
      * @param rowNumStart rowNum 块的开始行
      * @param rowNumEnd rowNum 块的结束行
      * @param rowDatas 原始的待写的row数据
+     * @param rootTagData 父tagData
      * @param writeBlockMap 转换后的待写的block数据
      * @return
      */
-    public static void geneTreeWriteBlock(int rowNumStart, int rowNumEnd, Map<String, RowData> rowDatas, Map<String, WriteBlock> writeBlockMap){
+    public static void geneTreeWriteBlock(int rowNumStart, int rowNumEnd, Map<String, RowData> rowDatas, TagData rootTagData, Map<String, TagData> writeBlockMap){
         if(rowNumStart < 0 || rowNumStart > rowNumEnd || rowNumEnd >= rowDatas.size()){
             return ;
         }
         int writeBlockNum = 0;
 
         int curRowNum = rowNumStart;
-        while(curRowNum <= rowNumEnd && rowNumEnd < rowDatas.size()){
-            WriteBlock writeBlock = new WriteBlock();
-
+        while(curRowNum < rowNumEnd && rowNumEnd < rowDatas.size()){
             RowData rowData = rowDatas.get(String.valueOf(curRowNum));
             TagData tagData = null;
             TagEnum tagEnum = TagUtil.getTagEnum(rowData);
@@ -103,46 +102,36 @@ public class SaxWriteUtil {
                     tagData.setValue(getFirstCellValueStr(rowData));
 
                     curRowEndNum = TagUtil.getTagEndNum(curRowNum + 1, rowNumEnd, rowDatas);
-                    for (int i = curRowNum + 1; i< curRowEndNum; i++){
-                        rowData = rowDatas.get(String.valueOf(i));
-                        tagData.addRowData(rowData);
-                    }
+                    geneTreeWriteBlock(curRowNum + 1, curRowEndNum, rowDatas, tagData, writeBlockMap);
                     curRowNum = curRowEndNum;
                     break;
                 case FOREACH_TAG:
                     tagData = new ForeachTagData();
                     tagData.setValue(getFirstCellValueStr(rowData));
                     curRowEndNum = TagUtil.getTagEndNum(curRowNum + 1, rowNumEnd, rowDatas);
-
-                    for (int i = curRowNum + 1; i< curRowEndNum; i++){
-                        rowData = rowDatas.get(String.valueOf(i));
-                        tagData.addRowData(rowData);
-                    }
+                    geneTreeWriteBlock(curRowNum + 1, curRowEndNum, rowDatas, tagData, writeBlockMap);
                     curRowNum = curRowEndNum;
                     break;
                 case BIGFOREACH_TAG:
                     tagData = new PageForeachTagData();
                     tagData.setValue(getFirstCellValueStr(rowData));
                     curRowEndNum = TagUtil.getTagEndNum(curRowNum + 1, rowNumEnd, rowDatas);
-
-                    for (int i = curRowNum + 1; i< curRowEndNum; i++){
-                        rowData = rowDatas.get(String.valueOf(i));
-                        tagData.addRowData(rowData);
-                    }
+                    geneTreeWriteBlock(curRowNum + 1, curRowEndNum, rowDatas, tagData, writeBlockMap);
                     curRowNum = curRowEndNum;
                     break;
                 case EACH_TAG:
-                    tagData = new EachTagData();
-                    tagData.addRowData(rowData);
+                    tagData = new EachTagData(rowData);
                     tagData.setValue(getFirstCellValueStr(rowData)); break;
                 case CONST_TAG:
                 default:
-                    tagData = new ConstTagData();
-                    tagData.addRowData(rowData); break;
+                    tagData = new ConstTagData(Arrays.asList(rowData)); break;
             }
 
-            writeBlock.setTagData(tagData);
-            writeBlockMap.put(String.valueOf(writeBlockNum), writeBlock);
+            if(null == rootTagData){
+                writeBlockMap.put(String.valueOf(writeBlockNum), tagData);
+            } else {
+                rootTagData.getChildTagDatas().add(tagData);
+            }
 
             writeBlockNum ++;
             curRowNum ++;

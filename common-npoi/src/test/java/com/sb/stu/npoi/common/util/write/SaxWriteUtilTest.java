@@ -4,8 +4,8 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.sb.stu.npoi.common.bean.read.ReadSheetData;
 import com.sb.stu.npoi.common.bean.read.RowData;
-import com.sb.stu.npoi.common.bean.write.WriteBlock;
 import com.sb.stu.npoi.common.bean.write.WriteSheetData;
+import com.sb.stu.npoi.common.bean.write.tag.TagData;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
@@ -38,7 +38,7 @@ public class SaxWriteUtilTest {
         List<ReadSheetData> readReadSheetData = JSONArray.parseArray(readReadSheetDataStr, ReadSheetData.class);
 
         Map<String, RowData> rowDatas = readReadSheetData.get(0).getRowDatas();
-        Map<String, WriteBlock> writeBlocks = SaxWriteUtil.parseRowData(rowDatas);
+        Map<String, TagData> writeBlocks = SaxWriteUtil.parseRowData(rowDatas);
         log.info("writeBlocks.result=\n-->\n{}", JSON.toJSONString(writeBlocks));
     }
 }

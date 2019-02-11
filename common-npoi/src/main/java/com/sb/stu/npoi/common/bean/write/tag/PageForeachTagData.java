@@ -5,7 +5,6 @@ import com.sb.stu.npoi.common.bean.write.WriteSheetData;
 import com.sb.stu.npoi.common.consts.SaxExcelConst;
 import com.sb.stu.npoi.common.consts.TagEnum;
 import com.sb.stu.npoi.common.util.ExprUtil;
-import com.sb.stu.npoi.common.util.write.TagUtil;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.streaming.SXSSFSheet;
@@ -59,7 +58,9 @@ public class PageForeachTagData extends TagData {
         while (iterator.hasNext()) {
             Object iteratorObj = iterator.next();
             params.put(iteratorObjKey, iteratorObj);
-            TagUtil.writeTagData(writeWb, writeSheet, writeSheetData, readRowData, params, writeCellStyleCache);
+            childTagDatas.stream().forEach(childTagData -> {
+                childTagData.writeTagData(writeWb, writeSheet, writeSheetData, params, writeCellStyleCache);
+            });
         }
     }
 

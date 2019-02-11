@@ -116,6 +116,43 @@ public class Sax07ExcelUtilTest {
     }
 
     @Test
+    public void exportNestIfAndForeachTest(){
+        log.info("缓存导出的xlsx临时文件目录为:{}", System.getProperty("java.io.tmpdir"));
+
+        long t1 = System.currentTimeMillis();
+        int num = 4;
+
+        String tempPath = "xlsx/";
+        String tempFilePath = tempPath + "nest_if_foreach_temp.xlsx";
+
+        FileOutputStream fos = null;
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("printDate", "2019-01-31");
+
+        ModelTest model = new ModelTest("aaa1", "bbb", 123.234);
+        model.setYear("1992");
+        map.put("model", model);
+
+        List details = new ArrayList();
+        //i条数据导出测试
+        for(int i = 0; i< num; i++){
+            details.add(new ModelTest("user" + i, "world", 144.342));
+        }
+        map.put("list", details);
+
+        try {
+            fos = new FileOutputStream(exportPath + "nest_if_foreach_data.xlsx");
+            Sax07ExcelUtil.export(tempFilePath, map, fos);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            IoUtil.close(fos);
+        }
+        log.info("导出{}条数据,耗费时间为{}毫秒", num, System.currentTimeMillis() - t1);
+    }
+
+    @Test
     public void exportPageForeachTest(){
         log.info("缓存导出的xlsx临时文件目录为:{}", System.getProperty("java.io.tmpdir"));
 
