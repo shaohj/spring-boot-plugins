@@ -90,8 +90,13 @@ public class SaxWriteUtil {
         int writeBlockNum = 0;
 
         int curRowNum = rowNumStart;
-        while(curRowNum < rowNumEnd && rowNumEnd < rowDatas.size()){
+        while(curRowNum <= rowNumEnd && rowNumEnd < rowDatas.size()){
             RowData rowData = rowDatas.get(String.valueOf(curRowNum));
+
+            if(curRowNum == rowNumEnd && null != rootTagData && TagUtil.isEndTag(rowData)){
+                // 递归时，若为递归父标签的结束标签，则跳出
+                break;
+            }
             TagData tagData = null;
             TagEnum tagEnum = TagUtil.getTagEnum(rowData);
 

@@ -2,7 +2,6 @@ package com.sb.stu.npoi.common.bean.write.tag;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
-import com.alibaba.fastjson.JSON;
 import com.sb.stu.npoi.common.bean.read.CellData;
 import com.sb.stu.npoi.common.bean.read.RowData;
 import com.sb.stu.npoi.common.bean.write.WriteSheetData;
@@ -19,7 +18,10 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.streaming.SXSSFSheet;
 
 import java.lang.reflect.Field;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.StringTokenizer;
 
 /**
  * 编  号：
@@ -59,7 +61,7 @@ public class EachTagData extends TagData{
                              Map<String, Object> params, Map<String, CellStyle> writeCellStyleCache) {
         initExpr();
         initReadRowData(params);
-        log.info("EachTagData.readRowData parse\n-->\n{}", JSON.toJSONString(readRowData));
+//        log.info("EachTagData.readRowData parse\n-->\n{}", JSON.toJSONString(readRowData));
         TagUtil.writeTagData(writeWb, writeSheet, writeSheetData, Arrays.asList(readRowData), params, writeCellStyleCache);
     }
 
