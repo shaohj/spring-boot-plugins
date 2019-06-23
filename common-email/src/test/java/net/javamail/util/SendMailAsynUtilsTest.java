@@ -72,7 +72,7 @@ public class SendMailAsynUtilsTest {
 		contentBuf.append(
 				"<span style='color:red;'>这是我自己用java mail发送的邮件哦...</span>");
 		
-		SendMailParam param = SendMailParam.Builder
+		SendMailParam param = SendMailParam.builder()
 				.protocol("smtp")
 				.host("smtp.163.com")
 				.port("25")
@@ -85,7 +85,7 @@ public class SendMailAsynUtilsTest {
 				.subject("使用JavaMail发送混合组合类型的邮件测试主题(异步)")
 				//.attachFiles(attachFiles)
 				.content(contentBuf.toString())
-				.toRecipients(toRecipients);
+				.toRecipients(toRecipients).build();
 		
 		param.initDefaultProps();
 		

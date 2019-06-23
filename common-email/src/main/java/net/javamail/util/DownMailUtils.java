@@ -1,25 +1,16 @@
 package net.javamail.util;
 
+import lombok.extern.slf4j.Slf4j;
+import net.javamail.ServiceResponse;
+import net.javamail.model.param.DownMailParam;
+import org.springframework.util.StringUtils;
+
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.mail.Address;
-import javax.mail.Folder;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Session;
-import javax.mail.Store;
-import javax.mail.URLName;
-import javax.mail.internet.InternetAddress;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.util.StringUtils;
-
-import net.javamail.ServiceResponse;
-import net.javamail.model.param.DownMailParam;
 
 /**
  * 编  号：
@@ -28,9 +19,8 @@ import net.javamail.model.param.DownMailParam;
  * 完成日期：2018/8/4 15:12
  * @author：felix.shao
  */
+@Slf4j
 public class DownMailUtils {
-	
-	private static final Logger logger = LoggerFactory.getLogger(DownMailUtils.class);
 	
 	/**
 	 * 下载收件人指定的邮件
@@ -80,16 +70,16 @@ public class DownMailUtils {
             // 取出来邮件数
             int msgCount = popFolder.getMessageCount();
             
-            logger.debug(param.getAccount() + "收件箱共有" + msgCount + "封邮件" );
+            log.debug(param.getAccount() + "收件箱共有" + msgCount + "封邮件" );
             
             String tempPath = null;
             for (int i = 0; i < msgCount; i++) {
-            	logger.debug("遍历第" + (i+1) + "封邮件");
+				log.debug("遍历第" + (i+1) + "封邮件");
             	
             	// 单个邮件
             	boolean flag = isMatcher(messages[i], param);
-            	
-            	logger.debug("第" + (i+1) + "封邮件是否满足匹配要求:" + String.valueOf(flag));
+
+				log.debug("第" + (i+1) + "封邮件是否满足匹配要求:" + String.valueOf(flag));
             	
             	if(flag){
             		String subject = messages[i].getSubject();
@@ -104,7 +94,7 @@ public class DownMailUtils {
             }  
             
 		} catch (MessagingException| IOException e) {
-			logger.error("{}", e);
+			log.error("{}", e);
 			
 			errorNO = ServiceResponse.DEFAULT_FAIL;
 			errorMsg = e.getMessage();
@@ -162,7 +152,7 @@ public class DownMailUtils {
 			}
 			
 		} catch (MessagingException e) {
-			logger.error("{}", e);
+			log.error("{}", e);
 		} 
 		
 		return flag;

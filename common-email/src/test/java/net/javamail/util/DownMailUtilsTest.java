@@ -1,16 +1,11 @@
 package net.javamail.util;
 
-import java.util.List;
-
-import javax.mail.internet.InternetAddress;
-
-import org.junit.Test;
-
 import com.alibaba.fastjson.JSON;
-
 import net.javamail.ServiceResponse;
 import net.javamail.model.param.DownMailParam;
-import net.javamail.util.DownMailUtils;
+import org.junit.Test;
+
+import java.util.List;
 
 /**
  * SendMailUtil测试
@@ -29,7 +24,7 @@ public class DownMailUtilsTest {
 	
 	@Test
 	public void downMultipleEmailTest(){
-		DownMailParam param = DownMailParam.Builder
+		DownMailParam param = DownMailParam.builder()
 				.protocol("smtp")
 				.type("pop3")
 				.port(110)
@@ -39,7 +34,7 @@ public class DownMailUtilsTest {
 				.account(ACCOUNT)
 				.password(PASSWORD) //收件人密码,请用自己的账号,密码
 				.subject("邮箱大师邮件群功能，解放你的收件人列表") //主题匹配条件
-				.path("C:\\Users\\SHJ\\Desktop\\temp\\emldown");
+				.path("C:\\Users\\SHJ\\Desktop\\temp\\emldown").build();
 		
 		param.initDefaultProps();
 

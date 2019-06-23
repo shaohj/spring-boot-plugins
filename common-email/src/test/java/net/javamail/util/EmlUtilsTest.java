@@ -1,14 +1,18 @@
 package net.javamail.util;
 
-import java.util.List;
-
+import com.alibaba.fastjson.JSON;
+import net.javamail.ServiceResponse;
 import org.junit.Test;
 
-import com.alibaba.fastjson.JSON;
+import java.util.List;
 
-import net.javamail.ServiceResponse;
-import net.javamail.util.EmlUtils;
-
+/**
+ * 编  号：
+ * 名  称：EmlUtilsTest
+ * 描  述：
+ * 完成日期：2019/6/23 12:32
+ * @author：felix.shao
+ */
 public class EmlUtilsTest {
 
 	@Test

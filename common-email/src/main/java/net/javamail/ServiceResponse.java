@@ -1,5 +1,7 @@
 package net.javamail;
 
+import lombok.Data;
+
 /**
  * 编  号：
  * 名  称：ServiceResponse
@@ -7,6 +9,7 @@ package net.javamail;
  * 完成日期：2018/8/4 15:15
  * @author：felix.shao
  */
+@Data
 public class ServiceResponse<T> {
 	
 	/** 默认成功code */
@@ -32,7 +35,6 @@ public class ServiceResponse<T> {
 		this.errorNO = errorNo;
 	}
 
-	@SuppressWarnings("unchecked")
 	public ServiceResponse(int errorNo, Object obj) {
 		this.errorNO = errorNo;
 		if(obj instanceof String){
@@ -46,30 +48,6 @@ public class ServiceResponse<T> {
 		this.errorNO = errorNo;
 		this.errorMsg = errorMsg;
 		this.result = result;
-	}
-
-	public int getErrorNO() {
-		return errorNO;
-	}
-
-	public void setErrorNO(int errorNo) {
-		this.errorNO = errorNo;
-	}
-
-	public T getResult() {
-		return result;
-	}
-
-	public void setResult(T result) {
-		this.result = result;
-	}
-
-	public String getErrorMsg() {
-		return errorMsg;
-	}
-
-	public void setErrorMsg(String errorMsg) {
-		this.errorMsg = errorMsg;
 	}
 
 }

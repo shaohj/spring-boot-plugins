@@ -1,17 +1,17 @@
 package net.javamail.util;
 
-import java.io.*;
-import java.util.*;
+import com.alibaba.fastjson.util.IOUtils;
+import lombok.extern.slf4j.Slf4j;
+import net.javamail.ServiceResponse;
 
 import javax.mail.*;
 import javax.mail.internet.MimeMessage;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.alibaba.fastjson.util.IOUtils;
-
-import net.javamail.ServiceResponse;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Properties;
 
 /**
  * 编  号：
@@ -20,10 +20,9 @@ import net.javamail.ServiceResponse;
  * 完成日期：2018/8/4 15:13
  * @author：felix.shao
  */
+@Slf4j
 public class EmlUtils {
 	
-	private static final Logger logger = LoggerFactory.getLogger(EmlUtils.class);
-
 	public static ServiceResponse<List<String>> parseAttachFiles(String emlPath, String storePath){
 		int errorNO = ServiceResponse.SUCCESS;
 		String errorMsg = "";
@@ -48,7 +47,7 @@ public class EmlUtils {
     			errorMsg = "类型:" + msg.getContentType() + ",内容:" + msg.getContent(); 
     		}
         } catch (MessagingException|IOException e) {
-        	logger.error("{}", e);
+			log.error("{}", e);
 			
 			errorNO = ServiceResponse.DEFAULT_FAIL;
 			errorMsg = e.getMessage();

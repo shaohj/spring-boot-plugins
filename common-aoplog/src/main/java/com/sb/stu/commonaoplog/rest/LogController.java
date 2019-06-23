@@ -1,13 +1,16 @@
 package com.sb.stu.commonaoplog.rest;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import com.sb.stu.commonaoplog.annotation.SystemControllerLog;
 import com.sb.stu.commonaoplog.model.Demand;
 import com.sb.stu.commonaoplog.service.ILogService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 编  号：
@@ -19,9 +22,8 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class LogController {
 
-	public static final String EXPORT_PATH = "C:/Users/dell/Desktop/temp/export";
-	
-	private @Autowired ILogService ls;
+	@Autowired
+	private ILogService iLogService;
 	
 	public LogController(){
 		System.out.println("**** LogController init ");
@@ -52,7 +54,7 @@ public class LogController {
 		result.put("error_no", "0");
 		result.put("error_msg", "ok!");
 		
-		result.put("results", ls.save(demand));
+		result.put("results", iLogService.save(demand));
 		
 		return result;
 	}

@@ -1,11 +1,9 @@
 package net.javamail.event;
 
-import java.util.Map;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
+import lombok.extern.slf4j.Slf4j;
 import net.javamail.ServiceResponse;
+
+import java.util.Map;
 
 /**
  * 编  号：
@@ -14,13 +12,12 @@ import net.javamail.ServiceResponse;
  * 完成日期：2018/8/4 13:33
  * @author：felix.shao
  */
+@Slf4j
 public class SendDownCallEventDefault implements ISendDownCallEvent{
 
-	private static final Logger logger = LoggerFactory.getLogger(SendDownCallEventDefault.class);
-	
 	@Override
 	public void handle(ServiceResponse<String> serviceResponse, Map<String, String> params) {
-		logger.info("SendDownCallEventDefault...");
+		log.info("SendDownCallEventDefault...");
 	}
 
 }

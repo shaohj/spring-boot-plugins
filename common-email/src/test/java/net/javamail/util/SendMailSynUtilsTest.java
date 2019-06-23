@@ -1,20 +1,15 @@
 package net.javamail.util;
 
+import net.javamail.ServiceResponse;
+import net.javamail.model.param.SendMailParam;
+import org.junit.Test;
+
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
-
-import org.junit.Test;
-
-import net.javamail.ServiceResponse;
-import net.javamail.model.param.AttachFileParam;
-import net.javamail.model.param.SendMailParam;
-import net.javamail.util.SendMailSynUtils;
-import net.javamail.util.MailParamUtils;
 
 /**
  * SendMailUtil测试
@@ -66,7 +61,7 @@ public class SendMailSynUtilsTest {
 		contentBuf.append(
 				"<span style='color:red;'>这是我自己用java mail发送的邮件哦...</span>");
 		
-		SendMailParam param = SendMailParam.Builder
+		SendMailParam param = SendMailParam.builder()
 				.protocol("smtp")
 				.host("smtp.163.com")
 				.port("25")
@@ -79,7 +74,7 @@ public class SendMailSynUtilsTest {
 				.subject("使用JavaMail发送混合组合类型的邮件测试主题")
 //				.attachFiles(attachFiles)
 				.content(contentBuf.toString())
-				.toRecipients(toRecipients);
+				.toRecipients(toRecipients).build();
 		
 		param.initDefaultProps();
 		

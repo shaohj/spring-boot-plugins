@@ -1,31 +1,25 @@
 package net.javamail.util;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.util.Date;
+import lombok.extern.slf4j.Slf4j;
+import net.javamail.ServiceResponse;
+import net.javamail.model.param.AttachFileParam;
+import net.javamail.model.param.EmbedImageParam;
+import net.javamail.model.param.SendMailParam;
 
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.activation.FileDataSource;
 import javax.mail.Message.RecipientType;
 import javax.mail.MessagingException;
-import javax.mail.NoSuchProviderException;
 import javax.mail.Session;
 import javax.mail.Transport;
-import javax.mail.internet.AddressException;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.mail.internet.MimeUtility;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import net.javamail.ServiceResponse;
-import net.javamail.model.param.AttachFileParam;
-import net.javamail.model.param.EmbedImageParam;
-import net.javamail.model.param.SendMailParam;
+import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.util.Date;
 
 /**
  * 编  号：
@@ -34,9 +28,8 @@ import net.javamail.model.param.SendMailParam;
  * 完成日期：2018/8/4 15:15
  * @author：felix.shao
  */
+@Slf4j
 public class SendMailSynUtils {
-	
-	private static final Logger logger = LoggerFactory.getLogger(SendMailSynUtils.class);
 	
 	public static ServiceResponse<String> sendEmail(SendMailParam param) {
 		ServiceResponse<String> validateResponse = MailParamUtils.validateSendMailParam(param);
@@ -46,8 +39,8 @@ public class SendMailSynUtils {
 			return validateResponse;
 		}
 		ServiceResponse<String> result = sendMultipleEmail(param);
-		
-		logger.info("sendEmail consume time is ： {}", System.currentTimeMillis() - now);
+
+		log.info("sendEmail consume time is ： {}", System.currentTimeMillis() - now);
 		return result;
 	}
 	
@@ -126,7 +119,7 @@ public class SendMailSynUtils {
 			// 将message对象传递给transport对象，将邮件发送出去 
 			transport.sendMessage(message, message.getAllRecipients()); 
 		} catch (Exception e) {
-			logger.error("{}", e);
+			log.error("{}", e);
 			errorNO = ServiceResponse.DEFAULT_FAIL;
 			errorMsg = e.getMessage();
 		} finally{
@@ -157,7 +150,7 @@ public class SendMailSynUtils {
 	        imagePart.setDataHandler(dh); 
 	        imagePart.setContentID(param.getContentId());  // 设置内容编号,用于其它邮件体引用 
 		} catch (MessagingException e) {
-			logger.error("{}", e);
+			log.error("{}", e);
 
 			errorNO = ServiceResponse.DEFAULT_FAIL;
 			errorMsg = "添加嵌入图片失败."+param.getPath()+"."+e.getMessage();
@@ -190,12 +183,12 @@ public class SendMailSynUtils {
 	        attach.setFileName(MimeUtility.encodeText(name)); 
 	        attach.setDataHandler(dataHandler); 
 		} catch (MessagingException e) {
-			logger.error("{}", e);
+			log.error("{}", e);
 			
 			errorNO = ServiceResponse.DEFAULT_FAIL;
 			errorMsg = "添加附件失败." + path + "." + e.getMessage();
 		} catch (UnsupportedEncodingException e) {
-			logger.error("{}", e);
+			log.error("{}", e);
 			
 			errorNO = ServiceResponse.DEFAULT_FAIL;
 			errorMsg = "添加附件失败." + path + "." + e.getMessage();

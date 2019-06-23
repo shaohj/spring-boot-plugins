@@ -9,6 +9,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
+/**
+ * 编  号：
+ * 名  称：BaseApplicationTest
+ * 描  述：
+ * 完成日期：2019/6/23 12:31
+ * @author：felix.shao
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = CommonAoplogApplication.class)
 @ActiveProfiles

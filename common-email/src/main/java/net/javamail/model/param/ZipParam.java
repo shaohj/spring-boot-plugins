@@ -1,5 +1,8 @@
 package net.javamail.model.param;
 
+import lombok.Builder;
+import lombok.Getter;
+
 /**
  * 编  号：
  * 名  称：ZipParam
@@ -7,6 +10,8 @@ package net.javamail.model.param;
  * 完成日期：2018/8/4 15:12
  * @author：felix.shao
  */
+@Builder(toBuilder = true)
+@Getter
 public class ZipParam {
 
 	/** 文件路径 */
@@ -15,47 +20,4 @@ public class ZipParam {
 	/** 文件名  */
 	protected String name;
 	
-	public ZipParam(){
-		
-	}
-	
-	public ZipParam path(String path){
-		this.path = path;
-		return this;
-	}
-	
-	public ZipParam name(String name){
-		this.name = name;
-		return this;
-	}
-	
-	/**
-	 * 编  号：
-	 * 名  称：ZipParam
-	 * 描  述：
-	 * 完成日期：2018/8/4 15:12
-	 * @author：felix.shao
-	 */
-	public static class Builder {
-		
-		public static ZipParam path(String path){
-			ZipParam params = new ZipParam();
-			return params.path(path);
-		}
-		
-		public static ZipParam name(String name){
-			ZipParam params = new ZipParam();
-			return params.name(name);
-		}
-		
-	}
-
-	public String getPath() {
-		return path;
-	}
-
-	public String getName() {
-		return name;
-	}
-
 }
