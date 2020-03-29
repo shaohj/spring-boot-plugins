@@ -1,4 +1,4 @@
-package com.sb.stu.commonresttemp.util;
+package com.sprboot.plugin.resttempex.util;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -14,9 +14,11 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * 日期工具类
- * @author xiecharles@163.com
- *
+ * 编  号：
+ * 名  称：DateUtil
+ * 描  述：
+ * 完成日期：2020/3/29 22:25
+ * @author：felix.shao
  */
 public final class DateUtil {
 	

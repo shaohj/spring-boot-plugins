@@ -3,14 +3,13 @@ server:
   address: 0.0.0.0
   servlet:
     context-path: /resttemp
-    path: /rest
 
 logging:
   level:
     root: INFO
     com:
-      sb:
-        stu: DEBUG
+      sprboot:
+        plugin: DEBUG
     org:
       springframework:
         web:

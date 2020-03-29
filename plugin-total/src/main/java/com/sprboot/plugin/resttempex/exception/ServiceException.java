@@ -1,13 +1,12 @@
-package com.sb.stu.commonresttemp.exception;
+package com.sprboot.plugin.resttempex.exception;
 
 /**
- * service层异常
- * <li>继承RuntimeException,可实现抛出该异常，使得事务回滚
- * 编  号：<br/>
- * 名  称：ServiceException<br/>
- * 描  述：<br/>
- * 完成日期：2017年7月26日 下午4:45:27<br/>
- * 编码作者：ShaoHj<br/>
+ * 编  号：
+ * 名  称：ServiceException
+ * 描  述：service层异常
+ *  <li>继承RuntimeException,可实现抛出该异常，使得事务回滚
+ * 完成日期：2020/3/29 20:45
+ * @author：felix.shao
  */
 public class ServiceException extends RuntimeException {
 

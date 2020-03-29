@@ -3,7 +3,6 @@
 
 - [plugin-total](plugin-total/README.md)
 - common-poi：如导出excel，这里做了2种处理，分为缓存模板导出(SXSSFWorkbook，不支持xls等导出)、及支持xls的导出(不支持缓存导出)
-- common-resttemp：resttemplate调用封装
 - common-redis：如5种数据类型处理
 - common-jpa-hb：jpa-hibernate常用功能支持。如审计功能、返回自定义实体、多对多等关系配置
 - common-muldb-hb：jpa-hibernate多数据源功能

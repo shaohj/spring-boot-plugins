@@ -1,16 +1,15 @@
-package com.sb.stu.commonresttemp.entity.resttemp;
+package com.sprboot.plugin.resttempex.bean.param;
 
 import java.util.*;
 
 import org.springframework.http.client.ClientHttpRequestInterceptor;
 
 /**
- * http header 请求头对象
- * 编  号：<br/>
- * 名  称：HeaderParams<br/>
- * 描  述：<br/>
- * 完成日期：2017年7月26日 下午4:37:06<br/>
- * 编码作者：ShaoHj<br/>
+ * 编  号：
+ * 名  称：HeaderParams
+ * 描  述：http header 请求头对象
+ * 完成日期：2020/3/29 20:45
+ * @author：felix.shao
  */
 public class HeaderParams {
 
@@ -138,7 +137,7 @@ public class HeaderParams {
 
 
 	public static HeaderParams getDefaultHeaderParams(){
-		return HeaderParams.Builder
+		return Builder
 				.contentType("application/json; charset=utf-8")
 				.accept("application/json; charset=utf-8");
 	}

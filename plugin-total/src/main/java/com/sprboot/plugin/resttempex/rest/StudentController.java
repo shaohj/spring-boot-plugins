@@ -1,10 +1,11 @@
-package com.sb.stu.commonresttemp.rest;
+package com.sprboot.plugin.resttempex.rest;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.sb.stu.commonresttemp.util.DateUtil;
+import com.sprboot.plugin.resttempex.bean.Student;
+import com.sprboot.plugin.resttempex.util.DateUtil;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,8 +15,6 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.sb.stu.commonresttemp.model.Student;
 
 @RestController
 @RequestMapping("student")
@@ -48,7 +47,7 @@ public class StudentController {
 	@GetMapping(path="query/listAll", consumes="application/json; charset=utf-8", produces = "application/json; charset=utf-8")
 	public Object getAllStudent(){
 		Student stu1 = new Student("100", "张三", 1, DateUtil.stringToDate("19961022", "yyyyMMdd"));
-		com.sb.stu.commonresttemp.model.Class myclass = new com.sb.stu.commonresttemp.model.Class();
+		com.sprboot.plugin.resttempex.bean.Class myclass = new com.sprboot.plugin.resttempex.bean.Class();
 		myclass.setCno("1000");
 		myclass.setCname("88班");
 		stu1.setsClass(myclass);

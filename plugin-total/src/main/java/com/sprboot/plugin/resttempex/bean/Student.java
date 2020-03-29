@@ -1,4 +1,4 @@
-package com.sb.stu.commonresttemp.model;
+package com.sprboot.plugin.resttempex.bean;
 
 import java.util.Date;
 
@@ -15,7 +15,7 @@ public class Student {
 	@JSONField(format = "yyyyMMdd")
 	private Date birthDay;
 	
-	private Class sClass;
+	private com.sprboot.plugin.resttempex.bean.Class sClass;
 	
 	public Student(){
 		
@@ -60,11 +60,11 @@ public class Student {
 		this.birthDay = birthDay;
 	}
 
-	public Class getsClass() {
+	public com.sprboot.plugin.resttempex.bean.Class getsClass() {
 		return sClass;
 	}
 
-	public void setsClass(Class sClass) {
+	public void setsClass(com.sprboot.plugin.resttempex.bean.Class sClass) {
 		this.sClass = sClass;
 	}
 	

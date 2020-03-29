@@ -1,4 +1,4 @@
-package com.sb.stu.commonresttemp.util;
+package com.sprboot.plugin.resttempex.util;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 
+import com.sprboot.plugin.resttempex.bean.param.HeaderParams;
+import com.sprboot.plugin.resttempex.exception.ServiceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpEntity;
@@ -28,16 +30,14 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import com.alibaba.fastjson.util.IOUtils;
-import com.sb.stu.commonresttemp.entity.resttemp.HeaderParams;
-import com.sb.stu.commonresttemp.exception.ServiceException;
 
 /**
+ * 编  号：
+ * 名  称：RestUtils
+ * 描  述：
  * 下载：参考：https://my.oschina.net/heweipo/blog/683233
- * 编  号：<br/>
- * 名  称：RestUtils<br/>
- * 描  述：<br/>
- * 完成日期：2017年7月26日 下午5:08:17<br/>
- * 编码作者：ShaoHj<br/>
+ * 完成日期：2020/3/29 21:57
+ * @author：felix.shao
  */
 public class RestUtils {
 
@@ -53,7 +53,7 @@ public class RestUtils {
 	 * @throws ServiceException
 	 */
 	public static void downFile(String url, String folder, String fileName, HeaderParams headerParams)
-    		throws IllegalArgumentException, ServiceException{
+    		throws IllegalArgumentException, ServiceException {
 		downFile(url, folder + "/" + fileName, headerParams);
     }
 	

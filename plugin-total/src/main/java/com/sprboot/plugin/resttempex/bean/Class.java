@@ -1,4 +1,4 @@
-package com.sb.stu.commonresttemp.model;
+package com.sprboot.plugin.resttempex.bean;
 
 public class Class {
 

@@ -5,6 +5,7 @@
 - [aop](md/aop.md)
 - [email-ex](md/email-ex.md)
 - [freemarker-ex](md/freemarker-ex.md)
+- [resttemp-ex](md/resttemp-ex.md)
 - orm
   - [mybatis](md/propertykey.md)
     - [mybatis](md/propertykey.md)
