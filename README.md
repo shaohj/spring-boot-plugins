@@ -1,25 +1,16 @@
-# spring-boot-common-modules
+## spring-boot-plugins
+基于spring boot相关的功能点或插件提供了相关的demo和实现。其中有些工具类发布到了maven公共仓库。
 
-## 描述
-封装功能原型demo，方便代码功能等
-
-## 原型模块
-有些原型demo存放在本仓库中的，另外有些归类到其他仓库了，包含发布到maven公共仓库中心的模块
-
-### 本仓库模块
-* common-service：spring boot项目原型，处理一些基本配置和日志等配置
-* common-aoplog：如记录日志
-* common-email：如发送邮件，分析邮件
-* common-poi：如导出excel，这里做了2种处理，分为缓存模板导出(SXSSFWorkbook，不支持xls等导出)、及支持xls的导出(不支持缓存导出)
-* common-freemarker：freemarker模板导出word
-* common-resttemp：resttemplate调用封装
-* common-redis：如5种数据类型处理
-* common-jpa-hb：jpa-hibernate常用功能支持。如审计功能、返回自定义实体、多对多等关系配置
-* common-muldb-hb：jpa-hibernate多数据源功能
-* common-muldb-mb：mybatis多数据源功能
-* common-util：封装一些常用的工具类，如时间、文件、hibernate验证器等工具类
-* common-net：网络编程学习，如bio、nio(netty)、aio
-* java-stu：javase知识点，编程题学习代码
+- [plugin-total](plugin-total/README.md)
+- common-poi：如导出excel，这里做了2种处理，分为缓存模板导出(SXSSFWorkbook，不支持xls等导出)、及支持xls的导出(不支持缓存导出)
+- common-resttemp：resttemplate调用封装
+- common-redis：如5种数据类型处理
+- common-jpa-hb：jpa-hibernate常用功能支持。如审计功能、返回自定义实体、多对多等关系配置
+- common-muldb-hb：jpa-hibernate多数据源功能
+- common-muldb-mb：mybatis多数据源功能
+- common-util：封装一些常用的工具类，如时间、文件、hibernate验证器等工具类
+- common-net：网络编程学习，如bio、nio(netty)、aio
+- java-stu：javase知识点，编程题学习代码
 
 ### 其他仓库模块
 * [sstool-poi-expand](https://github.com/shaohj/sstool/tree/master/sstool-poi-expand)：模板导出2007Excel，已发布至maven公共仓库，实现了分页导出等功能，解决了大数据导出内存容易溢出问题，后续会写sstool的api文档。

@@ -1,0 +1,26 @@
+server:
+  port: 8080
+  address: 0.0.0.0
+  servlet:
+    context-path: /common
+
+logging:
+  level:
+    root: INFO
+    com:
+      sprboot:
+        plugin: DEBUG
+    org:
+      springframework:
+        web:
+          servlet:
+            DispatcherServlet: TRACE
+            mvc:
+              method:
+                annotation:
+                  ServletInvocableHandleMethod: TRACE
+  file: log/common.log
+
+spring:
+  aop:
+    auto: true
