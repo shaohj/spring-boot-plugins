@@ -15,3 +15,4 @@ com.sprboot.plugin.resttempex
 ~~~
 
 ### 资料
+RestTemplate后续版本可能会被移除，另外网络上也有hutool对http调用等封装的很好，使用挺方便。
