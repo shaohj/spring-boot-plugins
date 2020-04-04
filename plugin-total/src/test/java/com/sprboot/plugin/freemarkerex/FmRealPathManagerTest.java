@@ -1,13 +1,13 @@
 package com.sprboot.plugin.freemarkerex;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import com.sprboot.plugin.freemarkerex.constants.FmTempFilePathEnum;
 import com.sprboot.plugin.freemarkerex.util.FreeMarkerUtil;
 import com.sprboot.plugin.freemarkerex.util.WordUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static com.sprboot.plugin.freemarkerex.constants.FreemarkConstants.*;
 
@@ -34,7 +34,7 @@ public class FmRealPathManagerTest {
 		msgMap.put("address", "深圳福田区");
 
 		try {
-			log.info("parseResult=\n{}", FreeMarkerUtil.parseTFToString(FmTempFilePathEnum.REAL_PATH, msgMap, "testtmp.ftl"));
+			log.info("\n-->parseResult=\n{}", FreeMarkerUtil.parseTFToString(FmTempFilePathEnum.REAL_PATH, msgMap, "testtmp.ftl"));
 		} catch (Exception e) {
 			log.error("{}", e);
 		}
@@ -103,12 +103,12 @@ public class FmRealPathManagerTest {
 	//		//生成模板xml
 	//		String documentXmlPath = EXPORT_WORD_PATH + "中文docx模板替换文件.xml"; //存放生成的xml文件路径
 	//		FreeMarkerUtil.parseTFToFile(FmTempFilePathEnum.REAL_PATH, msgMap, "china_docx_temp.ftl", documentXmlPath);
-	//		log.info("导出xml成功，文件路径为{}", documentXmlPath);
+	//		log.info("\n-->导出xml成功，文件路径为{}", documentXmlPath);
     //
 	//		//导出docx
 	//		String tempZip = WORD_TEMP_BASE_REALPATH + WORD_DOCX_TEMPLATE_PATH + "\\中文名导出.docx";
 	//		WordUtils.parseDoc(FmTempFilePathEnum.REAL_PATH, new File(documentXmlPath), tempZip, toFilePath);
-	//		log.info("导出docx成功，文件路径为{}", toFilePath);
+	//		log.info("\n-->导出docx成功，文件路径为{}", toFilePath);
 	//	} catch (Exception e) {
 	//		log.error("{}", e);
 	//	}

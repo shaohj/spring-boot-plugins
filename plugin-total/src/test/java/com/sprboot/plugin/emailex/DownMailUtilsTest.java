@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.sprboot.plugin.emailex.bean.ServiceResponse;
 import com.sprboot.plugin.emailex.bean.param.DownMailParam;
 import com.sprboot.plugin.emailex.util.DownMailUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
 import java.util.List;
@@ -15,8 +16,8 @@ import java.util.List;
  * 完成日期：2020/3/29 19:28
  * @author：felix.shao
  */
+@Slf4j
 public class DownMailUtilsTest {
-
 
 	public static final String ACCOUNT = "shjLife@163.com";
 	
@@ -40,9 +41,9 @@ public class DownMailUtilsTest {
 
 		ServiceResponse<List<String>> serviceResponse = DownMailUtils.downMultipleEmail(param);
 		
-		System.out.println("errorNO = " + serviceResponse.getErrorNO());
-		System.out.println("errorMsg = " + serviceResponse.getErrorMsg());
-		System.out.println("result = " + JSON.toJSONString(serviceResponse.getResult()));
+		log.info("\n-->errorNO = " + serviceResponse.getErrorNO());
+		log.info("\n-->errorMsg = " + serviceResponse.getErrorMsg());
+		log.info("\n-->result = " + JSON.toJSONString(serviceResponse.getResult()));
 	}
 	
 }

@@ -24,7 +24,7 @@ public class UserRedisTemplateTest extends BaseApplicationTest {
         User result = userTemplate.opsForValue().get("超人1");
         Assert.assertEquals(20, result.getAge().longValue());
         
-        log.info("result={}", JSON.toJSONString(result));
+        log.info("\n-->result={}", JSON.toJSONString(result));
     }
     
 }

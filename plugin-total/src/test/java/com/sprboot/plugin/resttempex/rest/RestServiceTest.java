@@ -1,8 +1,6 @@
 package com.sprboot.plugin.resttempex.rest;
 
-import java.util.Date;
-import java.util.List;
-
+import com.alibaba.fastjson.JSON;
 import com.sprboot.plugin.resttempex.bean.Student;
 import com.sprboot.plugin.resttempex.bean.param.HeaderParams;
 import com.sprboot.plugin.resttempex.util.DateUtil;
@@ -12,7 +10,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.http.HttpMethod;
 
-import com.alibaba.fastjson.JSON;
+import java.util.Date;
+import java.util.List;
 
 @Slf4j
 public class RestServiceTest {
@@ -32,7 +31,7 @@ public class RestServiceTest {
 		
 		HeaderParams headerParams = HeaderParams.getDefaultHeaderParams();
 		List<?> result = RestUtils.sendRequest(url, HttpMethod.GET, headerParams, List.class);
-		log.info("result = {}", JSON.toJSONString(result));
+		log.info("\n-->result = {}", JSON.toJSONString(result));
 	}
 
 	@Test
@@ -41,7 +40,7 @@ public class RestServiceTest {
 		
 		HeaderParams headerParams = HeaderParams.getDefaultHeaderParams();
 		Student result = RestUtils.sendRequest(url, HttpMethod.GET, headerParams, Student.class);
-		log.info("\nresult = {}", JSON.toJSONString(result));
+		log.info("\n-->\nresult = {}", JSON.toJSONString(result));
 	}
 
 	@Test
@@ -51,7 +50,7 @@ public class RestServiceTest {
 		HeaderParams headerParams = HeaderParams.getDefaultHeaderParams()
 				.param("userInfo", "zs");
 		Student result = RestUtils.sendRequest(url, HttpMethod.GET, headerParams, Student.class);
-		log.info("\nresult = {}", JSON.toJSONString(result));
+		log.info("\n-->\nresult = {}", JSON.toJSONString(result));
 	}
 	
 	/* post测试 */
@@ -63,10 +62,10 @@ public class RestServiceTest {
 		
 		HeaderParams headerParams = HeaderParams.getDefaultHeaderParams();
 		String bodyStr = JSON.toJSONString(stu1); //DATE日期传入controller时,值会丢失
-		log.info("bodyStr = {}", bodyStr);
+		log.info("\n-->bodyStr = {}", bodyStr);
 
 		Student result = RestUtils.sendRequest(url, HttpMethod.POST, headerParams, bodyStr, Student.class);
-		log.info("\nresult = {}", JSON.toJSONString(result));
+		log.info("\n-->\nresult = {}", JSON.toJSONString(result));
 	}
 
 	@Test
@@ -77,10 +76,10 @@ public class RestServiceTest {
 		
 		HeaderParams headerParams = HeaderParams.getDefaultHeaderParams();
 		String bodyStr = JSON.toJSONString(stu1);
-		log.info("bodyStr = {}", bodyStr);
+		log.info("\n-->bodyStr = {}", bodyStr);
 
 		Student result = RestUtils.sendRequest(url, HttpMethod.POST, headerParams, bodyStr, Student.class);
-		log.info("\nresult = {}", JSON.toJSONString(result));
+		log.info("\n-->\nresult = {}", JSON.toJSONString(result));
 	}
 
 	@Test
@@ -92,10 +91,10 @@ public class RestServiceTest {
 		HeaderParams headerParams = HeaderParams.getDefaultHeaderParams()
 				.param("userInfo", "zs");
 		String bodyStr = JSON.toJSONString(stu1);
-		log.info("bodyStr = {}", bodyStr);
+		log.info("\n-->bodyStr = {}", bodyStr);
 
 		Student result = RestUtils.sendRequest(url, HttpMethod.POST, headerParams, bodyStr, Student.class);
-		log.info("\nresult = {}", JSON.toJSONString(result));
+		log.info("\n-->\nresult = {}", JSON.toJSONString(result));
 	}
 	
 	/* put 测试 */
@@ -107,10 +106,10 @@ public class RestServiceTest {
 		
 		HeaderParams headerParams = HeaderParams.getDefaultHeaderParams();
 		String bodyStr = JSON.toJSONString(stu1); //DATE日期传入controller时,值会丢失
-		log.info("bodyStr = {}", bodyStr);
+		log.info("\n-->bodyStr = {}", bodyStr);
 
 		Student result = RestUtils.sendRequest(url, HttpMethod.PUT, headerParams, bodyStr, Student.class);
-		log.info("\nresult = {}", JSON.toJSONString(result));
+		log.info("\n-->\nresult = {}", JSON.toJSONString(result));
 	}
 
 	@Test
@@ -121,10 +120,10 @@ public class RestServiceTest {
 		
 		HeaderParams headerParams = HeaderParams.getDefaultHeaderParams();
 		String bodyStr = JSON.toJSONString(stu1);
-		log.info("bodyStr = {}", bodyStr);
+		log.info("\n-->bodyStr = {}", bodyStr);
 
 		Student result = RestUtils.sendRequest(url, HttpMethod.PUT, headerParams, bodyStr, Student.class);
-		log.info("\nresult = {}", JSON.toJSONString(result));
+		log.info("\n-->\nresult = {}", JSON.toJSONString(result));
 	}
 
 	@Test
@@ -136,10 +135,10 @@ public class RestServiceTest {
 		HeaderParams headerParams = HeaderParams.getDefaultHeaderParams()
 				.param("userInfo", "zs");
 		String bodyStr = JSON.toJSONString(stu1);
-		log.info("bodyStr = {}", bodyStr);
+		log.info("\n-->bodyStr = {}", bodyStr);
 
 		Student result = RestUtils.sendRequest(url, HttpMethod.PUT, headerParams, bodyStr, Student.class);
-		log.info("\nresult = {}", JSON.toJSONString(result));
+		log.info("\n-->\nresult = {}", JSON.toJSONString(result));
 	}
 	
 	/* delete测试 */
@@ -150,7 +149,7 @@ public class RestServiceTest {
 		HeaderParams headerParams = HeaderParams.getDefaultHeaderParams();
 		
 		Student result = RestUtils.sendRequest(url, HttpMethod.DELETE, headerParams, Student.class);
-		log.info("\nresult = {}", JSON.toJSONString(result));
+		log.info("\n-->\nresult = {}", JSON.toJSONString(result));
 	}
 	
 }

@@ -16,7 +16,7 @@ public class BaseApplicationTest {
 
     @Test
     public void contextLoads() {
-        log.info("<<<<<<<<  contextLoads,{}", "success");
+        log.info("\n--><<<<<<<<  contextLoads,{}", "success");
     }
 
 }

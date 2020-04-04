@@ -4,6 +4,7 @@ import com.sprboot.plugin.emailex.bean.ServiceResponse;
 import com.sprboot.plugin.emailex.bean.param.SendMailParam;
 import com.sprboot.plugin.emailex.util.MailParamUtils;
 import com.sprboot.plugin.emailex.util.SendMailSynUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
 import javax.mail.internet.AddressException;
@@ -20,6 +21,7 @@ import java.util.List;
  * 完成日期：2020/3/29 19:27
  * @author：felix.shao
  */
+@Slf4j
 public class SendMailSynUtilsTest {
 
 	public static final String ACCOUNT = "shjLife@163.com";
@@ -88,8 +90,8 @@ public class SendMailSynUtilsTest {
 		
 		ServiceResponse<String> serviceResponse = SendMailSynUtils.sendEmail(param);
 		
-		System.out.println("errorNO = "+ serviceResponse.getErrorNO());
-		System.out.println("errorMsg = "+ serviceResponse.getErrorMsg());
+		log.info("\n-->errorNO = "+ serviceResponse.getErrorNO());
+		log.info("\n-->errorMsg = "+ serviceResponse.getErrorMsg());
 	}
 	
 }

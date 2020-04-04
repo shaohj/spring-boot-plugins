@@ -1,22 +1,18 @@
 package com.sprboot.plugin.emailex;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
-
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
-
 import com.sprboot.plugin.emailex.bean.ServiceResponse;
 import com.sprboot.plugin.emailex.bean.param.SendMailParam;
 import com.sprboot.plugin.emailex.event.SendDownCallEventDefault;
 import com.sprboot.plugin.emailex.util.MailParamUtils;
 import com.sprboot.plugin.emailex.util.SendMailAsynUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
+
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import java.util.*;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 /**
  * 编  号：
@@ -25,6 +21,7 @@ import org.junit.Test;
  * 完成日期：2020/3/29 19:27
  * @author：felix.shao
  */
+@Slf4j
 public class SendMailAsynUtilsTest {
 
 	public static final String ACCOUNT = "shjLife@163.com";
@@ -101,8 +98,8 @@ public class SendMailAsynUtilsTest {
 		ServiceResponse<String> serviceResponse = SendMailAsynUtils.sendEmail(taskExecutor,
 				param, new SendDownCallEventDefault());
 		
-		System.out.println("errorNO = "+ serviceResponse.getErrorNO());
-		System.out.println("errorMsg = "+ serviceResponse.getErrorMsg());
+		log.info("\n-->errorNO = "+ serviceResponse.getErrorNO());
+		log.info("\n-->errorMsg = "+ serviceResponse.getErrorMsg());
 		
 		try {
 			Thread.currentThread().sleep(5000);

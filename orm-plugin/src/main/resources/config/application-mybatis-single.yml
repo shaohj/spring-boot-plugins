@@ -1,0 +1,43 @@
+server:
+  port: 8080
+  address: 0.0.0.0
+  servlet:
+    context-path: /mybatisMuldb
+
+logging:
+  level:
+    root: INFO
+    com:
+      sprboot:
+        plugin: DEBUG
+    org:
+      springframework:
+        web:
+          servlet:
+            DispatcherServlet: TRACE
+            mvc:
+              method:
+                annotation:
+                  ServletInvocableHandleMethod: TRACE
+  file: log/mybatisMuldb.log
+
+spring:
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://mcdh:3306/userDb1
+    username: root
+    password: root
+    initialSize: 5
+    minIdle: 5
+    maxIdle: 10
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+
+mybatis:
+  mapper-locations: classpath:mapper-single/*.xml

@@ -38,7 +38,7 @@ public class ListMapRedisTemplateTest extends BaseApplicationTest {
         ms.add(map2);
         listMapTemplate.opsForValue().set("key_ml", ms);
         List<Map<String,Object>> mls = listMapTemplate.opsForValue().get("key_ml");
-        log.info("mls={}", JSON.toJSONString(mls));
+        log.info("\n-->mls={}", JSON.toJSONString(mls));
     }
     
 }

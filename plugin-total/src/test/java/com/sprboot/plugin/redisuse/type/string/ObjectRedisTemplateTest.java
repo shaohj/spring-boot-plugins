@@ -21,7 +21,7 @@ public class ObjectRedisTemplateTest extends BaseApplicationTest {
         //原本opsForValue()是只能操作字符串的.现在就可以操作对象了
         Object resultObj = objTemplate.opsForValue().get(String.valueOf(user.getAge()));
         User result = (User) resultObj;
-        log.info("result={}", JSON.toJSONString(result));
+        log.info("\n-->result={}", JSON.toJSONString(result));
     }
     
     

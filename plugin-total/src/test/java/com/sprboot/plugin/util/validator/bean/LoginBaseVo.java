@@ -4,20 +4,27 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sprboot.plugin.util.validator.HbValidatorUtil;
+import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.validator.constraints.NotEmpty;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.groups.Default;
 import java.io.Serializable;
 
+/**
+ * 编  号：
+ * 名  称：LoginBaseVo
+ * 描  述：
+ * 完成日期：2020/4/4 19:34
+ * @author：felix.shao
+ */
+@Slf4j
+@Data
 @JsonAutoDetect(fieldVisibility = Visibility.ANY, getterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class LoginBaseVo implements Serializable {
-
-	private static final Logger logger = LoggerFactory.getLogger(LoginBaseVo.class);
 
 	private static final long serialVersionUID = 1L;
 
@@ -35,38 +42,6 @@ public class LoginBaseVo implements Serializable {
 
 	@NotEmpty(message = "游客id不能为空", groups = { VisitorLoginGroup.class })
 	private String uuid;
-
-	public String getSource() {
-		return source;
-	}
-
-	public void setSource(String source) {
-		this.source = source;
-	}
-
-	public Integer getUserId() {
-		return userId;
-	}
-
-	public void setUserId(Integer userId) {
-		this.userId = userId;
-	}
-
-	public Integer getMemberId() {
-		return memberId;
-	}
-
-	public void setMemberId(Integer memberId) {
-		this.memberId = memberId;
-	}
-
-	public String getUuid() {
-		return uuid;
-	}
-
-	public void setUuid(String uuid) {
-		this.uuid = uuid;
-	}
 
 	public void isSuccessLoginCheck() {
 		switch (source) {

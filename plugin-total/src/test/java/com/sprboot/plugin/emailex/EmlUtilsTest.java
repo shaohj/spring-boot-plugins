@@ -3,6 +3,7 @@ package com.sprboot.plugin.emailex;
 import com.alibaba.fastjson.JSON;
 import com.sprboot.plugin.emailex.bean.ServiceResponse;
 import com.sprboot.plugin.emailex.util.EmlUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.List;
  * 完成日期：2019/6/23 12:32
  * @author：felix.shao
  */
+@Slf4j
 public class EmlUtilsTest {
 
 	@Test
@@ -22,9 +24,9 @@ public class EmlUtilsTest {
 		String storePath = "C:\\Users\\SHJ\\Desktop\\temp\\emailAttachfiles";
 		ServiceResponse<List<String>> serviceResponse = EmlUtils.parseAttachFiles(emlPath, storePath);
 
-		System.out.println("errorNO = " + serviceResponse.getErrorNO());
-		System.out.println("errorMsg = " + serviceResponse.getErrorMsg());
-		System.out.println("result = " + JSON.toJSONString(serviceResponse.getResult()));
+		log.info("\n-->errorNO = " + serviceResponse.getErrorNO());
+		log.info("\n-->errorMsg = " + serviceResponse.getErrorMsg());
+		log.info("\n-->result = " + JSON.toJSONString(serviceResponse.getResult()));
 	}
 	
 }

@@ -22,7 +22,7 @@ public class StringRedisTemplateTest extends BaseApplicationTest {
         String val = valOpt.get("strTest");
         Assert.assertEquals("222", val);
 
-        log.info("strTest.val={}", val);
+        log.info("\n-->strTest.val={}", val);
     }
     
     

@@ -1,0 +1,57 @@
+server:
+  port: 8080
+  address: 0.0.0.0
+  servlet:
+    context-path: /jpaSingle
+
+logging:
+  level:
+    root: INFO
+    com:
+      sprboot:
+        plugin: DEBUG
+    org:
+      springframework:
+        web:
+          servlet:
+            DispatcherServlet: TRACE
+            mvc:
+              method:
+                annotation:
+                  ServletInvocableHandleMethod: TRACE
+      hibernate:
+        type:
+          descriptor:
+            sql:
+              BasicBinder: TRACE
+              BasicExtractor: TRACE
+        engine:
+          QueryParameters: TRACE
+          query:
+            HQLQueryPlan: TRACE
+  file: log/jpaSingle.log
+
+spring:
+  #=====================jpa config================================
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://mcdh:3306/userDb1
+    username: root
+    password: root
+    initialSize: 5
+    minIdle: 5
+    maxIdle: 10
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false

@@ -26,7 +26,7 @@ public class ListRedisTemplateTest extends BaseApplicationTest {
         
         List<String> result = listOpt.range("ul", 0, -1);
         
-        log.info("resultStr={}", JSON.toJSONString(result));
+        log.info("\n-->resultStr={}", JSON.toJSONString(result));
     }
     
 }
