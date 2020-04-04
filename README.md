@@ -1,12 +1,10 @@
 ## spring-boot-plugins
-基于spring boot相关的功能点或插件提供了相关的demo和实现。其中有些工具类发布到了maven公共仓库。
+基于spring boot相关的功能点或功能插件提供了相关的demo和实现。其中有些工具类发布到了maven公共仓库。
 
-- [plugin-total](plugin-total/README.md)
-- common-jpa-hb：jpa-hibernate常用功能支持。如审计功能、返回自定义实体、多对多等关系配置
-- common-muldb-hb：jpa-hibernate多数据源功能
-- common-muldb-mb：mybatis多数据源功能
+- [功能点或功能插件汇总](plugin-total/README.md)
+- [orm框架使用](orm-plugin/README.md)
 - common-net：网络编程学习，如bio、nio(netty)、aio
-- common-poi：如导出excel，这里做了2种处理，分为缓存模板导出(SXSSFWorkbook，不支持xls等导出)、及支持xls的导出(不支持缓存导出)
+- common-poi：如导出excel，这里做了2种处理，分为缓存模板导出(SXSSFWorkbook，不支持xls等导出，已发布至sstool公共仓库)、及支持xls的导出(不支持缓存导出)
 - java-stu：javase知识点，编程题学习代码
 
 ### 其他仓库模块
